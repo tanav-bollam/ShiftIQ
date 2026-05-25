@@ -1,0 +1,2521 @@
+﻿date,day_of_week,hour,item_name,revenue,transaction_count
+2024-01-01,Monday,8,Muffin,56.45,5
+2024-01-01,Monday,8,Breakfast Sandwich,38.71,3
+2024-01-01,Monday,8,Drip Coffee,29.03,2
+2024-01-01,Monday,9,Breakfast Sandwich,55.07,5
+2024-01-01,Monday,9,Drip Coffee,37.76,3
+2024-01-01,Monday,9,Croissant,28.32,2
+2024-01-01,Monday,10,Drip Coffee,53.62,4
+2024-01-01,Monday,10,Croissant,36.77,3
+2024-01-01,Monday,10,Latte,27.58,2
+2024-01-01,Monday,11,Croissant,96.09,8
+2024-01-01,Monday,11,Latte,65.89,5
+2024-01-01,Monday,11,Muffin,49.42,4
+2024-01-01,Monday,12,Latte,94.04,8
+2024-01-01,Monday,12,Muffin,64.48,5
+2024-01-01,Monday,12,Breakfast Sandwich,48.36,4
+2024-01-01,Monday,13,Muffin,92.66,8
+2024-01-01,Monday,13,Breakfast Sandwich,63.54,5
+2024-01-01,Monday,13,Drip Coffee,47.65,4
+2024-01-01,Monday,14,Breakfast Sandwich,92.1,8
+2024-01-01,Monday,14,Drip Coffee,63.15,5
+2024-01-01,Monday,14,Croissant,47.37,4
+2024-01-01,Monday,15,Drip Coffee,73.94,6
+2024-01-01,Monday,15,Croissant,50.7,4
+2024-01-01,Monday,15,Latte,38.02,3
+2024-01-01,Monday,16,Croissant,74.87,6
+2024-01-01,Monday,16,Latte,51.34,4
+2024-01-01,Monday,16,Muffin,38.5,3
+2024-01-01,Monday,17,Latte,76.38,6
+2024-01-01,Monday,17,Muffin,52.37,4
+2024-01-01,Monday,17,Breakfast Sandwich,39.28,3
+2024-01-01,Monday,18,Muffin,121.35,10
+2024-01-01,Monday,18,Breakfast Sandwich,83.21,7
+2024-01-01,Monday,18,Drip Coffee,62.41,5
+2024-01-01,Monday,19,Breakfast Sandwich,124.62,10
+2024-01-01,Monday,19,Drip Coffee,85.45,7
+2024-01-01,Monday,19,Croissant,64.09,5
+2024-01-01,Monday,20,Drip Coffee,127.84,11
+2024-01-01,Monday,20,Croissant,87.66,7
+2024-01-01,Monday,20,Latte,65.75,5
+2024-01-01,Monday,21,Croissant,130.65,11
+2024-01-01,Monday,21,Latte,89.59,7
+2024-01-01,Monday,21,Muffin,67.19,6
+2024-01-01,Monday,22,Latte,85.64,7
+2024-01-01,Monday,22,Muffin,58.72,5
+2024-01-01,Monday,22,Breakfast Sandwich,44.04,4
+2024-01-02,Tuesday,8,Breakfast Sandwich,46.68,4
+2024-01-02,Tuesday,8,Drip Coffee,32.01,3
+2024-01-02,Tuesday,8,Croissant,24.01,2
+2024-01-02,Tuesday,9,Drip Coffee,45.45,4
+2024-01-02,Tuesday,9,Croissant,31.17,3
+2024-01-02,Tuesday,9,Latte,23.38,2
+2024-01-02,Tuesday,10,Croissant,44.31,4
+2024-01-02,Tuesday,10,Latte,30.38,3
+2024-01-02,Tuesday,10,Muffin,22.79,2
+2024-01-02,Tuesday,11,Latte,79.71,7
+2024-01-02,Tuesday,11,Muffin,54.66,5
+2024-01-02,Tuesday,11,Breakfast Sandwich,41,3
+2024-01-02,Tuesday,12,Muffin,78.54,7
+2024-01-02,Tuesday,12,Breakfast Sandwich,53.86,4
+2024-01-02,Tuesday,12,Drip Coffee,40.39,3
+2024-01-02,Tuesday,13,Breakfast Sandwich,78.07,7
+2024-01-02,Tuesday,13,Drip Coffee,53.53,4
+2024-01-02,Tuesday,13,Croissant,40.15,3
+2024-01-02,Tuesday,14,Drip Coffee,78.34,7
+2024-01-02,Tuesday,14,Croissant,53.72,4
+2024-01-02,Tuesday,14,Latte,40.29,3
+2024-01-02,Tuesday,15,Croissant,63.46,5
+2024-01-02,Tuesday,15,Latte,43.52,4
+2024-01-02,Tuesday,15,Muffin,32.64,3
+2024-01-02,Tuesday,16,Latte,64.74,5
+2024-01-02,Tuesday,16,Muffin,44.39,4
+2024-01-02,Tuesday,16,Breakfast Sandwich,33.29,3
+2024-01-02,Tuesday,17,Muffin,66.36,6
+2024-01-02,Tuesday,17,Breakfast Sandwich,45.5,4
+2024-01-02,Tuesday,17,Drip Coffee,34.13,3
+2024-01-02,Tuesday,18,Breakfast Sandwich,105.63,9
+2024-01-02,Tuesday,18,Drip Coffee,72.43,6
+2024-01-02,Tuesday,18,Croissant,54.33,5
+2024-01-02,Tuesday,19,Drip Coffee,108.36,9
+2024-01-02,Tuesday,19,Croissant,74.3,6
+2024-01-02,Tuesday,19,Latte,55.73,5
+2024-01-02,Tuesday,20,Croissant,110.74,9
+2024-01-02,Tuesday,20,Latte,75.94,6
+2024-01-02,Tuesday,20,Muffin,56.95,5
+2024-01-02,Tuesday,21,Latte,112.51,9
+2024-01-02,Tuesday,21,Muffin,77.15,6
+2024-01-02,Tuesday,21,Breakfast Sandwich,57.86,5
+2024-01-02,Tuesday,22,Muffin,73.21,6
+2024-01-02,Tuesday,22,Breakfast Sandwich,50.2,4
+2024-01-02,Tuesday,22,Drip Coffee,37.65,3
+2024-01-03,Wednesday,8,Drip Coffee,48.29,4
+2024-01-03,Wednesday,8,Croissant,33.11,3
+2024-01-03,Wednesday,8,Latte,24.83,2
+2024-01-03,Wednesday,9,Croissant,47.07,4
+2024-01-03,Wednesday,9,Latte,32.28,3
+2024-01-03,Wednesday,9,Muffin,24.21,2
+2024-01-03,Wednesday,10,Latte,46.07,4
+2024-01-03,Wednesday,10,Muffin,31.59,3
+2024-01-03,Wednesday,10,Breakfast Sandwich,23.69,2
+2024-01-03,Wednesday,11,Muffin,83.44,7
+2024-01-03,Wednesday,11,Breakfast Sandwich,57.22,5
+2024-01-03,Wednesday,11,Drip Coffee,42.91,4
+2024-01-03,Wednesday,12,Breakfast Sandwich,82.94,7
+2024-01-03,Wednesday,12,Drip Coffee,56.87,5
+2024-01-03,Wednesday,12,Croissant,42.65,4
+2024-01-03,Wednesday,13,Drip Coffee,83.23,7
+2024-01-03,Wednesday,13,Croissant,57.07,5
+2024-01-03,Wednesday,13,Latte,42.8,4
+2024-01-03,Wednesday,14,Croissant,84.28,7
+2024-01-03,Wednesday,14,Latte,57.79,5
+2024-01-03,Wednesday,14,Muffin,43.34,4
+2024-01-03,Wednesday,15,Latte,68.78,6
+2024-01-03,Wednesday,15,Muffin,47.16,4
+2024-01-03,Wednesday,15,Breakfast Sandwich,35.37,3
+2024-01-03,Wednesday,16,Muffin,70.5,6
+2024-01-03,Wednesday,16,Breakfast Sandwich,48.35,4
+2024-01-03,Wednesday,16,Drip Coffee,36.26,3
+2024-01-03,Wednesday,17,Breakfast Sandwich,72.4,6
+2024-01-03,Wednesday,17,Drip Coffee,49.65,4
+2024-01-03,Wednesday,17,Croissant,37.24,3
+2024-01-03,Wednesday,18,Drip Coffee,115.13,10
+2024-01-03,Wednesday,18,Croissant,78.94,7
+2024-01-03,Wednesday,18,Latte,59.21,5
+2024-01-03,Wednesday,19,Croissant,117.66,10
+2024-01-03,Wednesday,19,Latte,80.68,7
+2024-01-03,Wednesday,19,Muffin,60.51,5
+2024-01-03,Wednesday,20,Latte,119.54,10
+2024-01-03,Wednesday,20,Muffin,81.97,7
+2024-01-03,Wednesday,20,Breakfast Sandwich,61.48,5
+2024-01-03,Wednesday,21,Muffin,120.56,10
+2024-01-03,Wednesday,21,Breakfast Sandwich,82.67,7
+2024-01-03,Wednesday,21,Drip Coffee,62,5
+2024-01-03,Wednesday,22,Breakfast Sandwich,77.82,6
+2024-01-03,Wednesday,22,Drip Coffee,53.36,4
+2024-01-03,Wednesday,22,Croissant,40.02,3
+2024-01-04,Thursday,8,Croissant,55.96,5
+2024-01-04,Thursday,8,Latte,38.37,3
+2024-01-04,Thursday,8,Muffin,28.78,2
+2024-01-04,Thursday,9,Latte,54.77,5
+2024-01-04,Thursday,9,Muffin,37.56,3
+2024-01-04,Thursday,9,Breakfast Sandwich,28.17,2
+2024-01-04,Thursday,10,Muffin,53.96,4
+2024-01-04,Thursday,10,Breakfast Sandwich,37,3
+2024-01-04,Thursday,10,Drip Coffee,27.75,2
+2024-01-04,Thursday,11,Breakfast Sandwich,98.6,8
+2024-01-04,Thursday,11,Drip Coffee,67.61,6
+2024-01-04,Thursday,11,Croissant,50.71,4
+2024-01-04,Thursday,12,Drip Coffee,98.94,8
+2024-01-04,Thursday,12,Croissant,67.85,6
+2024-01-04,Thursday,12,Latte,50.88,4
+2024-01-04,Thursday,13,Croissant,100.19,8
+2024-01-04,Thursday,13,Latte,68.7,6
+2024-01-04,Thursday,13,Muffin,51.52,4
+2024-01-04,Thursday,14,Latte,102.2,9
+2024-01-04,Thursday,14,Muffin,70.08,6
+2024-01-04,Thursday,14,Breakfast Sandwich,52.56,4
+2024-01-04,Thursday,15,Muffin,83.81,7
+2024-01-04,Thursday,15,Breakfast Sandwich,57.47,5
+2024-01-04,Thursday,15,Drip Coffee,43.1,4
+2024-01-04,Thursday,16,Breakfast Sandwich,86.07,7
+2024-01-04,Thursday,16,Drip Coffee,59.02,5
+2024-01-04,Thursday,16,Croissant,44.27,4
+2024-01-04,Thursday,17,Drip Coffee,88.29,7
+2024-01-04,Thursday,17,Croissant,60.54,5
+2024-01-04,Thursday,17,Latte,45.41,4
+2024-01-04,Thursday,18,Croissant,139.86,12
+2024-01-04,Thursday,18,Latte,95.91,8
+2024-01-04,Thursday,18,Muffin,71.93,6
+2024-01-04,Thursday,19,Latte,142.1,12
+2024-01-04,Thursday,19,Muffin,97.44,8
+2024-01-04,Thursday,19,Breakfast Sandwich,73.08,6
+2024-01-04,Thursday,20,Muffin,143.32,12
+2024-01-04,Thursday,20,Breakfast Sandwich,98.28,8
+2024-01-04,Thursday,20,Drip Coffee,73.71,6
+2024-01-04,Thursday,21,Breakfast Sandwich,143.4,12
+2024-01-04,Thursday,21,Drip Coffee,98.33,8
+2024-01-04,Thursday,21,Croissant,73.75,6
+2024-01-04,Thursday,22,Drip Coffee,91.82,8
+2024-01-04,Thursday,22,Croissant,62.96,5
+2024-01-04,Thursday,22,Latte,47.22,4
+2024-01-05,Friday,8,Latte,80.99,7
+2024-01-05,Friday,8,Muffin,55.54,5
+2024-01-05,Friday,8,Breakfast Sandwich,41.65,3
+2024-01-05,Friday,9,Muffin,79.8,7
+2024-01-05,Friday,9,Breakfast Sandwich,54.72,5
+2024-01-05,Friday,9,Drip Coffee,41.04,3
+2024-01-05,Friday,10,Breakfast Sandwich,79.32,7
+2024-01-05,Friday,10,Drip Coffee,54.39,5
+2024-01-05,Friday,10,Croissant,40.79,3
+2024-01-05,Friday,11,Drip Coffee,146.32,12
+2024-01-05,Friday,11,Croissant,100.33,8
+2024-01-05,Friday,11,Latte,75.25,6
+2024-01-05,Friday,12,Croissant,148.17,12
+2024-01-05,Friday,12,Latte,101.6,8
+2024-01-05,Friday,12,Muffin,76.2,6
+2024-01-05,Friday,13,Latte,151.15,13
+2024-01-05,Friday,13,Muffin,103.64,9
+2024-01-05,Friday,13,Breakfast Sandwich,77.73,6
+2024-01-05,Friday,14,Muffin,154.93,13
+2024-01-05,Friday,14,Breakfast Sandwich,106.24,9
+2024-01-05,Friday,14,Drip Coffee,79.68,7
+2024-01-05,Friday,15,Breakfast Sandwich,127.29,11
+2024-01-05,Friday,15,Drip Coffee,87.28,7
+2024-01-05,Friday,15,Croissant,65.46,5
+2024-01-05,Friday,16,Drip Coffee,130.57,11
+2024-01-05,Friday,16,Croissant,89.54,7
+2024-01-05,Friday,16,Latte,67.15,6
+2024-01-05,Friday,17,Croissant,133.44,11
+2024-01-05,Friday,17,Latte,91.5,8
+2024-01-05,Friday,17,Muffin,68.63,6
+2024-01-05,Friday,18,Latte,210.15,18
+2024-01-05,Friday,18,Muffin,144.1,12
+2024-01-05,Friday,18,Breakfast Sandwich,108.08,9
+2024-01-05,Friday,19,Muffin,211.96,18
+2024-01-05,Friday,19,Breakfast Sandwich,145.34,12
+2024-01-05,Friday,19,Drip Coffee,109.01,9
+2024-01-05,Friday,20,Breakfast Sandwich,212.06,18
+2024-01-05,Friday,20,Drip Coffee,145.42,12
+2024-01-05,Friday,20,Croissant,109.06,9
+2024-01-05,Friday,21,Drip Coffee,210.46,18
+2024-01-05,Friday,21,Croissant,144.31,12
+2024-01-05,Friday,21,Latte,108.24,9
+2024-01-05,Friday,22,Croissant,133.76,11
+2024-01-05,Friday,22,Latte,91.72,8
+2024-01-05,Friday,22,Muffin,68.79,6
+2024-01-06,Saturday,8,Brownie,89.7,7
+2024-01-06,Saturday,8,Party Pack,65.96,5
+2024-01-06,Saturday,8,Specialty Cake,47.49,4
+2024-01-06,Saturday,9,Party Pack,89.16,7
+2024-01-06,Saturday,9,Specialty Cake,65.56,5
+2024-01-06,Saturday,9,Sundae,47.2,4
+2024-01-06,Saturday,10,Specialty Cake,89.47,7
+2024-01-06,Saturday,10,Sundae,65.78,5
+2024-01-06,Saturday,10,Cold Brew,47.37,4
+2024-01-06,Saturday,11,Sundae,166.54,14
+2024-01-06,Saturday,11,Cold Brew,122.45,10
+2024-01-06,Saturday,11,Brownie,88.17,7
+2024-01-06,Saturday,12,Cold Brew,169.89,14
+2024-01-06,Saturday,12,Brownie,124.92,10
+2024-01-06,Saturday,12,Party Pack,89.94,7
+2024-01-06,Saturday,13,Brownie,174.14,15
+2024-01-06,Saturday,13,Party Pack,128.05,11
+2024-01-06,Saturday,13,Specialty Cake,92.19,8
+2024-01-06,Saturday,14,Party Pack,178.84,15
+2024-01-06,Saturday,14,Specialty Cake,131.5,11
+2024-01-06,Saturday,14,Sundae,94.68,8
+2024-01-06,Saturday,15,Specialty Cake,146.77,12
+2024-01-06,Saturday,15,Sundae,107.92,9
+2024-01-06,Saturday,15,Cold Brew,77.7,6
+2024-01-06,Saturday,16,Sundae,149.99,12
+2024-01-06,Saturday,16,Cold Brew,110.29,9
+2024-01-06,Saturday,16,Brownie,79.41,7
+2024-01-06,Saturday,17,Cold Brew,152.39,13
+2024-01-06,Saturday,17,Brownie,112.05,9
+2024-01-06,Saturday,17,Party Pack,80.68,7
+2024-01-06,Saturday,18,Brownie,238.24,20
+2024-01-06,Saturday,18,Party Pack,175.18,15
+2024-01-06,Saturday,18,Specialty Cake,126.13,11
+2024-01-06,Saturday,19,Party Pack,238.36,20
+2024-01-06,Saturday,19,Specialty Cake,175.26,15
+2024-01-06,Saturday,19,Sundae,126.19,11
+2024-01-06,Saturday,20,Specialty Cake,236.56,20
+2024-01-06,Saturday,20,Sundae,173.94,14
+2024-01-06,Saturday,20,Cold Brew,125.24,10
+2024-01-06,Saturday,21,Sundae,233.03,19
+2024-01-06,Saturday,21,Cold Brew,171.34,14
+2024-01-06,Saturday,21,Brownie,123.37,10
+2024-01-06,Saturday,22,Cold Brew,147.2,12
+2024-01-06,Saturday,22,Brownie,108.24,9
+2024-01-06,Saturday,22,Party Pack,77.93,6
+2024-01-07,Sunday,8,Party Pack,64.92,5
+2024-01-07,Sunday,8,Specialty Cake,47.74,4
+2024-01-07,Sunday,8,Sundae,34.37,3
+2024-01-07,Sunday,9,Specialty Cake,65.14,5
+2024-01-07,Sunday,9,Sundae,47.9,4
+2024-01-07,Sunday,9,Cold Brew,34.49,3
+2024-01-07,Sunday,10,Sundae,65.97,5
+2024-01-07,Sunday,10,Cold Brew,48.5,4
+2024-01-07,Sunday,10,Brownie,34.92,3
+2024-01-07,Sunday,11,Cold Brew,123.7,10
+2024-01-07,Sunday,11,Brownie,90.96,8
+2024-01-07,Sunday,11,Party Pack,65.49,5
+2024-01-07,Sunday,12,Brownie,126.8,11
+2024-01-07,Sunday,12,Party Pack,93.24,8
+2024-01-07,Sunday,12,Specialty Cake,67.13,6
+2024-01-07,Sunday,13,Party Pack,130.22,11
+2024-01-07,Sunday,13,Specialty Cake,95.75,8
+2024-01-07,Sunday,13,Sundae,68.94,6
+2024-01-07,Sunday,14,Specialty Cake,133.58,11
+2024-01-07,Sunday,14,Sundae,98.22,8
+2024-01-07,Sunday,14,Cold Brew,70.72,6
+2024-01-07,Sunday,15,Sundae,109.21,9
+2024-01-07,Sunday,15,Cold Brew,80.31,7
+2024-01-07,Sunday,15,Brownie,57.82,5
+2024-01-07,Sunday,16,Cold Brew,110.96,9
+2024-01-07,Sunday,16,Brownie,81.59,7
+2024-01-07,Sunday,16,Party Pack,58.74,5
+2024-01-07,Sunday,17,Brownie,111.91,9
+2024-01-07,Sunday,17,Party Pack,82.29,7
+2024-01-07,Sunday,17,Specialty Cake,59.25,5
+2024-01-07,Sunday,18,Party Pack,173.56,14
+2024-01-07,Sunday,18,Specialty Cake,127.62,11
+2024-01-07,Sunday,18,Sundae,91.88,8
+2024-01-07,Sunday,19,Specialty Cake,172.24,14
+2024-01-07,Sunday,19,Sundae,126.65,11
+2024-01-07,Sunday,19,Cold Brew,91.19,8
+2024-01-07,Sunday,20,Sundae,169.67,14
+2024-01-07,Sunday,20,Cold Brew,124.76,10
+2024-01-07,Sunday,20,Brownie,89.83,7
+2024-01-07,Sunday,21,Cold Brew,166.13,14
+2024-01-07,Sunday,21,Brownie,122.16,10
+2024-01-07,Sunday,21,Party Pack,87.95,7
+2024-01-07,Sunday,22,Brownie,104.52,9
+2024-01-07,Sunday,22,Party Pack,76.85,6
+2024-01-07,Sunday,22,Specialty Cake,55.33,5
+2024-01-08,Monday,8,Drip Coffee,53.09,4
+2024-01-08,Monday,8,Croissant,36.41,3
+2024-01-08,Monday,8,Latte,27.3,2
+2024-01-08,Monday,9,Croissant,53.76,4
+2024-01-08,Monday,9,Latte,36.87,3
+2024-01-08,Monday,9,Muffin,27.65,2
+2024-01-08,Monday,10,Latte,54.84,5
+2024-01-08,Monday,10,Muffin,37.61,3
+2024-01-08,Monday,10,Breakfast Sandwich,28.21,2
+2024-01-08,Monday,11,Muffin,103.34,9
+2024-01-08,Monday,11,Breakfast Sandwich,70.86,6
+2024-01-08,Monday,11,Drip Coffee,53.15,4
+2024-01-08,Monday,12,Breakfast Sandwich,106.13,9
+2024-01-08,Monday,12,Drip Coffee,72.78,6
+2024-01-08,Monday,12,Croissant,54.58,5
+2024-01-08,Monday,13,Drip Coffee,108.87,9
+2024-01-08,Monday,13,Croissant,74.65,6
+2024-01-08,Monday,13,Latte,55.99,5
+2024-01-08,Monday,14,Croissant,111.26,9
+2024-01-08,Monday,14,Latte,76.29,6
+2024-01-08,Monday,14,Muffin,57.22,5
+2024-01-08,Monday,15,Latte,90.43,8
+2024-01-08,Monday,15,Muffin,62.01,5
+2024-01-08,Monday,15,Breakfast Sandwich,46.51,4
+2024-01-08,Monday,16,Muffin,91.21,8
+2024-01-08,Monday,16,Breakfast Sandwich,62.54,5
+2024-01-08,Monday,16,Drip Coffee,46.91,4
+2024-01-08,Monday,17,Breakfast Sandwich,91.26,8
+2024-01-08,Monday,17,Drip Coffee,62.58,5
+2024-01-08,Monday,17,Croissant,46.93,4
+2024-01-08,Monday,18,Drip Coffee,140.38,12
+2024-01-08,Monday,18,Croissant,96.26,8
+2024-01-08,Monday,18,Latte,72.19,6
+2024-01-08,Monday,19,Croissant,138.28,12
+2024-01-08,Monday,19,Latte,94.82,8
+2024-01-08,Monday,19,Muffin,71.12,6
+2024-01-08,Monday,20,Latte,135.4,11
+2024-01-08,Monday,20,Muffin,92.84,8
+2024-01-08,Monday,20,Breakfast Sandwich,69.63,6
+2024-01-08,Monday,21,Muffin,132.03,11
+2024-01-08,Monday,21,Breakfast Sandwich,90.54,8
+2024-01-08,Monday,21,Drip Coffee,67.9,6
+2024-01-08,Monday,22,Breakfast Sandwich,82.94,7
+2024-01-08,Monday,22,Drip Coffee,56.88,5
+2024-01-08,Monday,22,Croissant,42.66,4
+2024-01-09,Tuesday,8,Croissant,45.55,4
+2024-01-09,Tuesday,8,Latte,31.24,3
+2024-01-09,Tuesday,8,Muffin,23.43,2
+2024-01-09,Tuesday,9,Latte,46.47,4
+2024-01-09,Tuesday,9,Muffin,31.86,3
+2024-01-09,Tuesday,9,Breakfast Sandwich,23.9,2
+2024-01-09,Tuesday,10,Muffin,47.63,4
+2024-01-09,Tuesday,10,Breakfast Sandwich,32.66,3
+2024-01-09,Tuesday,10,Drip Coffee,24.5,2
+2024-01-09,Tuesday,11,Breakfast Sandwich,89.92,7
+2024-01-09,Tuesday,11,Drip Coffee,61.66,5
+2024-01-09,Tuesday,11,Croissant,46.25,4
+2024-01-09,Tuesday,12,Drip Coffee,92.24,8
+2024-01-09,Tuesday,12,Croissant,63.25,5
+2024-01-09,Tuesday,12,Latte,47.44,4
+2024-01-09,Tuesday,13,Croissant,94.27,8
+2024-01-09,Tuesday,13,Latte,64.64,5
+2024-01-09,Tuesday,13,Muffin,48.48,4
+2024-01-09,Tuesday,14,Latte,95.78,8
+2024-01-09,Tuesday,14,Muffin,65.68,5
+2024-01-09,Tuesday,14,Breakfast Sandwich,49.26,4
+2024-01-09,Tuesday,15,Muffin,77.28,6
+2024-01-09,Tuesday,15,Breakfast Sandwich,52.99,4
+2024-01-09,Tuesday,15,Drip Coffee,39.74,3
+2024-01-09,Tuesday,16,Breakfast Sandwich,77.32,6
+2024-01-09,Tuesday,16,Drip Coffee,53.02,4
+2024-01-09,Tuesday,16,Croissant,39.77,3
+2024-01-09,Tuesday,17,Drip Coffee,76.73,6
+2024-01-09,Tuesday,17,Croissant,52.62,4
+2024-01-09,Tuesday,17,Latte,39.46,3
+2024-01-09,Tuesday,18,Croissant,117.17,10
+2024-01-09,Tuesday,18,Latte,80.34,7
+2024-01-09,Tuesday,18,Muffin,60.26,5
+2024-01-09,Tuesday,19,Latte,114.72,10
+2024-01-09,Tuesday,19,Muffin,78.66,7
+2024-01-09,Tuesday,19,Breakfast Sandwich,59,5
+2024-01-09,Tuesday,20,Muffin,111.87,9
+2024-01-09,Tuesday,20,Breakfast Sandwich,76.71,6
+2024-01-09,Tuesday,20,Drip Coffee,57.53,5
+2024-01-09,Tuesday,21,Breakfast Sandwich,108.93,9
+2024-01-09,Tuesday,21,Drip Coffee,74.7,6
+2024-01-09,Tuesday,21,Croissant,56.02,5
+2024-01-09,Tuesday,22,Drip Coffee,68.53,6
+2024-01-09,Tuesday,22,Croissant,46.99,4
+2024-01-09,Tuesday,22,Latte,35.24,3
+2024-01-10,Wednesday,8,Latte,49.35,4
+2024-01-10,Wednesday,8,Muffin,33.84,3
+2024-01-10,Wednesday,8,Breakfast Sandwich,25.38,2
+2024-01-10,Wednesday,9,Muffin,50.59,4
+2024-01-10,Wednesday,9,Breakfast Sandwich,34.69,3
+2024-01-10,Wednesday,9,Drip Coffee,26.02,2
+2024-01-10,Wednesday,10,Breakfast Sandwich,51.95,4
+2024-01-10,Wednesday,10,Drip Coffee,35.62,3
+2024-01-10,Wednesday,10,Croissant,26.72,2
+2024-01-10,Wednesday,11,Drip Coffee,97.96,8
+2024-01-10,Wednesday,11,Croissant,67.17,6
+2024-01-10,Wednesday,11,Latte,50.38,4
+2024-01-10,Wednesday,12,Croissant,100.11,8
+2024-01-10,Wednesday,12,Latte,68.65,6
+2024-01-10,Wednesday,12,Muffin,51.49,4
+2024-01-10,Wednesday,13,Latte,101.71,8
+2024-01-10,Wednesday,13,Muffin,69.75,6
+2024-01-10,Wednesday,13,Breakfast Sandwich,52.31,4
+2024-01-10,Wednesday,14,Muffin,102.59,9
+2024-01-10,Wednesday,14,Breakfast Sandwich,70.35,6
+2024-01-10,Wednesday,14,Drip Coffee,52.76,4
+2024-01-10,Wednesday,15,Breakfast Sandwich,82.11,7
+2024-01-10,Wednesday,15,Drip Coffee,56.31,5
+2024-01-10,Wednesday,15,Croissant,42.23,4
+2024-01-10,Wednesday,16,Drip Coffee,81.49,7
+2024-01-10,Wednesday,16,Croissant,55.88,5
+2024-01-10,Wednesday,16,Latte,41.91,3
+2024-01-10,Wednesday,17,Croissant,80.28,7
+2024-01-10,Wednesday,17,Latte,55.05,5
+2024-01-10,Wednesday,17,Muffin,41.28,3
+2024-01-10,Wednesday,18,Latte,121.83,10
+2024-01-10,Wednesday,18,Muffin,83.54,7
+2024-01-10,Wednesday,18,Breakfast Sandwich,62.65,5
+2024-01-10,Wednesday,19,Muffin,118.8,10
+2024-01-10,Wednesday,19,Breakfast Sandwich,81.46,7
+2024-01-10,Wednesday,19,Drip Coffee,61.1,5
+2024-01-10,Wednesday,20,Breakfast Sandwich,115.68,10
+2024-01-10,Wednesday,20,Drip Coffee,79.32,7
+2024-01-10,Wednesday,20,Croissant,59.49,5
+2024-01-10,Wednesday,21,Drip Coffee,112.81,9
+2024-01-10,Wednesday,21,Croissant,77.35,6
+2024-01-10,Wednesday,21,Latte,58.02,5
+2024-01-10,Wednesday,22,Croissant,71.29,6
+2024-01-10,Wednesday,22,Latte,48.89,4
+2024-01-10,Wednesday,22,Muffin,36.66,3
+2024-01-11,Thursday,8,Muffin,60.11,5
+2024-01-11,Thursday,8,Breakfast Sandwich,41.22,3
+2024-01-11,Thursday,8,Drip Coffee,30.91,3
+2024-01-11,Thursday,9,Breakfast Sandwich,61.73,5
+2024-01-11,Thursday,9,Drip Coffee,42.33,4
+2024-01-11,Thursday,9,Croissant,31.75,3
+2024-01-11,Thursday,10,Drip Coffee,63.33,5
+2024-01-11,Thursday,10,Croissant,43.42,4
+2024-01-11,Thursday,10,Latte,32.57,3
+2024-01-11,Thursday,11,Croissant,118.96,10
+2024-01-11,Thursday,11,Latte,81.57,7
+2024-01-11,Thursday,11,Muffin,61.18,5
+2024-01-11,Thursday,12,Latte,120.87,10
+2024-01-11,Thursday,12,Muffin,82.88,7
+2024-01-11,Thursday,12,Breakfast Sandwich,62.16,5
+2024-01-11,Thursday,13,Muffin,121.9,10
+2024-01-11,Thursday,13,Breakfast Sandwich,83.59,7
+2024-01-11,Thursday,13,Drip Coffee,62.69,5
+2024-01-11,Thursday,14,Breakfast Sandwich,121.97,10
+2024-01-11,Thursday,14,Drip Coffee,83.64,7
+2024-01-11,Thursday,14,Croissant,62.73,5
+2024-01-11,Thursday,15,Drip Coffee,96.83,8
+2024-01-11,Thursday,15,Croissant,66.4,6
+2024-01-11,Thursday,15,Latte,49.8,4
+2024-01-11,Thursday,16,Croissant,95.39,8
+2024-01-11,Thursday,16,Latte,65.41,5
+2024-01-11,Thursday,16,Muffin,49.06,4
+2024-01-11,Thursday,17,Latte,93.4,8
+2024-01-11,Thursday,17,Muffin,64.04,5
+2024-01-11,Thursday,17,Breakfast Sandwich,48.03,4
+2024-01-11,Thursday,18,Muffin,141.17,12
+2024-01-11,Thursday,18,Breakfast Sandwich,96.8,8
+2024-01-11,Thursday,18,Drip Coffee,72.6,6
+2024-01-11,Thursday,19,Breakfast Sandwich,137.46,11
+2024-01-11,Thursday,19,Drip Coffee,94.26,8
+2024-01-11,Thursday,19,Croissant,70.69,6
+2024-01-11,Thursday,20,Drip Coffee,134.05,11
+2024-01-11,Thursday,20,Croissant,91.92,8
+2024-01-11,Thursday,20,Latte,68.94,6
+2024-01-11,Thursday,21,Croissant,131.31,11
+2024-01-11,Thursday,21,Latte,90.04,8
+2024-01-11,Thursday,21,Muffin,67.53,6
+2024-01-11,Thursday,22,Latte,83.57,7
+2024-01-11,Thursday,22,Muffin,57.31,5
+2024-01-11,Thursday,22,Breakfast Sandwich,42.98,4
+2024-01-12,Friday,8,Breakfast Sandwich,91.26,8
+2024-01-12,Friday,8,Drip Coffee,62.58,5
+2024-01-12,Friday,8,Croissant,46.93,4
+2024-01-12,Friday,9,Drip Coffee,93.61,8
+2024-01-12,Friday,9,Croissant,64.19,5
+2024-01-12,Friday,9,Latte,48.14,4
+2024-01-12,Friday,10,Croissant,95.67,8
+2024-01-12,Friday,10,Latte,65.6,5
+2024-01-12,Friday,10,Muffin,49.2,4
+2024-01-12,Friday,11,Latte,178.67,15
+2024-01-12,Friday,11,Muffin,122.52,10
+2024-01-12,Friday,11,Breakfast Sandwich,91.89,8
+2024-01-12,Friday,12,Muffin,180.21,15
+2024-01-12,Friday,12,Breakfast Sandwich,123.57,10
+2024-01-12,Friday,12,Drip Coffee,92.68,8
+2024-01-12,Friday,13,Breakfast Sandwich,180.3,15
+2024-01-12,Friday,13,Drip Coffee,123.63,10
+2024-01-12,Friday,13,Croissant,92.73,8
+2024-01-12,Friday,14,Drip Coffee,178.93,15
+2024-01-12,Friday,14,Croissant,122.7,10
+2024-01-12,Friday,14,Latte,92.02,8
+2024-01-12,Friday,15,Croissant,141.01,12
+2024-01-12,Friday,15,Latte,96.69,8
+2024-01-12,Friday,15,Muffin,72.52,6
+2024-01-12,Friday,16,Latte,138.07,12
+2024-01-12,Friday,16,Muffin,94.68,8
+2024-01-12,Friday,16,Breakfast Sandwich,71.01,6
+2024-01-12,Friday,17,Muffin,134.64,11
+2024-01-12,Friday,17,Breakfast Sandwich,92.32,8
+2024-01-12,Friday,17,Drip Coffee,69.24,6
+2024-01-12,Friday,18,Breakfast Sandwich,203.2,17
+2024-01-12,Friday,18,Drip Coffee,139.34,12
+2024-01-12,Friday,18,Croissant,104.5,9
+2024-01-12,Friday,19,Drip Coffee,198.16,17
+2024-01-12,Friday,19,Croissant,135.88,11
+2024-01-12,Friday,19,Latte,101.91,8
+2024-01-12,Friday,20,Croissant,194.1,16
+2024-01-12,Friday,20,Latte,133.1,11
+2024-01-12,Friday,20,Muffin,99.82,8
+2024-01-12,Friday,21,Latte,191.49,16
+2024-01-12,Friday,21,Muffin,131.31,11
+2024-01-12,Friday,21,Breakfast Sandwich,98.48,8
+2024-01-12,Friday,22,Muffin,122.97,10
+2024-01-12,Friday,22,Breakfast Sandwich,84.32,7
+2024-01-12,Friday,22,Drip Coffee,63.24,5
+2024-01-13,Saturday,8,Specialty Cake,105.18,9
+2024-01-13,Saturday,8,Sundae,77.33,6
+2024-01-13,Saturday,8,Cold Brew,55.68,5
+2024-01-13,Saturday,9,Sundae,107.48,9
+2024-01-13,Saturday,9,Cold Brew,79.03,7
+2024-01-13,Saturday,9,Brownie,56.9,5
+2024-01-13,Saturday,10,Cold Brew,109.2,9
+2024-01-13,Saturday,10,Brownie,80.3,7
+2024-01-13,Saturday,10,Party Pack,57.81,5
+2024-01-13,Saturday,11,Brownie,202.47,17
+2024-01-13,Saturday,11,Party Pack,148.88,12
+2024-01-13,Saturday,11,Specialty Cake,107.19,9
+2024-01-13,Saturday,12,Party Pack,202.58,17
+2024-01-13,Saturday,12,Specialty Cake,148.95,12
+2024-01-13,Saturday,12,Sundae,107.25,9
+2024-01-13,Saturday,13,Specialty Cake,201.04,17
+2024-01-13,Saturday,13,Sundae,147.82,12
+2024-01-13,Saturday,13,Cold Brew,106.43,9
+2024-01-13,Saturday,14,Sundae,198.04,17
+2024-01-13,Saturday,14,Cold Brew,145.62,12
+2024-01-13,Saturday,14,Brownie,104.85,9
+2024-01-13,Saturday,15,Cold Brew,155.12,13
+2024-01-13,Saturday,15,Brownie,114.06,10
+2024-01-13,Saturday,15,Party Pack,82.12,7
+2024-01-13,Saturday,16,Brownie,151.27,13
+2024-01-13,Saturday,16,Party Pack,111.23,9
+2024-01-13,Saturday,16,Specialty Cake,80.08,7
+2024-01-13,Saturday,17,Party Pack,147.29,12
+2024-01-13,Saturday,17,Specialty Cake,108.3,9
+2024-01-13,Saturday,17,Sundae,77.98,6
+2024-01-13,Saturday,18,Specialty Cake,222.64,19
+2024-01-13,Saturday,18,Sundae,163.71,14
+2024-01-13,Saturday,18,Cold Brew,117.87,10
+2024-01-13,Saturday,19,Sundae,218.08,18
+2024-01-13,Saturday,19,Cold Brew,160.35,13
+2024-01-13,Saturday,19,Brownie,115.46,10
+2024-01-13,Saturday,20,Cold Brew,215.15,18
+2024-01-13,Saturday,20,Brownie,158.2,13
+2024-01-13,Saturday,20,Party Pack,113.9,9
+2024-01-13,Saturday,21,Brownie,214.15,18
+2024-01-13,Saturday,21,Party Pack,157.46,13
+2024-01-13,Saturday,21,Specialty Cake,113.37,9
+2024-01-13,Saturday,22,Party Pack,138.84,12
+2024-01-13,Saturday,22,Specialty Cake,102.09,9
+2024-01-13,Saturday,22,Sundae,73.5,6
+2024-01-14,Sunday,8,Sundae,78.23,7
+2024-01-14,Sunday,8,Cold Brew,57.52,5
+2024-01-14,Sunday,8,Brownie,41.42,3
+2024-01-14,Sunday,9,Cold Brew,79.49,7
+2024-01-14,Sunday,9,Brownie,58.44,5
+2024-01-14,Sunday,9,Party Pack,42.08,4
+2024-01-14,Sunday,10,Brownie,80.17,7
+2024-01-14,Sunday,10,Party Pack,58.95,5
+2024-01-14,Sunday,10,Specialty Cake,42.44,4
+2024-01-14,Sunday,11,Party Pack,147.44,12
+2024-01-14,Sunday,11,Specialty Cake,108.42,9
+2024-01-14,Sunday,11,Sundae,78.06,7
+2024-01-14,Sunday,12,Specialty Cake,146.33,12
+2024-01-14,Sunday,12,Sundae,107.6,9
+2024-01-14,Sunday,12,Cold Brew,77.47,6
+2024-01-14,Sunday,13,Sundae,144.15,12
+2024-01-14,Sunday,13,Cold Brew,105.99,9
+2024-01-14,Sunday,13,Brownie,76.31,6
+2024-01-14,Sunday,14,Cold Brew,141.13,12
+2024-01-14,Sunday,14,Brownie,103.78,9
+2024-01-14,Sunday,14,Party Pack,74.72,6
+2024-01-14,Sunday,15,Brownie,110.1,9
+2024-01-14,Sunday,15,Party Pack,80.96,7
+2024-01-14,Sunday,15,Specialty Cake,58.29,5
+2024-01-14,Sunday,16,Party Pack,107.21,9
+2024-01-14,Sunday,16,Specialty Cake,78.83,7
+2024-01-14,Sunday,16,Sundae,56.76,5
+2024-01-14,Sunday,17,Specialty Cake,104.55,9
+2024-01-14,Sunday,17,Sundae,76.87,6
+2024-01-14,Sunday,17,Cold Brew,55.35,5
+2024-01-14,Sunday,18,Sundae,158.73,13
+2024-01-14,Sunday,18,Cold Brew,116.72,10
+2024-01-14,Sunday,18,Brownie,84.03,7
+2024-01-14,Sunday,19,Cold Brew,156.59,13
+2024-01-14,Sunday,19,Brownie,115.14,10
+2024-01-14,Sunday,19,Party Pack,82.9,7
+2024-01-14,Sunday,20,Brownie,155.87,13
+2024-01-14,Sunday,20,Party Pack,114.61,10
+2024-01-14,Sunday,20,Specialty Cake,82.52,7
+2024-01-14,Sunday,21,Party Pack,156.63,13
+2024-01-14,Sunday,21,Specialty Cake,115.17,10
+2024-01-14,Sunday,21,Sundae,82.92,7
+2024-01-14,Sunday,22,Specialty Cake,102.46,9
+2024-01-14,Sunday,22,Sundae,75.33,6
+2024-01-14,Sunday,22,Cold Brew,54.24,5
+2024-01-15,Monday,8,Latte,58.23,5
+2024-01-15,Monday,8,Muffin,39.93,3
+2024-01-15,Monday,8,Breakfast Sandwich,29.95,2
+2024-01-15,Monday,9,Muffin,58.73,5
+2024-01-15,Monday,9,Breakfast Sandwich,40.27,3
+2024-01-15,Monday,9,Drip Coffee,30.21,3
+2024-01-15,Monday,10,Breakfast Sandwich,58.76,5
+2024-01-15,Monday,10,Drip Coffee,40.3,3
+2024-01-15,Monday,10,Croissant,30.22,3
+2024-01-15,Monday,11,Drip Coffee,107.2,9
+2024-01-15,Monday,11,Croissant,73.51,6
+2024-01-15,Monday,11,Latte,55.13,5
+2024-01-15,Monday,12,Croissant,105.61,9
+2024-01-15,Monday,12,Latte,72.42,6
+2024-01-15,Monday,12,Muffin,54.31,5
+2024-01-15,Monday,13,Latte,103.4,9
+2024-01-15,Monday,13,Muffin,70.9,6
+2024-01-15,Monday,13,Breakfast Sandwich,53.18,4
+2024-01-15,Monday,14,Muffin,100.83,8
+2024-01-15,Monday,14,Breakfast Sandwich,69.14,6
+2024-01-15,Monday,14,Drip Coffee,51.86,4
+2024-01-15,Monday,15,Breakfast Sandwich,78.55,7
+2024-01-15,Monday,15,Drip Coffee,53.86,4
+2024-01-15,Monday,15,Croissant,40.4,3
+2024-01-15,Monday,16,Drip Coffee,76.59,6
+2024-01-15,Monday,16,Croissant,52.52,4
+2024-01-15,Monday,16,Latte,39.39,3
+2024-01-15,Monday,17,Croissant,75.03,6
+2024-01-15,Monday,17,Latte,51.45,4
+2024-01-15,Monday,17,Muffin,38.59,3
+2024-01-15,Monday,18,Latte,114.73,10
+2024-01-15,Monday,18,Muffin,78.67,7
+2024-01-15,Monday,18,Breakfast Sandwich,59,5
+2024-01-15,Monday,19,Muffin,114.19,10
+2024-01-15,Monday,19,Breakfast Sandwich,78.3,7
+2024-01-15,Monday,19,Drip Coffee,58.73,5
+2024-01-15,Monday,20,Breakfast Sandwich,114.75,10
+2024-01-15,Monday,20,Drip Coffee,78.69,7
+2024-01-15,Monday,20,Croissant,59.02,5
+2024-01-15,Monday,21,Drip Coffee,116.35,10
+2024-01-15,Monday,21,Croissant,79.78,7
+2024-01-15,Monday,21,Latte,59.84,5
+2024-01-15,Monday,22,Croissant,76.64,6
+2024-01-15,Monday,22,Latte,52.56,4
+2024-01-15,Monday,22,Muffin,39.42,3
+2024-01-16,Tuesday,8,Muffin,49.78,4
+2024-01-16,Tuesday,8,Breakfast Sandwich,34.14,3
+2024-01-16,Tuesday,8,Drip Coffee,25.6,2
+2024-01-16,Tuesday,9,Breakfast Sandwich,49.81,4
+2024-01-16,Tuesday,9,Drip Coffee,34.16,3
+2024-01-16,Tuesday,9,Croissant,25.62,2
+2024-01-16,Tuesday,10,Drip Coffee,49.43,4
+2024-01-16,Tuesday,10,Croissant,33.9,3
+2024-01-16,Tuesday,10,Latte,25.42,2
+2024-01-16,Tuesday,11,Croissant,89.52,7
+2024-01-16,Tuesday,11,Latte,61.38,5
+2024-01-16,Tuesday,11,Muffin,46.04,4
+2024-01-16,Tuesday,12,Latte,87.65,7
+2024-01-16,Tuesday,12,Muffin,60.1,5
+2024-01-16,Tuesday,12,Breakfast Sandwich,45.08,4
+2024-01-16,Tuesday,13,Muffin,85.47,7
+2024-01-16,Tuesday,13,Breakfast Sandwich,58.61,5
+2024-01-16,Tuesday,13,Drip Coffee,43.95,4
+2024-01-16,Tuesday,14,Breakfast Sandwich,83.22,7
+2024-01-16,Tuesday,14,Drip Coffee,57.07,5
+2024-01-16,Tuesday,14,Croissant,42.8,4
+2024-01-16,Tuesday,15,Drip Coffee,64.92,5
+2024-01-16,Tuesday,15,Croissant,44.52,4
+2024-01-16,Tuesday,15,Latte,33.39,3
+2024-01-16,Tuesday,16,Croissant,63.59,5
+2024-01-16,Tuesday,16,Latte,43.61,4
+2024-01-16,Tuesday,16,Muffin,32.71,3
+2024-01-16,Tuesday,17,Latte,62.74,5
+2024-01-16,Tuesday,17,Muffin,43.02,4
+2024-01-16,Tuesday,17,Breakfast Sandwich,32.27,3
+2024-01-16,Tuesday,18,Muffin,96.8,8
+2024-01-16,Tuesday,18,Breakfast Sandwich,66.37,6
+2024-01-16,Tuesday,18,Drip Coffee,49.78,4
+2024-01-16,Tuesday,19,Breakfast Sandwich,97.27,8
+2024-01-16,Tuesday,19,Drip Coffee,66.7,6
+2024-01-16,Tuesday,19,Croissant,50.03,4
+2024-01-16,Tuesday,20,Drip Coffee,98.62,8
+2024-01-16,Tuesday,20,Croissant,67.62,6
+2024-01-16,Tuesday,20,Latte,50.72,4
+2024-01-16,Tuesday,21,Croissant,100.7,8
+2024-01-16,Tuesday,21,Latte,69.05,6
+2024-01-16,Tuesday,21,Muffin,51.79,4
+2024-01-16,Tuesday,22,Latte,66.63,6
+2024-01-16,Tuesday,22,Muffin,45.69,4
+2024-01-16,Tuesday,22,Breakfast Sandwich,34.26,3
+2024-01-17,Wednesday,8,Breakfast Sandwich,52.92,4
+2024-01-17,Wednesday,8,Drip Coffee,36.29,3
+2024-01-17,Wednesday,8,Croissant,27.22,2
+2024-01-17,Wednesday,9,Drip Coffee,52.52,4
+2024-01-17,Wednesday,9,Croissant,36.01,3
+2024-01-17,Wednesday,9,Latte,27.01,2
+2024-01-17,Wednesday,10,Croissant,51.74,4
+2024-01-17,Wednesday,10,Latte,35.48,3
+2024-01-17,Wednesday,10,Muffin,26.61,2
+2024-01-17,Wednesday,11,Latte,93.12,8
+2024-01-17,Wednesday,11,Muffin,63.85,5
+2024-01-17,Wednesday,11,Breakfast Sandwich,47.89,4
+2024-01-17,Wednesday,12,Muffin,90.8,8
+2024-01-17,Wednesday,12,Breakfast Sandwich,62.27,5
+2024-01-17,Wednesday,12,Drip Coffee,46.7,4
+2024-01-17,Wednesday,13,Breakfast Sandwich,88.42,7
+2024-01-17,Wednesday,13,Drip Coffee,60.63,5
+2024-01-17,Wednesday,13,Croissant,45.47,4
+2024-01-17,Wednesday,14,Drip Coffee,86.22,7
+2024-01-17,Wednesday,14,Croissant,59.12,5
+2024-01-17,Wednesday,14,Latte,44.34,4
+2024-01-17,Wednesday,15,Croissant,67.57,6
+2024-01-17,Wednesday,15,Latte,46.33,4
+2024-01-17,Wednesday,15,Muffin,34.75,3
+2024-01-17,Wednesday,16,Latte,66.65,6
+2024-01-17,Wednesday,16,Muffin,45.71,4
+2024-01-17,Wednesday,16,Breakfast Sandwich,34.28,3
+2024-01-17,Wednesday,17,Muffin,66.35,6
+2024-01-17,Wednesday,17,Breakfast Sandwich,45.49,4
+2024-01-17,Wednesday,17,Drip Coffee,34.12,3
+2024-01-17,Wednesday,18,Breakfast Sandwich,103.34,9
+2024-01-17,Wednesday,18,Drip Coffee,70.86,6
+2024-01-17,Wednesday,18,Croissant,53.15,4
+2024-01-17,Wednesday,19,Drip Coffee,104.78,9
+2024-01-17,Wednesday,19,Croissant,71.85,6
+2024-01-17,Wednesday,19,Latte,53.88,4
+2024-01-17,Wednesday,20,Croissant,106.98,9
+2024-01-17,Wednesday,20,Latte,73.36,6
+2024-01-17,Wednesday,20,Muffin,55.02,5
+2024-01-17,Wednesday,21,Latte,109.71,9
+2024-01-17,Wednesday,21,Muffin,75.23,6
+2024-01-17,Wednesday,21,Breakfast Sandwich,56.42,5
+2024-01-17,Wednesday,22,Muffin,72.69,6
+2024-01-17,Wednesday,22,Breakfast Sandwich,49.85,4
+2024-01-17,Wednesday,22,Drip Coffee,37.39,3
+2024-01-18,Thursday,8,Drip Coffee,62.43,5
+2024-01-18,Thursday,8,Croissant,42.81,4
+2024-01-18,Thursday,8,Latte,32.11,3
+2024-01-18,Thursday,9,Croissant,61.5,5
+2024-01-18,Thursday,9,Latte,42.17,4
+2024-01-18,Thursday,9,Muffin,31.63,3
+2024-01-18,Thursday,10,Latte,60.22,5
+2024-01-18,Thursday,10,Muffin,41.29,3
+2024-01-18,Thursday,10,Breakfast Sandwich,30.97,3
+2024-01-18,Thursday,11,Muffin,107.94,9
+2024-01-18,Thursday,11,Breakfast Sandwich,74.02,6
+2024-01-18,Thursday,11,Drip Coffee,55.51,5
+2024-01-18,Thursday,12,Breakfast Sandwich,105.11,9
+2024-01-18,Thursday,12,Drip Coffee,72.07,6
+2024-01-18,Thursday,12,Croissant,54.06,5
+2024-01-18,Thursday,13,Drip Coffee,102.5,9
+2024-01-18,Thursday,13,Croissant,70.28,6
+2024-01-18,Thursday,13,Latte,52.71,4
+2024-01-18,Thursday,14,Croissant,100.4,8
+2024-01-18,Thursday,14,Latte,68.85,6
+2024-01-18,Thursday,14,Muffin,51.63,4
+2024-01-18,Thursday,15,Latte,79.24,7
+2024-01-18,Thursday,15,Muffin,54.34,5
+2024-01-18,Thursday,15,Breakfast Sandwich,40.75,3
+2024-01-18,Thursday,16,Muffin,78.87,7
+2024-01-18,Thursday,16,Breakfast Sandwich,54.08,5
+2024-01-18,Thursday,16,Drip Coffee,40.56,3
+2024-01-18,Thursday,17,Breakfast Sandwich,79.26,7
+2024-01-18,Thursday,17,Drip Coffee,54.35,5
+2024-01-18,Thursday,17,Croissant,40.76,3
+2024-01-18,Thursday,18,Drip Coffee,124.55,10
+2024-01-18,Thursday,18,Croissant,85.41,7
+2024-01-18,Thursday,18,Latte,64.06,5
+2024-01-18,Thursday,19,Croissant,127.18,11
+2024-01-18,Thursday,19,Latte,87.21,7
+2024-01-18,Thursday,19,Muffin,65.4,5
+2024-01-18,Thursday,20,Latte,130.42,11
+2024-01-18,Thursday,20,Muffin,89.43,7
+2024-01-18,Thursday,20,Breakfast Sandwich,67.08,6
+2024-01-18,Thursday,21,Muffin,133.94,11
+2024-01-18,Thursday,21,Breakfast Sandwich,91.85,8
+2024-01-18,Thursday,21,Drip Coffee,68.89,6
+2024-01-18,Thursday,22,Breakfast Sandwich,88.61,7
+2024-01-18,Thursday,22,Drip Coffee,60.76,5
+2024-01-18,Thursday,22,Croissant,45.57,4
+2024-01-19,Friday,8,Croissant,90.95,8
+2024-01-19,Friday,8,Latte,62.37,5
+2024-01-19,Friday,8,Muffin,46.78,4
+2024-01-19,Friday,9,Latte,89.05,7
+2024-01-19,Friday,9,Muffin,61.07,5
+2024-01-19,Friday,9,Breakfast Sandwich,45.8,4
+2024-01-19,Friday,10,Muffin,86.84,7
+2024-01-19,Friday,10,Breakfast Sandwich,59.55,5
+2024-01-19,Friday,10,Drip Coffee,44.66,4
+2024-01-19,Friday,11,Breakfast Sandwich,155.44,13
+2024-01-19,Friday,11,Drip Coffee,106.59,9
+2024-01-19,Friday,11,Croissant,79.94,7
+2024-01-19,Friday,12,Drip Coffee,151.58,13
+2024-01-19,Friday,12,Croissant,103.94,9
+2024-01-19,Friday,12,Latte,77.95,6
+2024-01-19,Friday,13,Croissant,148.48,12
+2024-01-19,Friday,13,Latte,101.81,8
+2024-01-19,Friday,13,Muffin,76.36,6
+2024-01-19,Friday,14,Latte,146.48,12
+2024-01-19,Friday,14,Muffin,100.44,8
+2024-01-19,Friday,14,Breakfast Sandwich,75.33,6
+2024-01-19,Friday,15,Muffin,116.64,10
+2024-01-19,Friday,15,Breakfast Sandwich,79.98,7
+2024-01-19,Friday,15,Drip Coffee,59.98,5
+2024-01-19,Friday,16,Breakfast Sandwich,117.21,10
+2024-01-19,Friday,16,Drip Coffee,80.37,7
+2024-01-19,Friday,16,Croissant,60.28,5
+2024-01-19,Friday,17,Drip Coffee,118.84,10
+2024-01-19,Friday,17,Croissant,81.49,7
+2024-01-19,Friday,17,Latte,61.12,5
+2024-01-19,Friday,18,Croissant,188.08,16
+2024-01-19,Friday,18,Latte,128.97,11
+2024-01-19,Friday,18,Muffin,96.72,8
+2024-01-19,Friday,19,Latte,192.88,16
+2024-01-19,Friday,19,Muffin,132.26,11
+2024-01-19,Friday,19,Breakfast Sandwich,99.2,8
+2024-01-19,Friday,20,Muffin,198.09,17
+2024-01-19,Friday,20,Breakfast Sandwich,135.83,11
+2024-01-19,Friday,20,Drip Coffee,101.87,8
+2024-01-19,Friday,21,Breakfast Sandwich,203.12,17
+2024-01-19,Friday,21,Drip Coffee,139.28,12
+2024-01-19,Friday,21,Croissant,104.46,9
+2024-01-19,Friday,22,Drip Coffee,133.82,11
+2024-01-19,Friday,22,Croissant,91.76,8
+2024-01-19,Friday,22,Latte,68.82,6
+2024-01-20,Saturday,8,Cold Brew,100.1,8
+2024-01-20,Saturday,8,Brownie,73.6,6
+2024-01-20,Saturday,8,Party Pack,52.99,4
+2024-01-20,Saturday,9,Brownie,97.61,8
+2024-01-20,Saturday,9,Party Pack,71.77,6
+2024-01-20,Saturday,9,Specialty Cake,51.67,4
+2024-01-20,Saturday,10,Party Pack,95.04,8
+2024-01-20,Saturday,10,Specialty Cake,69.89,6
+2024-01-20,Saturday,10,Sundae,50.32,4
+2024-01-20,Saturday,11,Specialty Cake,170.37,14
+2024-01-20,Saturday,11,Sundae,125.28,10
+2024-01-20,Saturday,11,Cold Brew,90.2,8
+2024-01-20,Saturday,12,Sundae,166.89,14
+2024-01-20,Saturday,12,Cold Brew,122.71,10
+2024-01-20,Saturday,12,Brownie,88.35,7
+2024-01-20,Saturday,13,Cold Brew,164.64,14
+2024-01-20,Saturday,13,Brownie,121.06,10
+2024-01-20,Saturday,13,Party Pack,87.16,7
+2024-01-20,Saturday,14,Brownie,163.88,14
+2024-01-20,Saturday,14,Party Pack,120.5,10
+2024-01-20,Saturday,14,Specialty Cake,86.76,7
+2024-01-20,Saturday,15,Party Pack,131.74,11
+2024-01-20,Saturday,15,Specialty Cake,96.87,8
+2024-01-20,Saturday,15,Sundae,69.75,6
+2024-01-20,Saturday,16,Specialty Cake,133.57,11
+2024-01-20,Saturday,16,Sundae,98.22,8
+2024-01-20,Saturday,16,Cold Brew,70.71,6
+2024-01-20,Saturday,17,Sundae,136.38,11
+2024-01-20,Saturday,17,Cold Brew,100.28,8
+2024-01-20,Saturday,17,Brownie,72.2,6
+2024-01-20,Saturday,18,Cold Brew,216.79,18
+2024-01-20,Saturday,18,Brownie,159.41,13
+2024-01-20,Saturday,18,Party Pack,114.77,10
+2024-01-20,Saturday,19,Brownie,222.65,19
+2024-01-20,Saturday,19,Party Pack,163.71,14
+2024-01-20,Saturday,19,Specialty Cake,117.87,10
+2024-01-20,Saturday,20,Party Pack,228.3,19
+2024-01-20,Saturday,20,Specialty Cake,167.87,14
+2024-01-20,Saturday,20,Sundae,120.86,10
+2024-01-20,Saturday,21,Specialty Cake,233.14,19
+2024-01-20,Saturday,21,Sundae,171.42,14
+2024-01-20,Saturday,21,Cold Brew,123.43,10
+2024-01-20,Saturday,22,Sundae,152.66,13
+2024-01-20,Saturday,22,Cold Brew,112.25,9
+2024-01-20,Saturday,22,Brownie,80.82,7
+2024-01-21,Sunday,8,Brownie,71.07,6
+2024-01-21,Sunday,8,Party Pack,52.26,4
+2024-01-21,Sunday,8,Specialty Cake,37.63,3
+2024-01-21,Sunday,9,Party Pack,69.2,6
+2024-01-21,Sunday,9,Specialty Cake,50.88,4
+2024-01-21,Sunday,9,Sundae,36.64,3
+2024-01-21,Sunday,10,Specialty Cake,67.49,6
+2024-01-21,Sunday,10,Sundae,49.62,4
+2024-01-21,Sunday,10,Cold Brew,35.73,3
+2024-01-21,Sunday,11,Sundae,121.52,10
+2024-01-21,Sunday,11,Cold Brew,89.35,7
+2024-01-21,Sunday,11,Brownie,64.33,5
+2024-01-21,Sunday,12,Cold Brew,119.88,10
+2024-01-21,Sunday,12,Brownie,88.15,7
+2024-01-21,Sunday,12,Party Pack,63.47,5
+2024-01-21,Sunday,13,Brownie,119.32,10
+2024-01-21,Sunday,13,Party Pack,87.74,7
+2024-01-21,Sunday,13,Specialty Cake,63.17,5
+2024-01-21,Sunday,14,Party Pack,119.91,10
+2024-01-21,Sunday,14,Specialty Cake,88.17,7
+2024-01-21,Sunday,14,Sundae,63.48,5
+2024-01-21,Sunday,15,Specialty Cake,97.26,8
+2024-01-21,Sunday,15,Sundae,71.52,6
+2024-01-21,Sunday,15,Cold Brew,51.49,4
+2024-01-21,Sunday,16,Sundae,99.31,8
+2024-01-21,Sunday,16,Cold Brew,73.02,6
+2024-01-21,Sunday,16,Brownie,52.57,4
+2024-01-21,Sunday,17,Cold Brew,101.84,8
+2024-01-21,Sunday,17,Brownie,74.89,6
+2024-01-21,Sunday,17,Party Pack,53.92,4
+2024-01-21,Sunday,18,Brownie,162.12,14
+2024-01-21,Sunday,18,Party Pack,119.2,10
+2024-01-21,Sunday,18,Specialty Cake,85.83,7
+2024-01-21,Sunday,19,Party Pack,166.24,14
+2024-01-21,Sunday,19,Specialty Cake,122.23,10
+2024-01-21,Sunday,19,Sundae,88.01,7
+2024-01-21,Sunday,20,Specialty Cake,169.76,14
+2024-01-21,Sunday,20,Sundae,124.82,10
+2024-01-21,Sunday,20,Cold Brew,89.87,7
+2024-01-21,Sunday,21,Sundae,172.3,14
+2024-01-21,Sunday,21,Cold Brew,126.69,11
+2024-01-21,Sunday,21,Brownie,91.22,8
+2024-01-21,Sunday,22,Cold Brew,111.98,9
+2024-01-21,Sunday,22,Brownie,82.34,7
+2024-01-21,Sunday,22,Party Pack,59.28,5
+2024-01-22,Monday,8,Breakfast Sandwich,56.4,5
+2024-01-22,Monday,8,Drip Coffee,38.68,3
+2024-01-22,Monday,8,Croissant,29.01,2
+2024-01-22,Monday,9,Drip Coffee,55,5
+2024-01-22,Monday,9,Croissant,37.72,3
+2024-01-22,Monday,9,Latte,28.29,2
+2024-01-22,Monday,10,Croissant,53.88,4
+2024-01-22,Monday,10,Latte,36.94,3
+2024-01-22,Monday,10,Muffin,27.71,2
+2024-01-22,Monday,11,Latte,97.7,8
+2024-01-22,Monday,11,Muffin,67,6
+2024-01-22,Monday,11,Breakfast Sandwich,50.25,4
+2024-01-22,Monday,12,Muffin,97.25,8
+2024-01-22,Monday,12,Breakfast Sandwich,66.68,6
+2024-01-22,Monday,12,Drip Coffee,50.01,4
+2024-01-22,Monday,13,Breakfast Sandwich,97.73,8
+2024-01-22,Monday,13,Drip Coffee,67.01,6
+2024-01-22,Monday,13,Croissant,50.26,4
+2024-01-22,Monday,14,Drip Coffee,99.08,8
+2024-01-22,Monday,14,Croissant,67.94,6
+2024-01-22,Monday,14,Latte,50.96,4
+2024-01-22,Monday,15,Croissant,80.93,7
+2024-01-22,Monday,15,Latte,55.5,5
+2024-01-22,Monday,15,Muffin,41.62,3
+2024-01-22,Monday,16,Latte,83,7
+2024-01-22,Monday,16,Muffin,56.92,5
+2024-01-22,Monday,16,Breakfast Sandwich,42.69,4
+2024-01-22,Monday,17,Muffin,85.24,7
+2024-01-22,Monday,17,Breakfast Sandwich,58.45,5
+2024-01-22,Monday,17,Drip Coffee,43.84,4
+2024-01-22,Monday,18,Breakfast Sandwich,135.48,11
+2024-01-22,Monday,18,Drip Coffee,92.9,8
+2024-01-22,Monday,18,Croissant,69.68,6
+2024-01-22,Monday,19,Drip Coffee,138.35,12
+2024-01-22,Monday,19,Croissant,94.87,8
+2024-01-22,Monday,19,Latte,71.15,6
+2024-01-22,Monday,20,Croissant,140.42,12
+2024-01-22,Monday,20,Latte,96.29,8
+2024-01-22,Monday,20,Muffin,72.22,6
+2024-01-22,Monday,21,Latte,141.46,12
+2024-01-22,Monday,21,Muffin,97,8
+2024-01-22,Monday,21,Breakfast Sandwich,72.75,6
+2024-01-22,Monday,22,Muffin,91.2,8
+2024-01-22,Monday,22,Breakfast Sandwich,62.54,5
+2024-01-22,Monday,22,Drip Coffee,46.9,4
+2024-01-23,Tuesday,8,Drip Coffee,46.6,4
+2024-01-23,Tuesday,8,Croissant,31.96,3
+2024-01-23,Tuesday,8,Latte,23.97,2
+2024-01-23,Tuesday,9,Croissant,45.65,4
+2024-01-23,Tuesday,9,Latte,31.3,3
+2024-01-23,Tuesday,9,Muffin,23.48,2
+2024-01-23,Tuesday,10,Latte,45.03,4
+2024-01-23,Tuesday,10,Muffin,30.88,3
+2024-01-23,Tuesday,10,Breakfast Sandwich,23.16,2
+2024-01-23,Tuesday,11,Muffin,82.4,7
+2024-01-23,Tuesday,11,Breakfast Sandwich,56.5,5
+2024-01-23,Tuesday,11,Drip Coffee,42.38,4
+2024-01-23,Tuesday,12,Breakfast Sandwich,82.8,7
+2024-01-23,Tuesday,12,Drip Coffee,56.78,5
+2024-01-23,Tuesday,12,Croissant,42.58,4
+2024-01-23,Tuesday,13,Drip Coffee,83.95,7
+2024-01-23,Tuesday,13,Croissant,57.57,5
+2024-01-23,Tuesday,13,Latte,43.17,4
+2024-01-23,Tuesday,14,Croissant,85.72,7
+2024-01-23,Tuesday,14,Latte,58.78,5
+2024-01-23,Tuesday,14,Muffin,44.08,4
+2024-01-23,Tuesday,15,Latte,70.33,6
+2024-01-23,Tuesday,15,Muffin,48.22,4
+2024-01-23,Tuesday,15,Breakfast Sandwich,36.17,3
+2024-01-23,Tuesday,16,Muffin,72.22,6
+2024-01-23,Tuesday,16,Breakfast Sandwich,49.52,4
+2024-01-23,Tuesday,16,Drip Coffee,37.14,3
+2024-01-23,Tuesday,17,Breakfast Sandwich,74.06,6
+2024-01-23,Tuesday,17,Drip Coffee,50.78,4
+2024-01-23,Tuesday,17,Croissant,38.09,3
+2024-01-23,Tuesday,18,Drip Coffee,117.22,10
+2024-01-23,Tuesday,18,Croissant,80.38,7
+2024-01-23,Tuesday,18,Latte,60.29,5
+2024-01-23,Tuesday,19,Croissant,118.98,10
+2024-01-23,Tuesday,19,Latte,81.58,7
+2024-01-23,Tuesday,19,Muffin,61.19,5
+2024-01-23,Tuesday,20,Latte,119.86,10
+2024-01-23,Tuesday,20,Muffin,82.19,7
+2024-01-23,Tuesday,20,Breakfast Sandwich,61.64,5
+2024-01-23,Tuesday,21,Muffin,119.77,10
+2024-01-23,Tuesday,21,Breakfast Sandwich,82.13,7
+2024-01-23,Tuesday,21,Drip Coffee,61.6,5
+2024-01-23,Tuesday,22,Breakfast Sandwich,76.6,6
+2024-01-23,Tuesday,22,Drip Coffee,52.52,4
+2024-01-23,Tuesday,22,Croissant,39.39,3
+2024-01-24,Wednesday,8,Croissant,48.48,4
+2024-01-24,Wednesday,8,Latte,33.24,3
+2024-01-24,Wednesday,8,Muffin,24.93,2
+2024-01-24,Wednesday,9,Latte,47.82,4
+2024-01-24,Wednesday,9,Muffin,32.79,3
+2024-01-24,Wednesday,9,Breakfast Sandwich,24.6,2
+2024-01-24,Wednesday,10,Muffin,47.6,4
+2024-01-24,Wednesday,10,Breakfast Sandwich,32.64,3
+2024-01-24,Wednesday,10,Drip Coffee,24.48,2
+2024-01-24,Wednesday,11,Breakfast Sandwich,87.93,7
+2024-01-24,Wednesday,11,Drip Coffee,60.3,5
+2024-01-24,Wednesday,11,Croissant,45.22,4
+2024-01-24,Wednesday,12,Drip Coffee,89.16,7
+2024-01-24,Wednesday,12,Croissant,61.14,5
+2024-01-24,Wednesday,12,Latte,45.85,4
+2024-01-24,Wednesday,13,Croissant,91.03,8
+2024-01-24,Wednesday,13,Latte,62.42,5
+2024-01-24,Wednesday,13,Muffin,46.82,4
+2024-01-24,Wednesday,14,Latte,93.36,8
+2024-01-24,Wednesday,14,Muffin,64.02,5
+2024-01-24,Wednesday,14,Breakfast Sandwich,48.01,4
+2024-01-24,Wednesday,15,Muffin,76.7,6
+2024-01-24,Wednesday,15,Breakfast Sandwich,52.59,4
+2024-01-24,Wednesday,15,Drip Coffee,39.45,3
+2024-01-24,Wednesday,16,Breakfast Sandwich,78.65,7
+2024-01-24,Wednesday,16,Drip Coffee,53.93,4
+2024-01-24,Wednesday,16,Croissant,40.45,3
+2024-01-24,Wednesday,17,Drip Coffee,80.31,7
+2024-01-24,Wednesday,17,Croissant,55.07,5
+2024-01-24,Wednesday,17,Latte,41.3,3
+2024-01-24,Wednesday,18,Croissant,126.35,11
+2024-01-24,Wednesday,18,Latte,86.64,7
+2024-01-24,Wednesday,18,Muffin,64.98,5
+2024-01-24,Wednesday,19,Latte,127.29,11
+2024-01-24,Wednesday,19,Muffin,87.28,7
+2024-01-24,Wednesday,19,Breakfast Sandwich,65.46,5
+2024-01-24,Wednesday,20,Muffin,127.19,11
+2024-01-24,Wednesday,20,Breakfast Sandwich,87.22,7
+2024-01-24,Wednesday,20,Drip Coffee,65.41,5
+2024-01-24,Wednesday,21,Breakfast Sandwich,126.08,11
+2024-01-24,Wednesday,21,Drip Coffee,86.46,7
+2024-01-24,Wednesday,21,Croissant,64.84,5
+2024-01-24,Wednesday,22,Drip Coffee,80.05,7
+2024-01-24,Wednesday,22,Croissant,54.89,5
+2024-01-24,Wednesday,22,Latte,41.17,3
+2024-01-25,Thursday,8,Latte,56.83,5
+2024-01-25,Thursday,8,Muffin,38.97,3
+2024-01-25,Thursday,8,Breakfast Sandwich,29.23,2
+2024-01-25,Thursday,9,Muffin,56.57,5
+2024-01-25,Thursday,9,Breakfast Sandwich,38.79,3
+2024-01-25,Thursday,9,Drip Coffee,29.09,2
+2024-01-25,Thursday,10,Breakfast Sandwich,56.84,5
+2024-01-25,Thursday,10,Drip Coffee,38.98,3
+2024-01-25,Thursday,10,Croissant,29.23,2
+2024-01-25,Thursday,11,Drip Coffee,105.94,9
+2024-01-25,Thursday,11,Croissant,72.65,6
+2024-01-25,Thursday,11,Latte,54.48,5
+2024-01-25,Thursday,12,Croissant,108.17,9
+2024-01-25,Thursday,12,Latte,74.17,6
+2024-01-25,Thursday,12,Muffin,55.63,5
+2024-01-25,Thursday,13,Latte,110.93,9
+2024-01-25,Thursday,13,Muffin,76.07,6
+2024-01-25,Thursday,13,Breakfast Sandwich,57.05,5
+2024-01-25,Thursday,14,Muffin,113.93,9
+2024-01-25,Thursday,14,Breakfast Sandwich,78.12,7
+2024-01-25,Thursday,14,Drip Coffee,58.59,5
+2024-01-25,Thursday,15,Breakfast Sandwich,93.46,8
+2024-01-25,Thursday,15,Drip Coffee,64.08,5
+2024-01-25,Thursday,15,Croissant,48.06,4
+2024-01-25,Thursday,16,Drip Coffee,95.44,8
+2024-01-25,Thursday,16,Croissant,65.44,5
+2024-01-25,Thursday,16,Latte,49.08,4
+2024-01-25,Thursday,17,Croissant,96.87,8
+2024-01-25,Thursday,17,Latte,66.42,6
+2024-01-25,Thursday,17,Muffin,49.82,4
+2024-01-25,Thursday,18,Latte,151.25,13
+2024-01-25,Thursday,18,Muffin,103.72,9
+2024-01-25,Thursday,18,Breakfast Sandwich,77.79,6
+2024-01-25,Thursday,19,Muffin,151.14,13
+2024-01-25,Thursday,19,Breakfast Sandwich,103.64,9
+2024-01-25,Thursday,19,Drip Coffee,77.73,6
+2024-01-25,Thursday,20,Breakfast Sandwich,149.82,12
+2024-01-25,Thursday,20,Drip Coffee,102.74,9
+2024-01-25,Thursday,20,Croissant,77.05,6
+2024-01-25,Thursday,21,Drip Coffee,147.44,12
+2024-01-25,Thursday,21,Croissant,101.1,8
+2024-01-25,Thursday,21,Latte,75.82,6
+2024-01-25,Thursday,22,Croissant,93.06,8
+2024-01-25,Thursday,22,Latte,63.82,5
+2024-01-25,Thursday,22,Muffin,47.86,4
+2024-01-26,Friday,8,Muffin,83.62,7
+2024-01-26,Friday,8,Breakfast Sandwich,57.34,5
+2024-01-26,Friday,8,Drip Coffee,43,4
+2024-01-26,Friday,9,Breakfast Sandwich,84.03,7
+2024-01-26,Friday,9,Drip Coffee,57.62,5
+2024-01-26,Friday,9,Croissant,43.21,4
+2024-01-26,Friday,10,Drip Coffee,85.19,7
+2024-01-26,Friday,10,Croissant,58.42,5
+2024-01-26,Friday,10,Latte,43.81,4
+2024-01-26,Friday,11,Croissant,159.9,13
+2024-01-26,Friday,11,Latte,109.65,9
+2024-01-26,Friday,11,Muffin,82.24,7
+2024-01-26,Friday,12,Latte,163.99,14
+2024-01-26,Friday,12,Muffin,112.45,9
+2024-01-26,Friday,12,Breakfast Sandwich,84.34,7
+2024-01-26,Friday,13,Muffin,168.41,14
+2024-01-26,Friday,13,Breakfast Sandwich,115.48,10
+2024-01-26,Friday,13,Drip Coffee,86.61,7
+2024-01-26,Friday,14,Breakfast Sandwich,172.69,14
+2024-01-26,Friday,14,Drip Coffee,118.42,10
+2024-01-26,Friday,14,Croissant,88.81,7
+2024-01-26,Friday,15,Drip Coffee,141.08,12
+2024-01-26,Friday,15,Croissant,96.74,8
+2024-01-26,Friday,15,Latte,72.56,6
+2024-01-26,Friday,16,Croissant,143.19,12
+2024-01-26,Friday,16,Latte,98.19,8
+2024-01-26,Friday,16,Muffin,73.64,6
+2024-01-26,Friday,17,Latte,144.25,12
+2024-01-26,Friday,17,Muffin,98.92,8
+2024-01-26,Friday,17,Breakfast Sandwich,74.19,6
+2024-01-26,Friday,18,Muffin,223.43,19
+2024-01-26,Friday,18,Breakfast Sandwich,153.21,13
+2024-01-26,Friday,18,Drip Coffee,114.91,10
+2024-01-26,Friday,19,Breakfast Sandwich,221.48,18
+2024-01-26,Friday,19,Drip Coffee,151.87,13
+2024-01-26,Friday,19,Croissant,113.9,9
+2024-01-26,Friday,20,Drip Coffee,217.95,18
+2024-01-26,Friday,20,Croissant,149.45,12
+2024-01-26,Friday,20,Latte,112.09,9
+2024-01-26,Friday,21,Croissant,213.24,18
+2024-01-26,Friday,21,Latte,146.22,12
+2024-01-26,Friday,21,Muffin,109.66,9
+2024-01-26,Friday,22,Latte,134.1,11
+2024-01-26,Friday,22,Muffin,91.96,8
+2024-01-26,Friday,22,Breakfast Sandwich,68.97,6
+2024-01-27,Saturday,8,Party Pack,94.41,8
+2024-01-27,Saturday,8,Specialty Cake,69.42,6
+2024-01-27,Saturday,8,Sundae,49.98,4
+2024-01-27,Saturday,9,Specialty Cake,95.72,8
+2024-01-27,Saturday,9,Sundae,70.38,6
+2024-01-27,Saturday,9,Cold Brew,50.68,4
+2024-01-27,Saturday,10,Sundae,97.74,8
+2024-01-27,Saturday,10,Cold Brew,71.86,6
+2024-01-27,Saturday,10,Brownie,51.74,4
+2024-01-27,Saturday,11,Cold Brew,184.25,15
+2024-01-27,Saturday,11,Brownie,135.48,11
+2024-01-27,Saturday,11,Party Pack,97.54,8
+2024-01-27,Saturday,12,Brownie,189.22,16
+2024-01-27,Saturday,12,Party Pack,139.13,12
+2024-01-27,Saturday,12,Specialty Cake,100.18,8
+2024-01-27,Saturday,13,Party Pack,194.03,16
+2024-01-27,Saturday,13,Specialty Cake,142.67,12
+2024-01-27,Saturday,13,Sundae,102.72,9
+2024-01-27,Saturday,14,Specialty Cake,198.14,17
+2024-01-27,Saturday,14,Sundae,145.69,12
+2024-01-27,Saturday,14,Cold Brew,104.9,9
+2024-01-27,Saturday,15,Sundae,160.88,13
+2024-01-27,Saturday,15,Cold Brew,118.3,10
+2024-01-27,Saturday,15,Brownie,85.17,7
+2024-01-27,Saturday,16,Cold Brew,162.07,14
+2024-01-27,Saturday,16,Brownie,119.17,10
+2024-01-27,Saturday,16,Party Pack,85.8,7
+2024-01-27,Saturday,17,Brownie,161.96,13
+2024-01-27,Saturday,17,Party Pack,119.09,10
+2024-01-27,Saturday,17,Specialty Cake,85.74,7
+2024-01-27,Saturday,18,Party Pack,248.84,21
+2024-01-27,Saturday,18,Specialty Cake,182.97,15
+2024-01-27,Saturday,18,Sundae,131.74,11
+2024-01-27,Saturday,19,Specialty Cake,244.88,20
+2024-01-27,Saturday,19,Sundae,180.06,15
+2024-01-27,Saturday,19,Cold Brew,129.64,11
+2024-01-27,Saturday,20,Sundae,239.58,20
+2024-01-27,Saturday,20,Cold Brew,176.16,15
+2024-01-27,Saturday,20,Brownie,126.84,11
+2024-01-27,Saturday,21,Cold Brew,233.54,19
+2024-01-27,Saturday,21,Brownie,171.72,14
+2024-01-27,Saturday,21,Party Pack,123.64,10
+2024-01-27,Saturday,22,Brownie,146.71,12
+2024-01-27,Saturday,22,Party Pack,107.88,9
+2024-01-27,Saturday,22,Specialty Cake,77.67,6
+2024-01-28,Sunday,8,Specialty Cake,69.67,6
+2024-01-28,Sunday,8,Sundae,51.23,4
+2024-01-28,Sunday,8,Cold Brew,36.88,3
+2024-01-28,Sunday,9,Sundae,71.14,6
+2024-01-28,Sunday,9,Cold Brew,52.31,4
+2024-01-28,Sunday,9,Brownie,37.66,3
+2024-01-28,Sunday,10,Cold Brew,72.95,6
+2024-01-28,Sunday,10,Brownie,53.64,4
+2024-01-28,Sunday,10,Party Pack,38.62,3
+2024-01-28,Sunday,11,Brownie,137.72,11
+2024-01-28,Sunday,11,Party Pack,101.27,8
+2024-01-28,Sunday,11,Specialty Cake,72.91,6
+2024-01-28,Sunday,12,Party Pack,141.22,12
+2024-01-28,Sunday,12,Specialty Cake,103.84,9
+2024-01-28,Sunday,12,Sundae,74.76,6
+2024-01-28,Sunday,13,Specialty Cake,144.22,12
+2024-01-28,Sunday,13,Sundae,106.04,9
+2024-01-28,Sunday,13,Cold Brew,76.35,6
+2024-01-28,Sunday,14,Sundae,146.37,12
+2024-01-28,Sunday,14,Cold Brew,107.63,9
+2024-01-28,Sunday,14,Brownie,77.49,6
+2024-01-28,Sunday,15,Cold Brew,117.97,10
+2024-01-28,Sunday,15,Brownie,86.74,7
+2024-01-28,Sunday,15,Party Pack,62.45,5
+2024-01-28,Sunday,16,Brownie,117.88,10
+2024-01-28,Sunday,16,Party Pack,86.68,7
+2024-01-28,Sunday,16,Specialty Cake,62.41,5
+2024-01-28,Sunday,17,Party Pack,116.85,10
+2024-01-28,Sunday,17,Specialty Cake,85.92,7
+2024-01-28,Sunday,17,Sundae,61.86,5
+2024-01-28,Sunday,18,Specialty Cake,178.23,15
+2024-01-28,Sunday,18,Sundae,131.06,11
+2024-01-28,Sunday,18,Cold Brew,94.36,8
+2024-01-28,Sunday,19,Sundae,174.38,15
+2024-01-28,Sunday,19,Cold Brew,128.22,11
+2024-01-28,Sunday,19,Brownie,92.32,8
+2024-01-28,Sunday,20,Cold Brew,169.98,14
+2024-01-28,Sunday,20,Brownie,124.99,10
+2024-01-28,Sunday,20,Party Pack,89.99,7
+2024-01-28,Sunday,21,Brownie,165.52,14
+2024-01-28,Sunday,21,Party Pack,121.7,10
+2024-01-28,Sunday,21,Specialty Cake,87.63,7
+2024-01-28,Sunday,22,Party Pack,104.19,9
+2024-01-28,Sunday,22,Specialty Cake,76.61,6
+2024-01-28,Sunday,22,Sundae,55.16,5
+2024-01-29,Monday,8,Croissant,52.12,4
+2024-01-29,Monday,8,Latte,35.74,3
+2024-01-29,Monday,8,Muffin,26.8,2
+2024-01-29,Monday,9,Latte,53.45,4
+2024-01-29,Monday,9,Muffin,36.65,3
+2024-01-29,Monday,9,Breakfast Sandwich,27.49,2
+2024-01-29,Monday,10,Muffin,54.89,5
+2024-01-29,Monday,10,Breakfast Sandwich,37.64,3
+2024-01-29,Monday,10,Drip Coffee,28.23,2
+2024-01-29,Monday,11,Breakfast Sandwich,103.46,9
+2024-01-29,Monday,11,Drip Coffee,70.95,6
+2024-01-29,Monday,11,Croissant,53.21,4
+2024-01-29,Monday,12,Drip Coffee,105.66,9
+2024-01-29,Monday,12,Croissant,72.45,6
+2024-01-29,Monday,12,Latte,54.34,5
+2024-01-29,Monday,13,Croissant,107.24,9
+2024-01-29,Monday,13,Latte,73.53,6
+2024-01-29,Monday,13,Muffin,55.15,5
+2024-01-29,Monday,14,Latte,108.03,9
+2024-01-29,Monday,14,Muffin,74.08,6
+2024-01-29,Monday,14,Breakfast Sandwich,55.56,5
+2024-01-29,Monday,15,Muffin,86.36,7
+2024-01-29,Monday,15,Breakfast Sandwich,59.22,5
+2024-01-29,Monday,15,Drip Coffee,44.42,4
+2024-01-29,Monday,16,Breakfast Sandwich,85.61,7
+2024-01-29,Monday,16,Drip Coffee,58.7,5
+2024-01-29,Monday,16,Croissant,44.03,4
+2024-01-29,Monday,17,Drip Coffee,84.24,7
+2024-01-29,Monday,17,Croissant,57.77,5
+2024-01-29,Monday,17,Latte,43.33,4
+2024-01-29,Monday,18,Croissant,127.76,11
+2024-01-29,Monday,18,Latte,87.6,7
+2024-01-29,Monday,18,Muffin,65.7,5
+2024-01-29,Monday,19,Latte,124.53,10
+2024-01-29,Monday,19,Muffin,85.39,7
+2024-01-29,Monday,19,Breakfast Sandwich,64.05,5
+2024-01-29,Monday,20,Muffin,121.26,10
+2024-01-29,Monday,20,Breakfast Sandwich,83.15,7
+2024-01-29,Monday,20,Drip Coffee,62.36,5
+2024-01-29,Monday,21,Breakfast Sandwich,118.31,10
+2024-01-29,Monday,21,Drip Coffee,81.13,7
+2024-01-29,Monday,21,Croissant,60.85,5
+2024-01-29,Monday,22,Drip Coffee,74.84,6
+2024-01-29,Monday,22,Croissant,51.32,4
+2024-01-29,Monday,22,Latte,38.49,3
+2024-01-30,Tuesday,8,Latte,45.3,4
+2024-01-30,Tuesday,8,Muffin,31.07,3
+2024-01-30,Tuesday,8,Breakfast Sandwich,23.3,2
+2024-01-30,Tuesday,9,Muffin,46.53,4
+2024-01-30,Tuesday,9,Breakfast Sandwich,31.91,3
+2024-01-30,Tuesday,9,Drip Coffee,23.93,2
+2024-01-30,Tuesday,10,Breakfast Sandwich,47.71,4
+2024-01-30,Tuesday,10,Drip Coffee,32.71,3
+2024-01-30,Tuesday,10,Croissant,24.54,2
+2024-01-30,Tuesday,11,Drip Coffee,89.56,7
+2024-01-30,Tuesday,11,Croissant,61.41,5
+2024-01-30,Tuesday,11,Latte,46.06,4
+2024-01-30,Tuesday,12,Croissant,90.9,8
+2024-01-30,Tuesday,12,Latte,62.33,5
+2024-01-30,Tuesday,12,Muffin,46.75,4
+2024-01-30,Tuesday,13,Latte,91.57,8
+2024-01-30,Tuesday,13,Muffin,62.79,5
+2024-01-30,Tuesday,13,Breakfast Sandwich,47.1,4
+2024-01-30,Tuesday,14,Muffin,91.51,8
+2024-01-30,Tuesday,14,Breakfast Sandwich,62.75,5
+2024-01-30,Tuesday,14,Drip Coffee,47.06,4
+2024-01-30,Tuesday,15,Breakfast Sandwich,72.57,6
+2024-01-30,Tuesday,15,Drip Coffee,49.76,4
+2024-01-30,Tuesday,15,Croissant,37.32,3
+2024-01-30,Tuesday,16,Drip Coffee,71.41,6
+2024-01-30,Tuesday,16,Croissant,48.97,4
+2024-01-30,Tuesday,16,Latte,36.73,3
+2024-01-30,Tuesday,17,Croissant,69.87,6
+2024-01-30,Tuesday,17,Latte,47.91,4
+2024-01-30,Tuesday,17,Muffin,35.93,3
+2024-01-30,Tuesday,18,Latte,105.56,9
+2024-01-30,Tuesday,18,Muffin,72.38,6
+2024-01-30,Tuesday,18,Breakfast Sandwich,54.29,5
+2024-01-30,Tuesday,19,Muffin,102.79,9
+2024-01-30,Tuesday,19,Breakfast Sandwich,70.48,6
+2024-01-30,Tuesday,19,Drip Coffee,52.86,4
+2024-01-30,Tuesday,20,Breakfast Sandwich,100.29,8
+2024-01-30,Tuesday,20,Drip Coffee,68.77,6
+2024-01-30,Tuesday,20,Croissant,51.58,4
+2024-01-30,Tuesday,21,Drip Coffee,98.32,8
+2024-01-30,Tuesday,21,Croissant,67.42,6
+2024-01-30,Tuesday,21,Latte,50.57,4
+2024-01-30,Tuesday,22,Croissant,62.66,5
+2024-01-30,Tuesday,22,Latte,42.96,4
+2024-01-30,Tuesday,22,Muffin,32.22,3
+2024-01-31,Wednesday,8,Muffin,49.43,4
+2024-01-31,Wednesday,8,Breakfast Sandwich,33.9,3
+2024-01-31,Wednesday,8,Drip Coffee,25.42,2
+2024-01-31,Wednesday,9,Breakfast Sandwich,50.69,4
+2024-01-31,Wednesday,9,Drip Coffee,34.76,3
+2024-01-31,Wednesday,9,Croissant,26.07,2
+2024-01-31,Wednesday,10,Drip Coffee,51.76,4
+2024-01-31,Wednesday,10,Croissant,35.49,3
+2024-01-31,Wednesday,10,Latte,26.62,2
+2024-01-31,Wednesday,11,Croissant,96.57,8
+2024-01-31,Wednesday,11,Latte,66.22,6
+2024-01-31,Wednesday,11,Muffin,49.67,4
+2024-01-31,Wednesday,12,Latte,97.29,8
+2024-01-31,Wednesday,12,Muffin,66.71,6
+2024-01-31,Wednesday,12,Breakfast Sandwich,50.03,4
+2024-01-31,Wednesday,13,Muffin,97.22,8
+2024-01-31,Wednesday,13,Breakfast Sandwich,66.66,6
+2024-01-31,Wednesday,13,Drip Coffee,50,4
+2024-01-31,Wednesday,14,Breakfast Sandwich,96.37,8
+2024-01-31,Wednesday,14,Drip Coffee,66.08,6
+2024-01-31,Wednesday,14,Croissant,49.56,4
+2024-01-31,Wednesday,15,Drip Coffee,75.87,6
+2024-01-31,Wednesday,15,Croissant,52.02,4
+2024-01-31,Wednesday,15,Latte,39.02,3
+2024-01-31,Wednesday,16,Croissant,74.23,6
+2024-01-31,Wednesday,16,Latte,50.9,4
+2024-01-31,Wednesday,16,Muffin,38.17,3
+2024-01-31,Wednesday,17,Latte,72.36,6
+2024-01-31,Wednesday,17,Muffin,49.62,4
+2024-01-31,Wednesday,17,Breakfast Sandwich,37.21,3
+2024-01-31,Wednesday,18,Muffin,109.2,9
+2024-01-31,Wednesday,18,Breakfast Sandwich,74.88,6
+2024-01-31,Wednesday,18,Drip Coffee,56.16,5
+2024-01-31,Wednesday,19,Breakfast Sandwich,106.54,9
+2024-01-31,Wednesday,19,Drip Coffee,73.06,6
+2024-01-31,Wednesday,19,Croissant,54.79,5
+2024-01-31,Wednesday,20,Drip Coffee,104.46,9
+2024-01-31,Wednesday,20,Croissant,71.63,6
+2024-01-31,Wednesday,20,Latte,53.72,4
+2024-01-31,Wednesday,21,Croissant,103.18,9
+2024-01-31,Wednesday,21,Latte,70.75,6
+2024-01-31,Wednesday,21,Muffin,53.07,4
+2024-01-31,Wednesday,22,Latte,66.36,6
+2024-01-31,Wednesday,22,Muffin,45.5,4
+2024-01-31,Wednesday,22,Breakfast Sandwich,34.13,3
+2024-02-01,Thursday,8,Breakfast Sandwich,60.26,5
+2024-02-01,Thursday,8,Drip Coffee,41.32,3
+2024-02-01,Thursday,8,Croissant,30.99,3
+2024-02-01,Thursday,9,Drip Coffee,61.53,5
+2024-02-01,Thursday,9,Croissant,42.19,4
+2024-02-01,Thursday,9,Latte,31.65,3
+2024-02-01,Thursday,10,Croissant,62.45,5
+2024-02-01,Thursday,10,Latte,42.83,4
+2024-02-01,Thursday,10,Muffin,32.12,3
+2024-02-01,Thursday,11,Latte,115.65,10
+2024-02-01,Thursday,11,Muffin,79.31,7
+2024-02-01,Thursday,11,Breakfast Sandwich,59.48,5
+2024-02-01,Thursday,12,Muffin,115.57,10
+2024-02-01,Thursday,12,Breakfast Sandwich,79.25,7
+2024-02-01,Thursday,12,Drip Coffee,59.44,5
+2024-02-01,Thursday,13,Breakfast Sandwich,114.56,10
+2024-02-01,Thursday,13,Drip Coffee,78.56,7
+2024-02-01,Thursday,13,Croissant,58.92,5
+2024-02-01,Thursday,14,Drip Coffee,112.74,9
+2024-02-01,Thursday,14,Croissant,77.3,6
+2024-02-01,Thursday,14,Latte,57.98,5
+2024-02-01,Thursday,15,Croissant,88.24,7
+2024-02-01,Thursday,15,Latte,60.51,5
+2024-02-01,Thursday,15,Muffin,45.38,4
+2024-02-01,Thursday,16,Latte,86.01,7
+2024-02-01,Thursday,16,Muffin,58.98,5
+2024-02-01,Thursday,16,Breakfast Sandwich,44.24,4
+2024-02-01,Thursday,17,Muffin,83.76,7
+2024-02-01,Thursday,17,Breakfast Sandwich,57.43,5
+2024-02-01,Thursday,17,Drip Coffee,43.07,4
+2024-02-01,Thursday,18,Breakfast Sandwich,126.66,11
+2024-02-01,Thursday,18,Drip Coffee,86.85,7
+2024-02-01,Thursday,18,Croissant,65.14,5
+2024-02-01,Thursday,19,Drip Coffee,124.18,10
+2024-02-01,Thursday,19,Croissant,85.15,7
+2024-02-01,Thursday,19,Latte,63.86,5
+2024-02-01,Thursday,20,Croissant,122.66,10
+2024-02-01,Thursday,20,Latte,84.11,7
+2024-02-01,Thursday,20,Muffin,63.08,5
+2024-02-01,Thursday,21,Latte,122.27,10
+2024-02-01,Thursday,21,Muffin,83.84,7
+2024-02-01,Thursday,21,Breakfast Sandwich,62.88,5
+2024-02-01,Thursday,22,Muffin,79.38,7
+2024-02-01,Thursday,22,Breakfast Sandwich,54.43,5
+2024-02-01,Thursday,22,Drip Coffee,40.82,3
+2024-02-02,Friday,8,Drip Coffee,91,8
+2024-02-02,Friday,8,Croissant,62.4,5
+2024-02-02,Friday,8,Latte,46.8,4
+2024-02-02,Friday,9,Croissant,92.36,8
+2024-02-02,Friday,9,Latte,63.33,5
+2024-02-02,Friday,9,Muffin,47.5,4
+2024-02-02,Friday,10,Latte,93.04,8
+2024-02-02,Friday,10,Muffin,63.8,5
+2024-02-02,Friday,10,Breakfast Sandwich,47.85,4
+2024-02-02,Friday,11,Muffin,170.91,14
+2024-02-02,Friday,11,Breakfast Sandwich,117.2,10
+2024-02-02,Friday,11,Drip Coffee,87.9,7
+2024-02-02,Friday,12,Breakfast Sandwich,169.42,14
+2024-02-02,Friday,12,Drip Coffee,116.17,10
+2024-02-02,Friday,12,Croissant,87.13,7
+2024-02-02,Friday,13,Drip Coffee,166.72,14
+2024-02-02,Friday,13,Croissant,114.32,10
+2024-02-02,Friday,13,Latte,85.74,7
+2024-02-02,Friday,14,Croissant,163.12,14
+2024-02-02,Friday,14,Latte,111.85,9
+2024-02-02,Friday,14,Muffin,83.89,7
+2024-02-02,Friday,15,Latte,127.2,11
+2024-02-02,Friday,15,Muffin,87.22,7
+2024-02-02,Friday,15,Breakfast Sandwich,65.42,5
+2024-02-02,Friday,16,Muffin,123.86,10
+2024-02-02,Friday,16,Breakfast Sandwich,84.93,7
+2024-02-02,Friday,16,Drip Coffee,63.7,5
+2024-02-02,Friday,17,Breakfast Sandwich,120.84,10
+2024-02-02,Friday,17,Drip Coffee,82.86,7
+2024-02-02,Friday,17,Croissant,62.15,5
+2024-02-02,Friday,18,Drip Coffee,183.64,15
+2024-02-02,Friday,18,Croissant,125.93,10
+2024-02-02,Friday,18,Latte,94.45,8
+2024-02-02,Friday,19,Croissant,181.4,15
+2024-02-02,Friday,19,Latte,124.39,10
+2024-02-02,Friday,19,Muffin,93.29,8
+2024-02-02,Friday,20,Latte,180.81,15
+2024-02-02,Friday,20,Muffin,123.99,10
+2024-02-02,Friday,20,Breakfast Sandwich,92.99,8
+2024-02-02,Friday,21,Muffin,181.96,15
+2024-02-02,Friday,21,Breakfast Sandwich,124.77,10
+2024-02-02,Friday,21,Drip Coffee,93.58,8
+2024-02-02,Friday,22,Breakfast Sandwich,119.16,10
+2024-02-02,Friday,22,Drip Coffee,81.71,7
+2024-02-02,Friday,22,Croissant,61.28,5
+2024-02-03,Saturday,8,Sundae,103.81,9
+2024-02-03,Saturday,8,Cold Brew,76.33,6
+2024-02-03,Saturday,8,Brownie,54.96,5
+2024-02-03,Saturday,9,Cold Brew,104.58,9
+2024-02-03,Saturday,9,Brownie,76.9,6
+2024-02-03,Saturday,9,Party Pack,55.37,5
+2024-02-03,Saturday,10,Brownie,104.5,9
+2024-02-03,Saturday,10,Party Pack,76.84,6
+2024-02-03,Saturday,10,Specialty Cake,55.32,5
+2024-02-03,Saturday,11,Party Pack,190.42,16
+2024-02-03,Saturday,11,Specialty Cake,140.02,12
+2024-02-03,Saturday,11,Sundae,100.81,8
+2024-02-03,Saturday,12,Specialty Cake,187.39,16
+2024-02-03,Saturday,12,Sundae,137.79,11
+2024-02-03,Saturday,12,Cold Brew,99.21,8
+2024-02-03,Saturday,13,Sundae,183.34,15
+2024-02-03,Saturday,13,Cold Brew,134.81,11
+2024-02-03,Saturday,13,Brownie,97.06,8
+2024-02-03,Saturday,14,Cold Brew,178.71,15
+2024-02-03,Saturday,14,Brownie,131.41,11
+2024-02-03,Saturday,14,Party Pack,94.61,8
+2024-02-03,Saturday,15,Brownie,139.22,12
+2024-02-03,Saturday,15,Party Pack,102.37,9
+2024-02-03,Saturday,15,Specialty Cake,73.7,6
+2024-02-03,Saturday,16,Party Pack,135.83,11
+2024-02-03,Saturday,16,Specialty Cake,99.87,8
+2024-02-03,Saturday,16,Sundae,71.91,6
+2024-02-03,Saturday,17,Specialty Cake,133.17,11
+2024-02-03,Saturday,17,Sundae,97.92,8
+2024-02-03,Saturday,17,Cold Brew,70.5,6
+2024-02-03,Saturday,18,Sundae,203.89,17
+2024-02-03,Saturday,18,Cold Brew,149.92,12
+2024-02-03,Saturday,18,Brownie,107.94,9
+2024-02-03,Saturday,19,Cold Brew,203.23,17
+2024-02-03,Saturday,19,Brownie,149.44,12
+2024-02-03,Saturday,19,Party Pack,107.59,9
+2024-02-03,Saturday,20,Brownie,204.52,17
+2024-02-03,Saturday,20,Party Pack,150.38,13
+2024-02-03,Saturday,20,Specialty Cake,108.28,9
+2024-02-03,Saturday,21,Party Pack,207.61,17
+2024-02-03,Saturday,21,Specialty Cake,152.65,13
+2024-02-03,Saturday,21,Sundae,109.91,9
+2024-02-03,Saturday,22,Specialty Cake,136.87,11
+2024-02-03,Saturday,22,Sundae,100.64,8
+2024-02-03,Saturday,22,Cold Brew,72.46,6
+2024-02-04,Sunday,8,Cold Brew,76.15,6
+2024-02-04,Sunday,8,Brownie,55.99,5
+2024-02-04,Sunday,8,Party Pack,40.31,3
+2024-02-04,Sunday,9,Brownie,76.09,6
+2024-02-04,Sunday,9,Party Pack,55.95,5
+2024-02-04,Sunday,9,Specialty Cake,40.28,3
+2024-02-04,Sunday,10,Party Pack,75.43,6
+2024-02-04,Sunday,10,Specialty Cake,55.46,5
+2024-02-04,Sunday,10,Sundae,39.93,3
+2024-02-04,Sunday,11,Specialty Cake,136.45,11
+2024-02-04,Sunday,11,Sundae,100.33,8
+2024-02-04,Sunday,11,Cold Brew,72.24,6
+2024-02-04,Sunday,12,Sundae,133.5,11
+2024-02-04,Sunday,12,Cold Brew,98.16,8
+2024-02-04,Sunday,12,Brownie,70.68,6
+2024-02-04,Sunday,13,Cold Brew,130.13,11
+2024-02-04,Sunday,13,Brownie,95.68,8
+2024-02-04,Sunday,13,Party Pack,68.89,6
+2024-02-04,Sunday,14,Brownie,126.71,11
+2024-02-04,Sunday,14,Party Pack,93.17,8
+2024-02-04,Sunday,14,Specialty Cake,67.08,6
+2024-02-04,Sunday,15,Party Pack,98.9,8
+2024-02-04,Sunday,15,Specialty Cake,72.72,6
+2024-02-04,Sunday,15,Sundae,52.36,4
+2024-02-04,Sunday,16,Specialty Cake,96.97,8
+2024-02-04,Sunday,16,Sundae,71.3,6
+2024-02-04,Sunday,16,Cold Brew,51.34,4
+2024-02-04,Sunday,17,Sundae,95.78,8
+2024-02-04,Sunday,17,Cold Brew,70.43,6
+2024-02-04,Sunday,17,Brownie,50.71,4
+2024-02-04,Sunday,18,Cold Brew,147.98,12
+2024-02-04,Sunday,18,Brownie,108.81,9
+2024-02-04,Sunday,18,Party Pack,78.34,7
+2024-02-04,Sunday,19,Brownie,148.92,12
+2024-02-04,Sunday,19,Party Pack,109.5,9
+2024-02-04,Sunday,19,Specialty Cake,78.84,7
+2024-02-04,Sunday,20,Party Pack,151.17,13
+2024-02-04,Sunday,20,Specialty Cake,111.15,9
+2024-02-04,Sunday,20,Sundae,80.03,7
+2024-02-04,Sunday,21,Specialty Cake,154.48,13
+2024-02-04,Sunday,21,Sundae,113.59,9
+2024-02-04,Sunday,21,Cold Brew,81.78,7
+2024-02-04,Sunday,22,Sundae,102.25,9
+2024-02-04,Sunday,22,Cold Brew,75.18,6
+2024-02-04,Sunday,22,Brownie,54.13,5
+2024-02-05,Monday,8,Muffin,62.02,5
+2024-02-05,Monday,8,Breakfast Sandwich,42.53,4
+2024-02-05,Monday,8,Drip Coffee,31.89,3
+2024-02-05,Monday,9,Breakfast Sandwich,61.47,5
+2024-02-05,Monday,9,Drip Coffee,42.15,4
+2024-02-05,Monday,9,Croissant,31.62,3
+2024-02-05,Monday,10,Drip Coffee,60.49,5
+2024-02-05,Monday,10,Croissant,41.48,3
+2024-02-05,Monday,10,Latte,31.11,3
+2024-02-05,Monday,11,Croissant,108.8,9
+2024-02-05,Monday,11,Latte,74.61,6
+2024-02-05,Monday,11,Muffin,55.95,5
+2024-02-05,Monday,12,Latte,106.05,9
+2024-02-05,Monday,12,Muffin,72.72,6
+2024-02-05,Monday,12,Breakfast Sandwich,54.54,5
+2024-02-05,Monday,13,Muffin,103.27,9
+2024-02-05,Monday,13,Breakfast Sandwich,70.81,6
+2024-02-05,Monday,13,Drip Coffee,53.11,4
+2024-02-05,Monday,14,Breakfast Sandwich,100.75,8
+2024-02-05,Monday,14,Drip Coffee,69.09,6
+2024-02-05,Monday,14,Croissant,51.82,4
+2024-02-05,Monday,15,Drip Coffee,79.03,7
+2024-02-05,Monday,15,Croissant,54.19,5
+2024-02-05,Monday,15,Latte,40.64,3
+2024-02-05,Monday,16,Croissant,78.06,7
+2024-02-05,Monday,16,Latte,53.53,4
+2024-02-05,Monday,16,Muffin,40.15,3
+2024-02-05,Monday,17,Latte,77.81,6
+2024-02-05,Monday,17,Muffin,53.35,4
+2024-02-05,Monday,17,Breakfast Sandwich,40.02,3
+2024-02-05,Monday,18,Muffin,121.37,10
+2024-02-05,Monday,18,Breakfast Sandwich,83.22,7
+2024-02-05,Monday,18,Drip Coffee,62.42,5
+2024-02-05,Monday,19,Breakfast Sandwich,123.2,10
+2024-02-05,Monday,19,Drip Coffee,84.48,7
+2024-02-05,Monday,19,Croissant,63.36,5
+2024-02-05,Monday,20,Drip Coffee,125.9,10
+2024-02-05,Monday,20,Croissant,86.33,7
+2024-02-05,Monday,20,Latte,64.75,5
+2024-02-05,Monday,21,Croissant,129.17,11
+2024-02-05,Monday,21,Latte,88.57,7
+2024-02-05,Monday,21,Muffin,66.43,6
+2024-02-05,Monday,22,Latte,85.58,7
+2024-02-05,Monday,22,Muffin,58.68,5
+2024-02-05,Monday,22,Breakfast Sandwich,44.01,4
+2024-02-06,Tuesday,8,Breakfast Sandwich,52.09,4
+2024-02-06,Tuesday,8,Drip Coffee,35.72,3
+2024-02-06,Tuesday,8,Croissant,26.79,2
+2024-02-06,Tuesday,9,Drip Coffee,51.26,4
+2024-02-06,Tuesday,9,Croissant,35.15,3
+2024-02-06,Tuesday,9,Latte,26.36,2
+2024-02-06,Tuesday,10,Croissant,50.15,4
+2024-02-06,Tuesday,10,Latte,34.39,3
+2024-02-06,Tuesday,10,Muffin,25.79,2
+2024-02-06,Tuesday,11,Latte,89.86,7
+2024-02-06,Tuesday,11,Muffin,61.62,5
+2024-02-06,Tuesday,11,Breakfast Sandwich,46.21,4
+2024-02-06,Tuesday,12,Muffin,87.5,7
+2024-02-06,Tuesday,12,Breakfast Sandwich,60,5
+2024-02-06,Tuesday,12,Drip Coffee,45,4
+2024-02-06,Tuesday,13,Breakfast Sandwich,85.37,7
+2024-02-06,Tuesday,13,Drip Coffee,58.54,5
+2024-02-06,Tuesday,13,Croissant,43.9,4
+2024-02-06,Tuesday,14,Drip Coffee,83.7,7
+2024-02-06,Tuesday,14,Croissant,57.39,5
+2024-02-06,Tuesday,14,Latte,43.05,4
+2024-02-06,Tuesday,15,Croissant,66.14,6
+2024-02-06,Tuesday,15,Latte,45.35,4
+2024-02-06,Tuesday,15,Muffin,34.01,3
+2024-02-06,Tuesday,16,Latte,65.93,5
+2024-02-06,Tuesday,16,Muffin,45.21,4
+2024-02-06,Tuesday,16,Breakfast Sandwich,33.9,3
+2024-02-06,Tuesday,17,Muffin,66.34,6
+2024-02-06,Tuesday,17,Breakfast Sandwich,45.49,4
+2024-02-06,Tuesday,17,Drip Coffee,34.12,3
+2024-02-06,Tuesday,18,Breakfast Sandwich,104.38,9
+2024-02-06,Tuesday,18,Drip Coffee,71.58,6
+2024-02-06,Tuesday,18,Croissant,53.68,4
+2024-02-06,Tuesday,19,Drip Coffee,106.67,9
+2024-02-06,Tuesday,19,Croissant,73.15,6
+2024-02-06,Tuesday,19,Latte,54.86,5
+2024-02-06,Tuesday,20,Croissant,109.44,9
+2024-02-06,Tuesday,20,Latte,75.05,6
+2024-02-06,Tuesday,20,Muffin,56.28,5
+2024-02-06,Tuesday,21,Latte,112.39,9
+2024-02-06,Tuesday,21,Muffin,77.07,6
+2024-02-06,Tuesday,21,Breakfast Sandwich,57.8,5
+2024-02-06,Tuesday,22,Muffin,74.32,6
+2024-02-06,Tuesday,22,Breakfast Sandwich,50.96,4
+2024-02-06,Tuesday,22,Drip Coffee,38.22,3
+2024-02-07,Wednesday,8,Drip Coffee,54.43,5
+2024-02-07,Wednesday,8,Croissant,37.32,3
+2024-02-07,Wednesday,8,Latte,27.99,2
+2024-02-07,Wednesday,9,Croissant,53.26,4
+2024-02-07,Wednesday,9,Latte,36.52,3
+2024-02-07,Wednesday,9,Muffin,27.39,2
+2024-02-07,Wednesday,10,Latte,51.91,4
+2024-02-07,Wednesday,10,Muffin,35.6,3
+2024-02-07,Wednesday,10,Breakfast Sandwich,26.7,2
+2024-02-07,Wednesday,11,Muffin,92.92,8
+2024-02-07,Wednesday,11,Breakfast Sandwich,63.72,5
+2024-02-07,Wednesday,11,Drip Coffee,47.79,4
+2024-02-07,Wednesday,12,Breakfast Sandwich,90.66,8
+2024-02-07,Wednesday,12,Drip Coffee,62.17,5
+2024-02-07,Wednesday,12,Croissant,46.63,4
+2024-02-07,Wednesday,13,Drip Coffee,88.89,7
+2024-02-07,Wednesday,13,Croissant,60.95,5
+2024-02-07,Wednesday,13,Latte,45.71,4
+2024-02-07,Wednesday,14,Croissant,87.8,7
+2024-02-07,Wednesday,14,Latte,60.2,5
+2024-02-07,Wednesday,14,Muffin,45.15,4
+2024-02-07,Wednesday,15,Latte,70.01,6
+2024-02-07,Wednesday,15,Muffin,48.01,4
+2024-02-07,Wednesday,15,Breakfast Sandwich,36.01,3
+2024-02-07,Wednesday,16,Muffin,70.46,6
+2024-02-07,Wednesday,16,Breakfast Sandwich,48.31,4
+2024-02-07,Wednesday,16,Drip Coffee,36.23,3
+2024-02-07,Wednesday,17,Breakfast Sandwich,71.52,6
+2024-02-07,Wednesday,17,Drip Coffee,49.04,4
+2024-02-07,Wednesday,17,Croissant,36.78,3
+2024-02-07,Wednesday,18,Drip Coffee,113.28,9
+2024-02-07,Wednesday,18,Croissant,77.68,6
+2024-02-07,Wednesday,18,Latte,58.26,5
+2024-02-07,Wednesday,19,Croissant,116.22,10
+2024-02-07,Wednesday,19,Latte,79.7,7
+2024-02-07,Wednesday,19,Muffin,59.77,5
+2024-02-07,Wednesday,20,Latte,119.35,10
+2024-02-07,Wednesday,20,Muffin,81.84,7
+2024-02-07,Wednesday,20,Breakfast Sandwich,61.38,5
+2024-02-07,Wednesday,21,Muffin,122.33,10
+2024-02-07,Wednesday,21,Breakfast Sandwich,83.88,7
+2024-02-07,Wednesday,21,Drip Coffee,62.91,5
+2024-02-07,Wednesday,22,Breakfast Sandwich,80.53,7
+2024-02-07,Wednesday,22,Drip Coffee,55.22,5
+2024-02-07,Wednesday,22,Croissant,41.41,3
+2024-02-08,Thursday,8,Croissant,63.28,5
+2024-02-08,Thursday,8,Latte,43.39,4
+2024-02-08,Thursday,8,Muffin,32.55,3
+2024-02-08,Thursday,9,Latte,61.69,5
+2024-02-08,Thursday,9,Muffin,42.3,4
+2024-02-08,Thursday,9,Breakfast Sandwich,31.72,3
+2024-02-08,Thursday,10,Muffin,60.07,5
+2024-02-08,Thursday,10,Breakfast Sandwich,41.19,3
+2024-02-08,Thursday,10,Drip Coffee,30.89,3
+2024-02-08,Thursday,11,Breakfast Sandwich,107.73,9
+2024-02-08,Thursday,11,Drip Coffee,73.87,6
+2024-02-08,Thursday,11,Croissant,55.4,5
+2024-02-08,Thursday,12,Drip Coffee,105.62,9
+2024-02-08,Thursday,12,Croissant,72.43,6
+2024-02-08,Thursday,12,Latte,54.32,5
+2024-02-08,Thursday,13,Croissant,104.33,9
+2024-02-08,Thursday,13,Latte,71.54,6
+2024-02-08,Thursday,13,Muffin,53.65,4
+2024-02-08,Thursday,14,Latte,103.99,9
+2024-02-08,Thursday,14,Muffin,71.31,6
+2024-02-08,Thursday,14,Breakfast Sandwich,53.48,4
+2024-02-08,Thursday,15,Muffin,83.72,7
+2024-02-08,Thursday,15,Breakfast Sandwich,57.41,5
+2024-02-08,Thursday,15,Drip Coffee,43.06,4
+2024-02-08,Thursday,16,Breakfast Sandwich,84.99,7
+2024-02-08,Thursday,16,Drip Coffee,58.28,5
+2024-02-08,Thursday,16,Croissant,43.71,4
+2024-02-08,Thursday,17,Drip Coffee,86.85,7
+2024-02-08,Thursday,17,Croissant,59.55,5
+2024-02-08,Thursday,17,Latte,44.66,4
+2024-02-08,Thursday,18,Croissant,138.11,12
+2024-02-08,Thursday,18,Latte,94.7,8
+2024-02-08,Thursday,18,Muffin,71.03,6
+2024-02-08,Thursday,19,Latte,141.83,12
+2024-02-08,Thursday,19,Muffin,97.25,8
+2024-02-08,Thursday,19,Breakfast Sandwich,72.94,6
+2024-02-08,Thursday,20,Muffin,145.36,12
+2024-02-08,Thursday,20,Breakfast Sandwich,99.68,8
+2024-02-08,Thursday,20,Drip Coffee,74.76,6
+2024-02-08,Thursday,21,Breakfast Sandwich,148.32,12
+2024-02-08,Thursday,21,Drip Coffee,101.71,8
+2024-02-08,Thursday,21,Croissant,76.28,6
+2024-02-08,Thursday,22,Drip Coffee,97.02,8
+2024-02-08,Thursday,22,Croissant,66.53,6
+2024-02-08,Thursday,22,Latte,49.9,4
+2024-02-09,Friday,8,Latte,91.19,8
+2024-02-09,Friday,8,Muffin,62.53,5
+2024-02-09,Friday,8,Breakfast Sandwich,46.9,4
+2024-02-09,Friday,9,Muffin,88.79,7
+2024-02-09,Friday,9,Breakfast Sandwich,60.89,5
+2024-02-09,Friday,9,Drip Coffee,45.67,4
+2024-02-09,Friday,10,Breakfast Sandwich,86.63,7
+2024-02-09,Friday,10,Drip Coffee,59.4,5
+2024-02-09,Friday,10,Croissant,44.55,4
+2024-02-09,Friday,11,Drip Coffee,156.14,13
+2024-02-09,Friday,11,Croissant,107.06,9
+2024-02-09,Friday,11,Latte,80.3,7
+2024-02-09,Friday,12,Croissant,154.23,13
+2024-02-09,Friday,12,Latte,105.76,9
+2024-02-09,Friday,12,Muffin,79.32,7
+2024-02-09,Friday,13,Latte,153.73,13
+2024-02-09,Friday,13,Muffin,105.42,9
+2024-02-09,Friday,13,Breakfast Sandwich,79.06,7
+2024-02-09,Friday,14,Muffin,154.7,13
+2024-02-09,Friday,14,Breakfast Sandwich,106.08,9
+2024-02-09,Friday,14,Drip Coffee,79.56,7
+2024-02-09,Friday,15,Breakfast Sandwich,125.63,10
+2024-02-09,Friday,15,Drip Coffee,86.15,7
+2024-02-09,Friday,15,Croissant,64.61,5
+2024-02-09,Friday,16,Drip Coffee,128.38,11
+2024-02-09,Friday,16,Croissant,88.03,7
+2024-02-09,Friday,16,Latte,66.03,6
+2024-02-09,Friday,17,Croissant,131.72,11
+2024-02-09,Friday,17,Latte,90.32,8
+2024-02-09,Friday,17,Muffin,67.74,6
+2024-02-09,Friday,18,Latte,209.66,17
+2024-02-09,Friday,18,Muffin,143.76,12
+2024-02-09,Friday,18,Breakfast Sandwich,107.82,9
+2024-02-09,Friday,19,Muffin,214.88,18
+2024-02-09,Friday,19,Breakfast Sandwich,147.35,12
+2024-02-09,Friday,19,Drip Coffee,110.51,9
+2024-02-09,Friday,20,Breakfast Sandwich,219.26,18
+2024-02-09,Friday,20,Drip Coffee,150.35,13
+2024-02-09,Friday,20,Croissant,112.76,9
+2024-02-09,Friday,21,Drip Coffee,222.31,19
+2024-02-09,Friday,21,Croissant,152.44,13
+2024-02-09,Friday,21,Latte,114.33,10
+2024-02-09,Friday,22,Croissant,144.31,12
+2024-02-09,Friday,22,Latte,98.96,8
+2024-02-09,Friday,22,Muffin,74.22,6
+2024-02-10,Saturday,8,Brownie,99.77,8
+2024-02-10,Saturday,8,Party Pack,73.36,6
+2024-02-10,Saturday,8,Specialty Cake,52.82,4
+2024-02-10,Saturday,9,Party Pack,97.34,8
+2024-02-10,Saturday,9,Specialty Cake,71.57,6
+2024-02-10,Saturday,9,Sundae,51.53,4
+2024-02-10,Saturday,10,Specialty Cake,95.43,8
+2024-02-10,Saturday,10,Sundae,70.17,6
+2024-02-10,Saturday,10,Cold Brew,50.52,4
+2024-02-10,Saturday,11,Sundae,173.28,14
+2024-02-10,Saturday,11,Cold Brew,127.41,11
+2024-02-10,Saturday,11,Brownie,91.74,8
+2024-02-10,Saturday,12,Cold Brew,172.72,14
+2024-02-10,Saturday,12,Brownie,127,11
+2024-02-10,Saturday,12,Party Pack,91.44,8
+2024-02-10,Saturday,13,Brownie,173.81,14
+2024-02-10,Saturday,13,Party Pack,127.8,11
+2024-02-10,Saturday,13,Specialty Cake,92.02,8
+2024-02-10,Saturday,14,Party Pack,176.44,15
+2024-02-10,Saturday,14,Specialty Cake,129.74,11
+2024-02-10,Saturday,14,Sundae,93.41,8
+2024-02-10,Saturday,15,Specialty Cake,144.24,12
+2024-02-10,Saturday,15,Sundae,106.06,9
+2024-02-10,Saturday,15,Cold Brew,76.36,6
+2024-02-10,Saturday,16,Sundae,147.99,12
+2024-02-10,Saturday,16,Cold Brew,108.82,9
+2024-02-10,Saturday,16,Brownie,78.35,7
+2024-02-10,Saturday,17,Cold Brew,151.97,13
+2024-02-10,Saturday,17,Brownie,111.74,9
+2024-02-10,Saturday,17,Party Pack,80.46,7
+2024-02-10,Saturday,18,Brownie,241.43,20
+2024-02-10,Saturday,18,Party Pack,177.52,15
+2024-02-10,Saturday,18,Specialty Cake,127.82,11
+2024-02-10,Saturday,19,Party Pack,246.35,21
+2024-02-10,Saturday,19,Specialty Cake,181.14,15
+2024-02-10,Saturday,19,Sundae,130.42,11
+2024-02-10,Saturday,20,Specialty Cake,249.77,21
+2024-02-10,Saturday,20,Sundae,183.66,15
+2024-02-10,Saturday,20,Cold Brew,132.23,11
+2024-02-10,Saturday,21,Sundae,251.32,21
+2024-02-10,Saturday,21,Cold Brew,184.8,15
+2024-02-10,Saturday,21,Brownie,133.05,11
+2024-02-10,Saturday,22,Cold Brew,161.83,13
+2024-02-10,Saturday,22,Brownie,118.99,10
+2024-02-10,Saturday,22,Party Pack,85.67,7
+2024-02-11,Sunday,8,Party Pack,70.85,6
+2024-02-11,Sunday,8,Specialty Cake,52.09,4
+2024-02-11,Sunday,8,Sundae,37.51,3
+2024-02-11,Sunday,9,Specialty Cake,69.46,6
+2024-02-11,Sunday,9,Sundae,51.08,4
+2024-02-11,Sunday,9,Cold Brew,36.77,3
+2024-02-11,Sunday,10,Sundae,68.61,6
+2024-02-11,Sunday,10,Cold Brew,50.45,4
+2024-02-11,Sunday,10,Brownie,36.32,3
+2024-02-11,Sunday,11,Cold Brew,125.72,10
+2024-02-11,Sunday,11,Brownie,92.44,8
+2024-02-11,Sunday,11,Party Pack,66.56,6
+2024-02-11,Sunday,12,Brownie,126.51,11
+2024-02-11,Sunday,12,Party Pack,93.02,8
+2024-02-11,Sunday,12,Specialty Cake,66.98,6
+2024-02-11,Sunday,13,Party Pack,128.42,11
+2024-02-11,Sunday,13,Specialty Cake,94.43,8
+2024-02-11,Sunday,13,Sundae,67.99,6
+2024-02-11,Sunday,14,Specialty Cake,131.24,11
+2024-02-11,Sunday,14,Sundae,96.5,8
+2024-02-11,Sunday,14,Cold Brew,69.48,6
+2024-02-11,Sunday,15,Sundae,107.72,9
+2024-02-11,Sunday,15,Cold Brew,79.2,7
+2024-02-11,Sunday,15,Brownie,57.03,5
+2024-02-11,Sunday,16,Cold Brew,110.62,9
+2024-02-11,Sunday,16,Brownie,81.33,7
+2024-02-11,Sunday,16,Party Pack,58.56,5
+2024-02-11,Sunday,17,Brownie,113.37,9
+2024-02-11,Sunday,17,Party Pack,83.36,7
+2024-02-11,Sunday,17,Specialty Cake,60.02,5
+2024-02-11,Sunday,18,Party Pack,179.31,15
+2024-02-11,Sunday,18,Specialty Cake,131.84,11
+2024-02-11,Sunday,18,Sundae,94.93,8
+2024-02-11,Sunday,19,Specialty Cake,181.8,15
+2024-02-11,Sunday,19,Sundae,133.68,11
+2024-02-11,Sunday,19,Cold Brew,96.25,8
+2024-02-11,Sunday,20,Sundae,182.92,15
+2024-02-11,Sunday,20,Cold Brew,134.5,11
+2024-02-11,Sunday,20,Brownie,96.84,8
+2024-02-11,Sunday,21,Cold Brew,182.57,15
+2024-02-11,Sunday,21,Brownie,134.24,11
+2024-02-11,Sunday,21,Party Pack,96.65,8
+2024-02-11,Sunday,22,Brownie,116.62,10
+2024-02-11,Sunday,22,Party Pack,85.75,7
+2024-02-11,Sunday,22,Specialty Cake,61.74,5
+2024-02-12,Monday,8,Drip Coffee,50.89,4
+2024-02-12,Monday,8,Croissant,34.9,3
+2024-02-12,Monday,8,Latte,26.17,2
+2024-02-12,Monday,9,Croissant,50.27,4
+2024-02-12,Monday,9,Latte,34.47,3
+2024-02-12,Monday,9,Muffin,25.85,2
+2024-02-12,Monday,10,Latte,50.11,4
+2024-02-12,Monday,10,Muffin,34.36,3
+2024-02-12,Monday,10,Breakfast Sandwich,25.77,2
+2024-02-12,Monday,11,Muffin,92.69,8
+2024-02-12,Monday,11,Breakfast Sandwich,63.56,5
+2024-02-12,Monday,11,Drip Coffee,47.67,4
+2024-02-12,Monday,12,Breakfast Sandwich,94.09,8
+2024-02-12,Monday,12,Drip Coffee,64.52,5
+2024-02-12,Monday,12,Croissant,48.39,4
+2024-02-12,Monday,13,Drip Coffee,96.15,8
+2024-02-12,Monday,13,Croissant,65.93,5
+2024-02-12,Monday,13,Latte,49.45,4
+2024-02-12,Monday,14,Croissant,98.64,8
+2024-02-12,Monday,14,Latte,67.64,6
+2024-02-12,Monday,14,Muffin,50.73,4
+2024-02-12,Monday,15,Latte,81.04,7
+2024-02-12,Monday,15,Muffin,55.57,5
+2024-02-12,Monday,15,Breakfast Sandwich,41.68,3
+2024-02-12,Monday,16,Muffin,83.06,7
+2024-02-12,Monday,16,Breakfast Sandwich,56.95,5
+2024-02-12,Monday,16,Drip Coffee,42.72,4
+2024-02-12,Monday,17,Breakfast Sandwich,84.75,7
+2024-02-12,Monday,17,Drip Coffee,58.12,5
+2024-02-12,Monday,17,Croissant,43.59,4
+2024-02-12,Monday,18,Drip Coffee,133.19,11
+2024-02-12,Monday,18,Croissant,91.33,8
+2024-02-12,Monday,18,Latte,68.5,6
+2024-02-12,Monday,19,Croissant,134.01,11
+2024-02-12,Monday,19,Latte,91.9,8
+2024-02-12,Monday,19,Muffin,68.92,6
+2024-02-12,Monday,20,Latte,133.75,11
+2024-02-12,Monday,20,Muffin,91.72,8
+2024-02-12,Monday,20,Breakfast Sandwich,68.79,6
+2024-02-12,Monday,21,Muffin,132.43,11
+2024-02-12,Monday,21,Breakfast Sandwich,90.81,8
+2024-02-12,Monday,21,Drip Coffee,68.11,6
+2024-02-12,Monday,22,Breakfast Sandwich,84,7
+2024-02-12,Monday,22,Drip Coffee,57.6,5
+2024-02-12,Monday,22,Croissant,43.2,4
+2024-02-13,Tuesday,8,Croissant,42.61,4
+2024-02-13,Tuesday,8,Latte,29.22,2
+2024-02-13,Tuesday,8,Muffin,21.91,2
+2024-02-13,Tuesday,9,Latte,42.47,4
+2024-02-13,Tuesday,9,Muffin,29.12,2
+2024-02-13,Tuesday,9,Breakfast Sandwich,21.84,2
+2024-02-13,Tuesday,10,Muffin,42.74,4
+2024-02-13,Tuesday,10,Breakfast Sandwich,29.31,2
+2024-02-13,Tuesday,10,Drip Coffee,21.98,2
+2024-02-13,Tuesday,11,Breakfast Sandwich,79.75,7
+2024-02-13,Tuesday,11,Drip Coffee,54.69,5
+2024-02-13,Tuesday,11,Croissant,41.01,3
+2024-02-13,Tuesday,12,Drip Coffee,81.5,7
+2024-02-13,Tuesday,12,Croissant,55.88,5
+2024-02-13,Tuesday,12,Latte,41.91,3
+2024-02-13,Tuesday,13,Croissant,83.62,7
+2024-02-13,Tuesday,13,Latte,57.34,5
+2024-02-13,Tuesday,13,Muffin,43,4
+2024-02-13,Tuesday,14,Latte,85.87,7
+2024-02-13,Tuesday,14,Muffin,58.88,5
+2024-02-13,Tuesday,14,Breakfast Sandwich,44.16,4
+2024-02-13,Tuesday,15,Muffin,70.41,6
+2024-02-13,Tuesday,15,Breakfast Sandwich,48.28,4
+2024-02-13,Tuesday,15,Drip Coffee,36.21,3
+2024-02-13,Tuesday,16,Breakfast Sandwich,71.84,6
+2024-02-13,Tuesday,16,Drip Coffee,49.26,4
+2024-02-13,Tuesday,16,Croissant,36.94,3
+2024-02-13,Tuesday,17,Drip Coffee,72.83,6
+2024-02-13,Tuesday,17,Croissant,49.94,4
+2024-02-13,Tuesday,17,Latte,37.46,3
+2024-02-13,Tuesday,18,Croissant,113.6,9
+2024-02-13,Tuesday,18,Latte,77.89,6
+2024-02-13,Tuesday,18,Muffin,58.42,5
+2024-02-13,Tuesday,19,Latte,113.38,9
+2024-02-13,Tuesday,19,Muffin,77.74,6
+2024-02-13,Tuesday,19,Breakfast Sandwich,58.31,5
+2024-02-13,Tuesday,20,Muffin,112.26,9
+2024-02-13,Tuesday,20,Breakfast Sandwich,76.98,6
+2024-02-13,Tuesday,20,Drip Coffee,57.73,5
+2024-02-13,Tuesday,21,Breakfast Sandwich,110.36,9
+2024-02-13,Tuesday,21,Drip Coffee,75.67,6
+2024-02-13,Tuesday,21,Croissant,56.76,5
+2024-02-13,Tuesday,22,Drip Coffee,69.61,6
+2024-02-13,Tuesday,22,Croissant,47.73,4
+2024-02-13,Tuesday,22,Latte,35.8,3
+2024-02-14,Wednesday,8,Latte,45.12,4
+2024-02-14,Wednesday,8,Muffin,30.94,3
+2024-02-14,Wednesday,8,Breakfast Sandwich,23.21,2
+2024-02-14,Wednesday,9,Muffin,45.41,4
+2024-02-14,Wednesday,9,Breakfast Sandwich,31.14,3
+2024-02-14,Wednesday,9,Drip Coffee,23.35,2
+2024-02-14,Wednesday,10,Breakfast Sandwich,46.09,4
+2024-02-14,Wednesday,10,Drip Coffee,31.61,3
+2024-02-14,Wednesday,10,Croissant,23.7,2
+2024-02-14,Wednesday,11,Drip Coffee,86.59,7
+2024-02-14,Wednesday,11,Croissant,59.37,5
+2024-02-14,Wednesday,11,Latte,44.53,4
+2024-02-14,Wednesday,12,Croissant,88.83,7
+2024-02-14,Wednesday,12,Latte,60.91,5
+2024-02-14,Wednesday,12,Muffin,45.69,4
+2024-02-14,Wednesday,13,Latte,91.22,8
+2024-02-14,Wednesday,13,Muffin,62.55,5
+2024-02-14,Wednesday,13,Breakfast Sandwich,46.92,4
+2024-02-14,Wednesday,14,Muffin,93.5,8
+2024-02-14,Wednesday,14,Breakfast Sandwich,64.11,5
+2024-02-14,Wednesday,14,Drip Coffee,48.09,4
+2024-02-14,Wednesday,15,Breakfast Sandwich,76.32,6
+2024-02-14,Wednesday,15,Drip Coffee,52.33,4
+2024-02-14,Wednesday,15,Croissant,39.25,3
+2024-02-14,Wednesday,16,Drip Coffee,77.38,6
+2024-02-14,Wednesday,16,Croissant,53.06,4
+2024-02-14,Wednesday,16,Latte,39.8,3
+2024-02-14,Wednesday,17,Croissant,77.86,6
+2024-02-14,Wednesday,17,Latte,53.39,4
+2024-02-14,Wednesday,17,Muffin,40.04,3
+2024-02-14,Wednesday,18,Latte,120.45,10
+2024-02-14,Wednesday,18,Muffin,82.6,7
+2024-02-14,Wednesday,18,Breakfast Sandwich,61.95,5
+2024-02-14,Wednesday,19,Muffin,119.26,10
+2024-02-14,Wednesday,19,Breakfast Sandwich,81.78,7
+2024-02-14,Wednesday,19,Drip Coffee,61.34,5
+2024-02-14,Wednesday,20,Breakfast Sandwich,117.25,10
+2024-02-14,Wednesday,20,Drip Coffee,80.4,7
+2024-02-14,Wednesday,20,Croissant,60.3,5
+2024-02-14,Wednesday,21,Drip Coffee,114.63,10
+2024-02-14,Wednesday,21,Croissant,78.6,7
+2024-02-14,Wednesday,21,Latte,58.95,5
+2024-02-14,Wednesday,22,Croissant,72.06,6
+2024-02-14,Wednesday,22,Latte,49.42,4
+2024-02-14,Wednesday,22,Muffin,37.06,3
+2024-02-15,Thursday,8,Muffin,53.98,4
+2024-02-15,Thursday,8,Breakfast Sandwich,37.01,3
+2024-02-15,Thursday,8,Drip Coffee,27.76,2
+2024-02-15,Thursday,9,Breakfast Sandwich,54.79,5
+2024-02-15,Thursday,9,Drip Coffee,37.57,3
+2024-02-15,Thursday,9,Croissant,28.18,2
+2024-02-15,Thursday,10,Drip Coffee,55.99,5
+2024-02-15,Thursday,10,Croissant,38.4,3
+2024-02-15,Thursday,10,Latte,28.8,2
+2024-02-15,Thursday,11,Croissant,105.6,9
+2024-02-15,Thursday,11,Latte,72.41,6
+2024-02-15,Thursday,11,Muffin,54.31,5
+2024-02-15,Thursday,12,Latte,108.45,9
+2024-02-15,Thursday,12,Muffin,74.36,6
+2024-02-15,Thursday,12,Breakfast Sandwich,55.77,5
+2024-02-15,Thursday,13,Muffin,111.15,9
+2024-02-15,Thursday,13,Breakfast Sandwich,76.22,6
+2024-02-15,Thursday,13,Drip Coffee,57.16,5
+2024-02-15,Thursday,14,Breakfast Sandwich,113.41,9
+2024-02-15,Thursday,14,Drip Coffee,77.77,6
+2024-02-15,Thursday,14,Croissant,58.33,5
+2024-02-15,Thursday,15,Drip Coffee,91.99,8
+2024-02-15,Thursday,15,Croissant,63.08,5
+2024-02-15,Thursday,15,Latte,47.31,4
+2024-02-15,Thursday,16,Croissant,92.56,8
+2024-02-15,Thursday,16,Latte,63.47,5
+2024-02-15,Thursday,16,Muffin,47.6,4
+2024-02-15,Thursday,17,Latte,92.38,8
+2024-02-15,Thursday,17,Muffin,63.35,5
+2024-02-15,Thursday,17,Breakfast Sandwich,47.51,4
+2024-02-15,Thursday,18,Muffin,141.77,12
+2024-02-15,Thursday,18,Breakfast Sandwich,97.22,8
+2024-02-15,Thursday,18,Drip Coffee,72.91,6
+2024-02-15,Thursday,19,Breakfast Sandwich,139.38,12
+2024-02-15,Thursday,19,Drip Coffee,95.58,8
+2024-02-15,Thursday,19,Croissant,71.68,6
+2024-02-15,Thursday,20,Drip Coffee,136.27,11
+2024-02-15,Thursday,20,Croissant,93.44,8
+2024-02-15,Thursday,20,Latte,70.08,6
+2024-02-15,Thursday,21,Croissant,132.79,11
+2024-02-15,Thursday,21,Latte,91.05,8
+2024-02-15,Thursday,21,Muffin,68.29,6
+2024-02-15,Thursday,22,Latte,83.43,7
+2024-02-15,Thursday,22,Muffin,57.21,5
+2024-02-15,Thursday,22,Breakfast Sandwich,42.91,4
+2024-02-16,Friday,8,Breakfast Sandwich,81.03,7
+2024-02-16,Friday,8,Drip Coffee,55.56,5
+2024-02-16,Friday,8,Croissant,41.67,3
+2024-02-16,Friday,9,Drip Coffee,82.81,7
+2024-02-16,Friday,9,Croissant,56.78,5
+2024-02-16,Friday,9,Latte,42.59,4
+2024-02-16,Friday,10,Croissant,84.96,7
+2024-02-16,Friday,10,Latte,58.26,5
+2024-02-16,Friday,10,Muffin,43.69,4
+2024-02-16,Friday,11,Latte,160.38,13
+2024-02-16,Friday,11,Muffin,109.97,9
+2024-02-16,Friday,11,Breakfast Sandwich,82.48,7
+2024-02-16,Friday,12,Muffin,164.37,14
+2024-02-16,Friday,12,Breakfast Sandwich,112.71,9
+2024-02-16,Friday,12,Drip Coffee,84.54,7
+2024-02-16,Friday,13,Breakfast Sandwich,167.72,14
+2024-02-16,Friday,13,Drip Coffee,115.01,10
+2024-02-16,Friday,13,Croissant,86.26,7
+2024-02-16,Friday,14,Drip Coffee,170.05,14
+2024-02-16,Friday,14,Croissant,116.61,10
+2024-02-16,Friday,14,Latte,87.45,7
+2024-02-16,Friday,15,Croissant,136.88,11
+2024-02-16,Friday,15,Latte,93.86,8
+2024-02-16,Friday,15,Muffin,70.4,6
+2024-02-16,Friday,16,Latte,136.62,11
+2024-02-16,Friday,16,Muffin,93.68,8
+2024-02-16,Friday,16,Breakfast Sandwich,70.26,6
+2024-02-16,Friday,17,Muffin,135.27,11
+2024-02-16,Friday,17,Breakfast Sandwich,92.76,8
+2024-02-16,Friday,17,Drip Coffee,69.57,6
+2024-02-16,Friday,18,Breakfast Sandwich,206.12,17
+2024-02-16,Friday,18,Drip Coffee,141.34,12
+2024-02-16,Friday,18,Croissant,106.01,9
+2024-02-16,Friday,19,Drip Coffee,201.52,17
+2024-02-16,Friday,19,Croissant,138.19,12
+2024-02-16,Friday,19,Latte,103.64,9
+2024-02-16,Friday,20,Croissant,196.37,16
+2024-02-16,Friday,20,Latte,134.65,11
+2024-02-16,Friday,20,Muffin,100.99,8
+2024-02-16,Friday,21,Latte,191.24,16
+2024-02-16,Friday,21,Muffin,131.13,11
+2024-02-16,Friday,21,Breakfast Sandwich,98.35,8
+2024-02-16,Friday,22,Muffin,120.44,10
+2024-02-16,Friday,22,Breakfast Sandwich,82.59,7
+2024-02-16,Friday,22,Drip Coffee,61.94,5
+2024-02-17,Saturday,8,Specialty Cake,93.08,8
+2024-02-17,Saturday,8,Sundae,68.44,6
+2024-02-17,Saturday,8,Cold Brew,49.28,4
+2024-02-17,Saturday,9,Sundae,95.49,8
+2024-02-17,Saturday,9,Cold Brew,70.21,6
+2024-02-17,Saturday,9,Brownie,50.55,4
+2024-02-17,Saturday,10,Cold Brew,98.06,8
+2024-02-17,Saturday,10,Brownie,72.1,6
+2024-02-17,Saturday,10,Party Pack,51.92,4
+2024-02-17,Saturday,11,Brownie,184.75,15
+2024-02-17,Saturday,11,Party Pack,135.85,11
+2024-02-17,Saturday,11,Specialty Cake,97.81,8
+2024-02-17,Saturday,12,Party Pack,188.52,16
+2024-02-17,Saturday,12,Specialty Cake,138.62,12
+2024-02-17,Saturday,12,Sundae,99.8,8
+2024-02-17,Saturday,13,Specialty Cake,191.13,16
+2024-02-17,Saturday,13,Sundae,140.54,12
+2024-02-17,Saturday,13,Cold Brew,101.19,8
+2024-02-17,Saturday,14,Sundae,192.32,16
+2024-02-17,Saturday,14,Cold Brew,141.41,12
+2024-02-17,Saturday,14,Brownie,101.82,8
+2024-02-17,Saturday,15,Cold Brew,153.56,13
+2024-02-17,Saturday,15,Brownie,112.91,9
+2024-02-17,Saturday,15,Party Pack,81.3,7
+2024-02-17,Saturday,16,Brownie,152.04,13
+2024-02-17,Saturday,16,Party Pack,111.79,9
+2024-02-17,Saturday,16,Specialty Cake,80.49,7
+2024-02-17,Saturday,17,Party Pack,149.47,12
+2024-02-17,Saturday,17,Specialty Cake,109.9,9
+2024-02-17,Saturday,17,Sundae,79.13,7
+2024-02-17,Saturday,18,Specialty Cake,226.51,19
+2024-02-17,Saturday,18,Sundae,166.55,14
+2024-02-17,Saturday,18,Cold Brew,119.92,10
+2024-02-17,Saturday,19,Sundae,220.72,18
+2024-02-17,Saturday,19,Cold Brew,162.29,14
+2024-02-17,Saturday,19,Brownie,116.85,10
+2024-02-17,Saturday,20,Cold Brew,214.95,18
+2024-02-17,Saturday,20,Brownie,158.05,13
+2024-02-17,Saturday,20,Party Pack,113.8,9
+2024-02-17,Saturday,21,Brownie,209.83,17
+2024-02-17,Saturday,21,Party Pack,154.28,13
+2024-02-17,Saturday,21,Specialty Cake,111.09,9
+2024-02-17,Saturday,22,Party Pack,132.86,11
+2024-02-17,Saturday,22,Specialty Cake,97.69,8
+2024-02-17,Saturday,22,Sundae,70.33,6
+2024-02-18,Sunday,8,Sundae,69.53,6
+2024-02-18,Sunday,8,Cold Brew,51.12,4
+2024-02-18,Sunday,8,Brownie,36.81,3
+2024-02-18,Sunday,9,Cold Brew,71.4,6
+2024-02-18,Sunday,9,Brownie,52.5,4
+2024-02-18,Sunday,9,Party Pack,37.8,3
+2024-02-18,Sunday,10,Brownie,73.18,6
+2024-02-18,Sunday,10,Party Pack,53.81,4
+2024-02-18,Sunday,10,Specialty Cake,38.74,3
+2024-02-18,Sunday,11,Party Pack,137.26,11
+2024-02-18,Sunday,11,Specialty Cake,100.93,8
+2024-02-18,Sunday,11,Sundae,72.67,6
+2024-02-18,Sunday,12,Specialty Cake,139.17,12
+2024-02-18,Sunday,12,Sundae,102.33,9
+2024-02-18,Sunday,12,Cold Brew,73.68,6
+2024-02-18,Sunday,13,Sundae,140.04,12
+2024-02-18,Sunday,13,Cold Brew,102.97,9
+2024-02-18,Sunday,13,Brownie,74.14,6
+2024-02-18,Sunday,14,Cold Brew,139.76,12
+2024-02-18,Sunday,14,Brownie,102.77,9
+2024-02-18,Sunday,14,Party Pack,73.99,6
+2024-02-18,Sunday,15,Brownie,110.7,9
+2024-02-18,Sunday,15,Party Pack,81.4,7
+2024-02-18,Sunday,15,Specialty Cake,58.61,5
+2024-02-18,Sunday,16,Party Pack,108.83,9
+2024-02-18,Sunday,16,Specialty Cake,80.03,7
+2024-02-18,Sunday,16,Sundae,57.62,5
+2024-02-18,Sunday,17,Specialty Cake,106.41,9
+2024-02-18,Sunday,17,Sundae,78.24,7
+2024-02-18,Sunday,17,Cold Brew,56.33,5
+2024-02-18,Sunday,18,Sundae,160.71,13
+2024-02-18,Sunday,18,Cold Brew,118.17,10
+2024-02-18,Sunday,18,Brownie,85.08,7
+2024-02-18,Sunday,19,Cold Brew,156.51,13
+2024-02-18,Sunday,19,Brownie,115.08,10
+2024-02-18,Sunday,19,Party Pack,82.86,7
+2024-02-18,Sunday,20,Brownie,152.78,13
+2024-02-18,Sunday,20,Party Pack,112.34,9
+2024-02-18,Sunday,20,Specialty Cake,80.88,7
+2024-02-18,Sunday,21,Party Pack,149.94,12
+2024-02-18,Sunday,21,Specialty Cake,110.25,9
+2024-02-18,Sunday,21,Sundae,79.38,7
+2024-02-18,Sunday,22,Specialty Cake,95.68,8
+2024-02-18,Sunday,22,Sundae,70.35,6
+2024-02-18,Sunday,22,Cold Brew,50.65,4
+2024-02-19,Monday,8,Latte,58.19,5
+2024-02-19,Monday,8,Muffin,39.9,3
+2024-02-19,Monday,8,Breakfast Sandwich,29.93,2
+2024-02-19,Monday,9,Muffin,59.64,5
+2024-02-19,Monday,9,Breakfast Sandwich,40.9,3
+2024-02-19,Monday,9,Drip Coffee,30.67,3
+2024-02-19,Monday,10,Breakfast Sandwich,60.86,5
+2024-02-19,Monday,10,Drip Coffee,41.73,3
+2024-02-19,Monday,10,Croissant,31.3,3
+2024-02-19,Monday,11,Drip Coffee,113.42,9
+2024-02-19,Monday,11,Croissant,77.78,6
+2024-02-19,Monday,11,Latte,58.33,5
+2024-02-19,Monday,12,Croissant,114.13,10
+2024-02-19,Monday,12,Latte,78.26,7
+2024-02-19,Monday,12,Muffin,58.7,5
+2024-02-19,Monday,13,Latte,113.91,9
+2024-02-19,Monday,13,Muffin,78.11,7
+2024-02-19,Monday,13,Breakfast Sandwich,58.58,5
+2024-02-19,Monday,14,Muffin,112.78,9
+2024-02-19,Monday,14,Breakfast Sandwich,77.34,6
+2024-02-19,Monday,14,Drip Coffee,58,5
+2024-02-19,Monday,15,Breakfast Sandwich,88.7,7
+2024-02-19,Monday,15,Drip Coffee,60.82,5
+2024-02-19,Monday,15,Croissant,45.62,4
+2024-02-19,Monday,16,Drip Coffee,86.72,7
+2024-02-19,Monday,16,Croissant,59.47,5
+2024-02-19,Monday,16,Latte,44.6,4
+2024-02-19,Monday,17,Croissant,84.5,7
+2024-02-19,Monday,17,Latte,57.95,5
+2024-02-19,Monday,17,Muffin,43.46,4
+2024-02-19,Monday,18,Latte,127.56,11
+2024-02-19,Monday,18,Muffin,87.47,7
+2024-02-19,Monday,18,Breakfast Sandwich,65.6,5
+2024-02-19,Monday,19,Muffin,124.52,10
+2024-02-19,Monday,19,Breakfast Sandwich,85.38,7
+2024-02-19,Monday,19,Drip Coffee,64.04,5
+2024-02-19,Monday,20,Breakfast Sandwich,122.2,10
+2024-02-19,Monday,20,Drip Coffee,83.8,7
+2024-02-19,Monday,20,Croissant,62.85,5
+2024-02-19,Monday,21,Drip Coffee,120.86,10
+2024-02-19,Monday,21,Croissant,82.88,7
+2024-02-19,Monday,21,Latte,62.16,5
+2024-02-19,Monday,22,Croissant,77.84,6
+2024-02-19,Monday,22,Latte,53.37,4
+2024-02-19,Monday,22,Muffin,40.03,3
+2024-02-20,Tuesday,8,Muffin,50.54,4
+2024-02-20,Tuesday,8,Breakfast Sandwich,34.65,3
+2024-02-20,Tuesday,8,Drip Coffee,25.99,2
+2024-02-20,Tuesday,9,Breakfast Sandwich,51.57,4
+2024-02-20,Tuesday,9,Drip Coffee,35.36,3
+2024-02-20,Tuesday,9,Croissant,26.52,2
+2024-02-20,Tuesday,10,Drip Coffee,52.28,4
+2024-02-20,Tuesday,10,Croissant,35.85,3
+2024-02-20,Tuesday,10,Latte,26.89,2
+2024-02-20,Tuesday,11,Croissant,96.7,8
+2024-02-20,Tuesday,11,Latte,66.31,6
+2024-02-20,Tuesday,11,Muffin,49.73,4
+2024-02-20,Tuesday,12,Latte,96.51,8
+2024-02-20,Tuesday,12,Muffin,66.18,6
+2024-02-20,Tuesday,12,Breakfast Sandwich,49.64,4
+2024-02-20,Tuesday,13,Muffin,95.56,8
+2024-02-20,Tuesday,13,Breakfast Sandwich,65.52,5
+2024-02-20,Tuesday,13,Drip Coffee,49.14,4
+2024-02-20,Tuesday,14,Breakfast Sandwich,93.94,8
+2024-02-20,Tuesday,14,Drip Coffee,64.42,5
+2024-02-20,Tuesday,14,Croissant,48.31,4
+2024-02-20,Tuesday,15,Drip Coffee,73.48,6
+2024-02-20,Tuesday,15,Croissant,50.38,4
+2024-02-20,Tuesday,15,Latte,37.79,3
+2024-02-20,Tuesday,16,Croissant,71.6,6
+2024-02-20,Tuesday,16,Latte,49.1,4
+2024-02-20,Tuesday,16,Muffin,36.82,3
+2024-02-20,Tuesday,17,Latte,69.73,6
+2024-02-20,Tuesday,17,Muffin,47.81,4
+2024-02-20,Tuesday,17,Breakfast Sandwich,35.86,3
+2024-02-20,Tuesday,18,Muffin,105.5,9
+2024-02-20,Tuesday,18,Breakfast Sandwich,72.34,6
+2024-02-20,Tuesday,18,Drip Coffee,54.26,5
+2024-02-20,Tuesday,19,Breakfast Sandwich,103.54,9
+2024-02-20,Tuesday,19,Drip Coffee,71,6
+2024-02-20,Tuesday,19,Croissant,53.25,4
+2024-02-20,Tuesday,20,Drip Coffee,102.4,9
+2024-02-20,Tuesday,20,Croissant,70.22,6
+2024-02-20,Tuesday,20,Latte,52.66,4
+2024-02-20,Tuesday,21,Croissant,102.22,9
+2024-02-20,Tuesday,21,Latte,70.09,6
+2024-02-20,Tuesday,21,Muffin,52.57,4
+2024-02-20,Tuesday,22,Latte,66.46,6
+2024-02-20,Tuesday,22,Muffin,45.57,4
+2024-02-20,Tuesday,22,Breakfast Sandwich,34.18,3
+2024-02-21,Wednesday,8,Breakfast Sandwich,54.76,5
+2024-02-21,Wednesday,8,Drip Coffee,37.55,3
+2024-02-21,Wednesday,8,Croissant,28.16,2
+2024-02-21,Wednesday,9,Drip Coffee,55.52,5
+2024-02-21,Wednesday,9,Croissant,38.07,3
+2024-02-21,Wednesday,9,Latte,28.55,2
+2024-02-21,Wednesday,10,Croissant,55.86,5
+2024-02-21,Wednesday,10,Latte,38.31,3
+2024-02-21,Wednesday,10,Muffin,28.73,2
+2024-02-21,Wednesday,11,Latte,102.49,9
+2024-02-21,Wednesday,11,Muffin,70.28,6
+2024-02-21,Wednesday,11,Breakfast Sandwich,52.71,4
+2024-02-21,Wednesday,12,Muffin,101.48,8
+2024-02-21,Wednesday,12,Breakfast Sandwich,69.59,6
+2024-02-21,Wednesday,12,Drip Coffee,52.19,4
+2024-02-21,Wednesday,13,Breakfast Sandwich,99.76,8
+2024-02-21,Wednesday,13,Drip Coffee,68.41,6
+2024-02-21,Wednesday,13,Croissant,51.31,4
+2024-02-21,Wednesday,14,Drip Coffee,97.54,8
+2024-02-21,Wednesday,14,Croissant,66.88,6
+2024-02-21,Wednesday,14,Latte,50.16,4
+2024-02-21,Wednesday,15,Croissant,76.04,6
+2024-02-21,Wednesday,15,Latte,52.14,4
+2024-02-21,Wednesday,15,Muffin,39.1,3
+2024-02-21,Wednesday,16,Latte,74.05,6
+2024-02-21,Wednesday,16,Muffin,50.78,4
+2024-02-21,Wednesday,16,Breakfast Sandwich,38.08,3
+2024-02-21,Wednesday,17,Muffin,72.29,6
+2024-02-21,Wednesday,17,Breakfast Sandwich,49.57,4
+2024-02-21,Wednesday,17,Drip Coffee,37.18,3
+2024-02-21,Wednesday,18,Breakfast Sandwich,109.96,9
+2024-02-21,Wednesday,18,Drip Coffee,75.4,6
+2024-02-21,Wednesday,18,Croissant,56.55,5
+2024-02-21,Wednesday,19,Drip Coffee,108.75,9
+2024-02-21,Wednesday,19,Croissant,74.57,6
+2024-02-21,Wednesday,19,Latte,55.93,5
+2024-02-21,Wednesday,20,Croissant,108.56,9
+2024-02-21,Wednesday,20,Latte,74.44,6
+2024-02-21,Wednesday,20,Muffin,55.83,5
+2024-02-21,Wednesday,21,Latte,109.4,9
+2024-02-21,Wednesday,21,Muffin,75.01,6
+2024-02-21,Wednesday,21,Breakfast Sandwich,56.26,5
+2024-02-21,Wednesday,22,Muffin,71.73,6
+2024-02-21,Wednesday,22,Breakfast Sandwich,49.18,4
+2024-02-21,Wednesday,22,Drip Coffee,36.89,3
+2024-02-22,Thursday,8,Drip Coffee,65.97,5
+2024-02-22,Thursday,8,Croissant,45.24,4
+2024-02-22,Thursday,8,Latte,33.93,3
+2024-02-22,Thursday,9,Croissant,66.38,6
+2024-02-22,Thursday,9,Latte,45.52,4
+2024-02-22,Thursday,9,Muffin,34.14,3
+2024-02-22,Thursday,10,Latte,66.26,6
+2024-02-22,Thursday,10,Muffin,45.43,4
+2024-02-22,Thursday,10,Breakfast Sandwich,34.07,3
+2024-02-22,Thursday,11,Muffin,120.59,10
+2024-02-22,Thursday,11,Breakfast Sandwich,82.69,7
+2024-02-22,Thursday,11,Drip Coffee,62.02,5
+2024-02-22,Thursday,12,Breakfast Sandwich,118.55,10
+2024-02-22,Thursday,12,Drip Coffee,81.29,7
+2024-02-22,Thursday,12,Croissant,60.97,5
+2024-02-22,Thursday,13,Drip Coffee,115.91,10
+2024-02-22,Thursday,13,Croissant,79.48,7
+2024-02-22,Thursday,13,Latte,59.61,5
+2024-02-22,Thursday,14,Croissant,112.94,9
+2024-02-22,Thursday,14,Latte,77.45,6
+2024-02-22,Thursday,14,Muffin,58.08,5
+2024-02-22,Thursday,15,Latte,87.99,7
+2024-02-22,Thursday,15,Muffin,60.34,5
+2024-02-22,Thursday,15,Breakfast Sandwich,45.25,4
+2024-02-22,Thursday,16,Muffin,85.89,7
+2024-02-22,Thursday,16,Breakfast Sandwich,58.9,5
+2024-02-22,Thursday,16,Drip Coffee,44.17,4
+2024-02-22,Thursday,17,Breakfast Sandwich,84.3,7
+2024-02-22,Thursday,17,Drip Coffee,57.8,5
+2024-02-22,Thursday,17,Croissant,43.35,4
+2024-02-22,Thursday,18,Drip Coffee,129.23,11
+2024-02-22,Thursday,18,Croissant,88.61,7
+2024-02-22,Thursday,18,Latte,66.46,6
+2024-02-22,Thursday,19,Croissant,129,11
+2024-02-22,Thursday,19,Latte,88.45,7
+2024-02-22,Thursday,19,Muffin,66.34,6
+2024-02-22,Thursday,20,Latte,129.99,11
+2024-02-22,Thursday,20,Muffin,89.14,7
+2024-02-22,Thursday,20,Breakfast Sandwich,66.85,6
+2024-02-22,Thursday,21,Muffin,132.11,11
+2024-02-22,Thursday,21,Breakfast Sandwich,90.59,8
+2024-02-22,Thursday,21,Drip Coffee,67.94,6
+2024-02-22,Thursday,22,Breakfast Sandwich,87.17,7
+2024-02-22,Thursday,22,Drip Coffee,59.77,5
+2024-02-22,Thursday,22,Croissant,44.83,4
+2024-02-23,Friday,8,Croissant,98.13,8
+2024-02-23,Friday,8,Latte,67.29,6
+2024-02-23,Friday,8,Muffin,50.47,4
+2024-02-23,Friday,9,Latte,97.94,8
+2024-02-23,Friday,9,Muffin,67.16,6
+2024-02-23,Friday,9,Breakfast Sandwich,50.37,4
+2024-02-23,Friday,10,Muffin,96.97,8
+2024-02-23,Friday,10,Breakfast Sandwich,66.5,6
+2024-02-23,Friday,10,Drip Coffee,49.87,4
+2024-02-23,Friday,11,Breakfast Sandwich,175.25,15
+2024-02-23,Friday,11,Drip Coffee,120.17,10
+2024-02-23,Friday,11,Croissant,90.13,8
+2024-02-23,Friday,12,Drip Coffee,171.34,14
+2024-02-23,Friday,12,Croissant,117.49,10
+2024-02-23,Friday,12,Latte,88.12,7
+2024-02-23,Friday,13,Croissant,166.96,14
+2024-02-23,Friday,13,Latte,114.48,10
+2024-02-23,Friday,13,Muffin,85.86,7
+2024-02-23,Friday,14,Latte,162.59,14
+2024-02-23,Friday,14,Muffin,111.49,9
+2024-02-23,Friday,14,Breakfast Sandwich,83.62,7
+2024-02-23,Friday,15,Muffin,126.97,11
+2024-02-23,Friday,15,Breakfast Sandwich,87.07,7
+2024-02-23,Friday,15,Drip Coffee,65.3,5
+2024-02-23,Friday,16,Breakfast Sandwich,124.61,10
+2024-02-23,Friday,16,Drip Coffee,85.45,7
+2024-02-23,Friday,16,Croissant,64.09,5
+2024-02-23,Friday,17,Drip Coffee,123.25,10
+2024-02-23,Friday,17,Croissant,84.51,7
+2024-02-23,Friday,17,Latte,63.38,5
+2024-02-23,Friday,18,Croissant,190.69,16
+2024-02-23,Friday,18,Latte,130.76,11
+2024-02-23,Friday,18,Muffin,98.07,8
+2024-02-23,Friday,19,Latte,192.16,16
+2024-02-23,Friday,19,Muffin,131.77,11
+2024-02-23,Friday,19,Breakfast Sandwich,98.83,8
+2024-02-23,Friday,20,Muffin,195.29,16
+2024-02-23,Friday,20,Breakfast Sandwich,133.92,11
+2024-02-23,Friday,20,Drip Coffee,100.44,8
+2024-02-23,Friday,21,Breakfast Sandwich,199.73,17
+2024-02-23,Friday,21,Drip Coffee,136.96,11
+2024-02-23,Friday,21,Croissant,102.72,9
+2024-02-23,Friday,22,Drip Coffee,132.24,11
+2024-02-23,Friday,22,Croissant,90.68,8
+2024-02-23,Friday,22,Latte,68.01,6
+2024-02-24,Saturday,8,Cold Brew,110.04,9
+2024-02-24,Saturday,8,Brownie,80.91,7
+2024-02-24,Saturday,8,Party Pack,58.26,5
+2024-02-24,Saturday,9,Brownie,108.95,9
+2024-02-24,Saturday,9,Party Pack,80.11,7
+2024-02-24,Saturday,9,Specialty Cake,57.68,5
+2024-02-24,Saturday,10,Party Pack,107.11,9
+2024-02-24,Saturday,10,Specialty Cake,78.76,7
+2024-02-24,Saturday,10,Sundae,56.71,5
+2024-02-24,Saturday,11,Specialty Cake,192.5,16
+2024-02-24,Saturday,11,Sundae,141.55,12
+2024-02-24,Saturday,11,Cold Brew,101.91,8
+2024-02-24,Saturday,12,Sundae,187.58,16
+2024-02-24,Saturday,12,Cold Brew,137.93,11
+2024-02-24,Saturday,12,Brownie,99.31,8
+2024-02-24,Saturday,13,Cold Brew,182.68,15
+2024-02-24,Saturday,13,Brownie,134.32,11
+2024-02-24,Saturday,13,Party Pack,96.71,8
+2024-02-24,Saturday,14,Brownie,178.33,15
+2024-02-24,Saturday,14,Party Pack,131.12,11
+2024-02-24,Saturday,14,Specialty Cake,94.41,8
+2024-02-24,Saturday,15,Party Pack,140.01,12
+2024-02-24,Saturday,15,Specialty Cake,102.95,9
+2024-02-24,Saturday,15,Sundae,74.12,6
+2024-02-24,Saturday,16,Specialty Cake,138.47,12
+2024-02-24,Saturday,16,Sundae,101.82,8
+2024-02-24,Saturday,16,Cold Brew,73.31,6
+2024-02-24,Saturday,17,Sundae,138.23,12
+2024-02-24,Saturday,17,Cold Brew,101.64,8
+2024-02-24,Saturday,17,Brownie,73.18,6
+2024-02-24,Saturday,18,Cold Brew,215.91,18
+2024-02-24,Saturday,18,Brownie,158.76,13
+2024-02-24,Saturday,18,Party Pack,114.3,10
+2024-02-24,Saturday,19,Brownie,219.42,18
+2024-02-24,Saturday,19,Party Pack,161.34,13
+2024-02-24,Saturday,19,Specialty Cake,116.16,10
+2024-02-24,Saturday,20,Party Pack,224.4,19
+2024-02-24,Saturday,20,Specialty Cake,165,14
+2024-02-24,Saturday,20,Sundae,118.8,10
+2024-02-24,Saturday,21,Specialty Cake,230.31,19
+2024-02-24,Saturday,21,Sundae,169.34,14
+2024-02-24,Saturday,21,Cold Brew,121.93,10
+2024-02-24,Saturday,22,Sundae,152.57,13
+2024-02-24,Saturday,22,Cold Brew,112.18,9
+2024-02-24,Saturday,22,Brownie,80.77,7
+2024-02-25,Sunday,8,Brownie,79.3,7
+2024-02-25,Sunday,8,Party Pack,58.31,5
+2024-02-25,Sunday,8,Specialty Cake,41.98,3
+2024-02-25,Sunday,9,Party Pack,77.96,6
+2024-02-25,Sunday,9,Specialty Cake,57.32,5
+2024-02-25,Sunday,9,Sundae,41.27,3
+2024-02-25,Sunday,10,Specialty Cake,76.22,6
+2024-02-25,Sunday,10,Sundae,56.05,5
+2024-02-25,Sunday,10,Cold Brew,40.35,3
+2024-02-25,Sunday,11,Sundae,136.53,11
+2024-02-25,Sunday,11,Cold Brew,100.39,8
+2024-02-25,Sunday,11,Brownie,72.28,6
+2024-02-25,Sunday,12,Cold Brew,132.96,11
+2024-02-25,Sunday,12,Brownie,97.77,8
+2024-02-25,Sunday,12,Party Pack,70.39,6
+2024-02-25,Sunday,13,Brownie,129.8,11
+2024-02-25,Sunday,13,Party Pack,95.44,8
+2024-02-25,Sunday,13,Specialty Cake,68.72,6
+2024-02-25,Sunday,14,Party Pack,127.38,11
+2024-02-25,Sunday,14,Specialty Cake,93.66,8
+2024-02-25,Sunday,14,Sundae,67.44,6
+2024-02-25,Sunday,15,Specialty Cake,100.79,8
+2024-02-25,Sunday,15,Sundae,74.11,6
+2024-02-25,Sunday,15,Cold Brew,53.36,4
+2024-02-25,Sunday,16,Sundae,100.61,8
+2024-02-25,Sunday,16,Cold Brew,73.98,6
+2024-02-25,Sunday,16,Brownie,53.26,4
+2024-02-25,Sunday,17,Cold Brew,101.38,8
+2024-02-25,Sunday,17,Brownie,74.55,6
+2024-02-25,Sunday,17,Party Pack,53.67,4
+2024-02-25,Sunday,18,Brownie,159.7,13
+2024-02-25,Sunday,18,Party Pack,117.43,10
+2024-02-25,Sunday,18,Specialty Cake,84.55,7
+2024-02-25,Sunday,19,Party Pack,163.33,14
+2024-02-25,Sunday,19,Specialty Cake,120.1,10
+2024-02-25,Sunday,19,Sundae,86.47,7
+2024-02-25,Sunday,20,Specialty Cake,167.63,14
+2024-02-25,Sunday,20,Sundae,123.26,10
+2024-02-25,Sunday,20,Cold Brew,88.75,7
+2024-02-25,Sunday,21,Sundae,172.12,14
+2024-02-25,Sunday,21,Cold Brew,126.56,11
+2024-02-25,Sunday,21,Brownie,91.12,8
+2024-02-25,Sunday,22,Cold Brew,113.75,9
+2024-02-25,Sunday,22,Brownie,83.64,7
+2024-02-25,Sunday,22,Party Pack,60.22,5

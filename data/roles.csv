@@ -1,0 +1,4 @@
+﻿shift_name,time_start,time_end,required_roles
+Opening,8,14,Opener|Cake|IceCream
+Midday,11,17,Cashier|Cashier
+Closing,16,22,Closer|Cashier|Cashier

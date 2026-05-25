@@ -1,0 +1,9 @@
+﻿id,name,role,skills,hourly_wage,max_hours,priority,phone,status,callouts_this_month
+1,Sarah K.,Closer,Closer|Cashier|Opener,16,40,1,+15550192,active,1
+2,John M.,Opener,Opener|Cashier,15,35,2,+15550111,active,0
+3,Marcus T.,Cake Decorator,Cake|Cashier,17,40,1,+15550134,active,2
+4,Priya L.,Ice Cream Maker,IceCream|Cashier,15,30,2,+15550145,active,0
+5,Alex R.,Cashier,Cashier|Closer,14,25,3,+15550156,active,3
+6,Jordan S.,Cashier,Cashier,13,20,3,+15550167,active,0
+7,Taylor N.,Manager,Manager|Closer|Cashier,18,32,1,+15550178,active,1
+8,Maya C.,Floater,Cashier|IceCream|Cake,15,24,2,+15550189,active,0

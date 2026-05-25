@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ShiftIQ — POS Scheduling Agent</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a3a;
+    --accent: #7c6bff;
+    --accent2: #b8ff6b;
+    --accent3: #ff6b6b;
+    --amber: #ffb347;
+    --teal: #4dffd2;
+    --text: #f0efff;
+    --muted: #6e6d8a;
+    --label: #a09fbe;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Layout */
+  .shell { display: flex; height: 100vh; }
+
+  /* Sidebar */
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .logo {
+    padding: 20px 18px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo-mark {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+  .logo-mark span { color: var(--accent); }
+  .logo-sub { font-size: 10px; color: var(--muted); margin-top: 2px; letter-spacing: 0.5px; text-transform: uppercase; }
+
+  .nav { padding: 12px 8px; flex: 1; }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--muted);
+    transition: all 0.15s;
+    margin-bottom: 2px;
+  }
+  .nav-item:hover { background: var(--surface2); color: var(--text); }
+  .nav-item.active { background: rgba(124,107,255,0.15); color: var(--accent); }
+  .nav-icon { width: 16px; text-align: center; font-size: 14px; }
+
+  .nav-section { font-size: 10px; color: var(--muted); letter-spacing: 0.8px; text-transform: uppercase; padding: 16px 12px 6px; }
+
+  .sidebar-bottom {
+    padding: 12px 8px;
+    border-top: 1px solid var(--border);
+  }
+  .labor-gauge {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .gauge-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .gauge-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .gauge-val { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; }
+  .gauge-val.ok { color: var(--accent2); }
+  .gauge-val.warn { color: var(--amber); }
+  .gauge-val.bad { color: var(--accent3); }
+  .gauge-target { font-size: 10px; color: var(--muted); }
+  .gauge-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .gauge-fill { height: 100%; border-radius: 2px; transition: width 0.5s, background 0.3s; }
+
+  /* Main content */
+  .main { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+
+  /* Top bar */
+  .topbar {
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    height: 52px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--surface);
+  }
+  .topbar-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; }
+  .topbar-actions { display: flex; gap: 8px; align-items: center; }
+  .btn {
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--label);
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.15s;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--text); }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    font-weight: 500;
+  }
+  .btn-primary:hover { background: #9585ff; border-color: #9585ff; color: #fff; }
+  .btn-danger { border-color: var(--accent3); color: var(--accent3); }
+  .btn-danger:hover { background: rgba(255,107,107,0.1); }
+  .badge {
+    padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 500;
+  }
+  .badge-green { background: rgba(184,255,107,0.15); color: var(--accent2); }
+  .badge-amber { background: rgba(255,179,71,0.15); color: var(--amber); }
+  .badge-red { background: rgba(255,107,107,0.15); color: var(--accent3); }
+  .badge-purple { background: rgba(124,107,255,0.15); color: var(--accent); }
+
+  /* Content area */
+  .content { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+
+  /* Panels / pages */
+  .page { display: none; flex-direction: column; gap: 20px; }
+  .page.active { display: flex; }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--label);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* Stats row */
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .stat-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .stat-val { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; color: var(--text); }
+  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .stat-delta-up { color: var(--accent2); }
+  .stat-delta-down { color: var(--accent3); }
+
+  /* Bar chart */
+  .bar-chart { display: flex; align-items: flex-end; gap: 5px; height: 120px; }
+  .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .bar {
+    width: 100%; border-radius: 4px 4px 0 0;
+    transition: all 0.4s;
+    cursor: pointer;
+    position: relative;
+  }
+  .bar:hover { filter: brightness(1.3); }
+  .bar-label { font-size: 10px; color: var(--muted); text-align: center; }
+  .bar-val { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--label); text-align: center; }
+
+  /* Schedule grid */
+  .schedule-grid { display: grid; grid-template-columns: 100px repeat(7, 1fr); gap: 2px; }
+  .sched-header {
+    font-size: 11px; color: var(--muted); text-align: center;
+    padding: 6px 4px; text-transform: uppercase; letter-spacing: 0.4px;
+  }
+  .sched-role {
+    font-size: 11px; color: var(--label);
+    padding: 6px 8px; display: flex; align-items: center;
+  }
+  .sched-cell {
+    border-radius: 6px; padding: 5px 6px;
+    font-size: 11px; min-height: 44px;
+    display: flex; flex-direction: column; justify-content: center;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    cursor: pointer; transition: all 0.15s;
+  }
+  .sched-cell:hover { border-color: var(--accent); }
+  .sched-cell.filled { background: rgba(124,107,255,0.12); border-color: rgba(124,107,255,0.3); }
+  .sched-cell.callout { background: rgba(255,107,107,0.12); border-color: rgba(255,107,107,0.4); animation: pulse 1.5s infinite; }
+  .sched-cell.covered { background: rgba(184,255,107,0.1); border-color: rgba(184,255,107,0.3); }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
+  .sched-name { font-weight: 500; color: var(--text); font-size: 11px; }
+  .sched-hours { color: var(--muted); font-size: 10px; font-family: 'DM Mono', monospace; }
+  .sched-empty { color: var(--muted); font-size: 10px; text-align: center; }
+
+  /* Employee table */
+  .emp-table { width: 100%; border-collapse: collapse; }
+  .emp-table th { font-size: 11px; color: var(--muted); text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 0.4px; }
+  .emp-table td { padding: 10px 10px; border-bottom: 1px solid rgba(42,42,58,0.5); font-size: 12px; vertical-align: middle; }
+  .emp-table tr:last-child td { border-bottom: none; }
+  .emp-table tr:hover td { background: var(--surface2); }
+  .avatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; }
+
+  /* Chat */
+  .chat-wrap { display: flex; flex-direction: column; gap: 12px; max-height: 380px; overflow-y: auto; padding-right: 4px; }
+  .msg { display: flex; gap: 10px; }
+  .msg.user { flex-direction: row-reverse; }
+  .msg-bubble {
+    max-width: 75%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.5;
+  }
+  .msg.agent .msg-bubble { background: var(--surface2); border: 1px solid var(--border); border-radius: 4px 12px 12px 12px; }
+  .msg.user .msg-bubble { background: var(--accent); color: #fff; border-radius: 12px 4px 12px 12px; }
+  .msg-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; border: 1px solid var(--border); }
+  .chat-input-row { display: flex; gap: 8px; margin-top: 4px; }
+  .chat-input {
+    flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; outline: none;
+  }
+  .chat-input:focus { border-color: var(--accent); }
+  .chip { display: inline-block; padding: 4px 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; font-size: 11px; color: var(--label); cursor: pointer; margin: 3px; transition: all 0.15s; }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Insight highlight */
+  .insight-block {
+    background: rgba(124,107,255,0.08); border: 1px solid rgba(124,107,255,0.2);
+    border-left: 3px solid var(--accent); border-radius: 8px; padding: 12px 14px;
+    font-size: 12px; line-height: 1.6; color: var(--label); margin-top: 4px;
+  }
+  .insight-block strong { color: var(--text); }
+
+  /* Backup ranking */
+  .backup-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; background: var(--surface2); border-radius: 8px;
+    border: 1px solid var(--border); margin-bottom: 6px; cursor: pointer; transition: all 0.15s;
+  }
+  .backup-row:hover { border-color: var(--accent2); }
+  .backup-row.top { border-color: rgba(184,255,107,0.4); background: rgba(184,255,107,0.06); }
+  .backup-score { font-family: 'DM Mono', monospace; font-size: 18px; font-weight: 500; min-width: 38px; text-align: center; }
+  .backup-info { flex: 1; }
+  .backup-name { font-weight: 500; font-size: 13px; }
+  .backup-reason { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .score-bar { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; margin-top: 6px; }
+  .score-fill { height: 100%; border-radius: 2px; transition: width 0.6s; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .tab { padding: 8px 16px; font-size: 12px; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; margin-bottom: -1px; }
+  .tab.active { color: var(--accent); border-color: var(--accent); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Heatmap */
+  .heatmap { display: grid; grid-template-columns: 50px repeat(7,1fr); gap: 3px; }
+  .heatmap-cell {
+    border-radius: 4px; height: 24px; display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-family: 'DM Mono', monospace; cursor: pointer; transition: all 0.15s;
+  }
+  .heatmap-cell:hover { transform: scale(1.05); }
+  .heat-label { font-size: 10px; color: var(--muted); display: flex; align-items: center; }
+
+  /* Confidence bar */
+  .conf-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .conf-label { font-size: 12px; min-width: 120px; color: var(--label); }
+  .conf-bar-wrap { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .conf-bar { height: 100%; border-radius: 4px; }
+  .conf-pct { font-family: 'DM Mono', monospace; font-size: 11px; min-width: 36px; text-align: right; color: var(--label); }
+
+  /* Tooltip */
+  .tooltip { position: relative; }
+  .tooltip-text {
+    display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    background: #1f1f2e; border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 10px; font-size: 11px; color: var(--label); white-space: nowrap; z-index: 100;
+  }
+  .tooltip:hover .tooltip-text { display: block; }
+
+  /* Callout modal */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center; }
+  .modal-overlay.show { display: flex; }
+  .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; width: 440px; max-width: 90vw; }
+  .modal-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+  .modal-sub { font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 4px; font-size: 10px; border: 1px solid; }
+  .tag-role { border-color: rgba(124,107,255,0.3); color: var(--accent); background: rgba(124,107,255,0.08); }
+  .tag-skill { border-color: rgba(77,255,210,0.3); color: var(--teal); background: rgba(77,255,210,0.08); }
+
+  .why-box { background: var(--surface2); border-left: 2px solid var(--accent); border-radius: 0 6px 6px 0; padding: 8px 12px; font-size: 11px; color: var(--muted); line-height: 1.5; margin-top: 4px; }
+  .why-box strong { color: var(--label); }
+
+  .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+
+  select, input[type=text], input[type=number] {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text); padding: 6px 10px; font-size: 12px; font-family: 'Inter', sans-serif; outline: none;
+  }
+  select:focus, input:focus { border-color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-mark">Shift<span>IQ</span></div>
+    <div class="logo-sub">POS Scheduling Agent</div>
+  </div>
+  <nav class="nav">
+    <div class="nav-section">Analytics</div>
+    <div class="nav-item active" onclick="showPage('insights')"><span class="nav-icon">📊</span> Sales Insights</div>
+    <div class="nav-item" onclick="showPage('forecast')"><span class="nav-icon">🔮</span> Forecast</div>
+    <div class="nav-section">Workforce</div>
+    <div class="nav-item" onclick="showPage('employees')"><span class="nav-icon">👥</span> Employees</div>
+    <div class="nav-item" onclick="showPage('schedule')"><span class="nav-icon">📅</span> Schedule</div>
+    <div class="nav-item" onclick="showPage('callout')"><span class="nav-icon">🚨</span> Call-out Manager</div>
+    <div class="nav-section">AI</div>
+    <div class="nav-item" onclick="showPage('chat')"><span class="nav-icon">🤖</span> Manager Chat</div>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="labor-gauge">
+      <div class="gauge-label">Labor % of Revenue</div>
+      <div class="gauge-row">
+        <div class="gauge-val ok" id="laborPct">27%</div>
+        <div class="gauge-target">Target: 30%</div>
+      </div>
+      <div class="gauge-bar"><div class="gauge-fill" id="laborFill" style="width:27%; background: var(--accent2);"></div></div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title" id="pageTitle">Sales Insights</div>
+    <div class="topbar-actions">
+      <span class="badge badge-green">● Live Data</span>
+      <button class="btn" onclick="showPage('chat')">🤖 Ask Agent</button>
+      <button class="btn btn-primary" onclick="showPage('schedule')">View Schedule</button>
+    </div>
+  </div>
+  <div class="content">
+
+    <!-- INSIGHTS PAGE -->
+    <div class="page active" id="page-insights">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Avg Daily Revenue</div>
+          <div class="stat-val">$4,280</div>
+          <div class="stat-sub stat-delta-up">↑ 12% vs last week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Peak Hour</div>
+          <div class="stat-val">7 PM</div>
+          <div class="stat-sub">Fri–Sat avg $820/hr</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Labor This Week</div>
+          <div class="stat-val">$6,140</div>
+          <div class="stat-sub stat-delta-up">↓ $340 vs target</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Overstaffed Hours</div>
+          <div class="stat-val">8 hrs</div>
+          <div class="stat-sub stat-delta-down">Tue/Wed mornings</div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+        <div class="card">
+          <div class="card-title">📈 Revenue by Day</div>
+          <div class="bar-chart" id="dayChart"></div>
+          <div class="insight-block" style="margin-top:14px;">
+            <strong>Agent insight:</strong> Fridays average <strong>42% higher sales</strong> than weekdays. Consider scheduling 4 staff instead of 2 between 6–9 PM.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">⏰ Hourly Traffic Heatmap</div>
+          <div id="heatmap" class="heatmap"></div>
+          <div style="display:flex; gap:12px; margin-top:10px; align-items:center;">
+            <span style="font-size:10px; color:var(--muted);">Low</span>
+            <div style="flex:1; height:4px; border-radius:2px; background: linear-gradient(to right, #1a1a26, var(--accent));"></div>
+            <span style="font-size:10px; color:var(--muted);">High</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">💡 Labor Cost Guardrails</div>
+        <div style="display:grid; grid-template-columns: repeat(7,1fr); gap:8px;" id="laborGrid"></div>
+        <div class="insight-block" style="margin-top:14px;">
+          <strong>Tuesday morning alert:</strong> Labor cost is <strong>38% of revenue</strong> (8–11 AM). Reducing from 3 to 2 staff saves ~$84 and brings labor to <strong>25%</strong> — well within target.
+        </div>
+      </div>
+    </div>
+
+    <!-- FORECAST PAGE -->
+    <div class="page" id="page-forecast">
+      <div class="card">
+        <div class="card-title">🔮 Next Week Demand Forecast</div>
+        <div class="tabs">
+          <div class="tab active" onclick="switchTab(this,'ft1')">Revenue Forecast</div>
+          <div class="tab" onclick="switchTab(this,'ft2')">Staffing Needs</div>
+          <div class="tab" onclick="switchTab(this,'ft3')">Confidence</div>
+        </div>
+        <div class="tab-panel active" id="ft1">
+          <div class="bar-chart" id="forecastChart" style="height:150px;"></div>
+          <div class="insight-block" style="margin-top:14px;">
+            <strong>Forecast summary:</strong> Next Saturday is predicted to be the highest revenue day at <strong>$5,900</strong> — 38% above weekly average. Plan for full staffing with backup availability on call.
+          </div>
+        </div>
+        <div class="tab-panel" id="ft2">
+          <div style="display:grid; grid-template-columns: repeat(7,1fr); gap:6px; margin-top:4px;" id="staffingGrid"></div>
+        </div>
+        <div class="tab-panel" id="ft3">
+          <div style="margin-top:4px;" id="confGrid"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📦 Top Selling Items by Period</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div>
+            <div style="font-size:11px; color:var(--muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Weekdays</div>
+            <div id="topItemsWeek"></div>
+          </div>
+          <div>
+            <div style="font-size:11px; color:var(--muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Weekends</div>
+            <div id="topItemsWknd"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMPLOYEES PAGE -->
+    <div class="page" id="page-employees">
+      <div class="card">
+        <div class="card-title">👥 Employee Roster</div>
+        <table class="emp-table">
+          <thead><tr>
+            <th>Employee</th><th>Role</th><th>Skills</th><th>Max Hrs</th><th>Scheduled</th><th>Availability</th><th>Status</th>
+          </tr></thead>
+          <tbody id="empBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SCHEDULE PAGE -->
+    <div class="page" id="page-schedule">
+      <div style="display:flex; gap:10px; align-items:center; margin-bottom:4px;">
+        <button class="btn btn-primary" onclick="generateSchedule()">⚡ Generate Optimized Schedule</button>
+        <button class="btn btn-danger" onclick="openCalloutModal()">🚨 Simulate Call-Out</button>
+        <span style="font-size:12px; color:var(--muted);" id="schedStatus"></span>
+      </div>
+      <div class="card">
+        <div class="card-title">📅 Week of June 9–15</div>
+        <div id="schedGrid"></div>
+        <div id="whyBoxes" style="margin-top:14px; display:none;">
+          <div class="card-title" style="margin-bottom:10px;">🧠 Why These Assignments?</div>
+          <div id="whyContent"></div>
+        </div>
+      </div>
+      <div class="card" id="laborLiveCard">
+        <div class="card-title">💰 Live Labor Cost Monitor</div>
+        <div style="display:grid; grid-template-columns: repeat(7,1fr); gap:8px;" id="laborLive"></div>
+      </div>
+    </div>
+
+    <!-- CALLOUT PAGE -->
+    <div class="page" id="page-callout">
+      <div class="card">
+        <div class="card-title">🚨 Active Call-Out — John M.</div>
+        <div style="background: rgba(255,107,107,0.08); border:1px solid rgba(255,107,107,0.2); border-radius:8px; padding:14px; margin-bottom:14px;">
+          <div style="font-weight:600; color:var(--accent3); margin-bottom:4px;">⚠ Open Shift: Saturday 6–10 PM · Cashier / Closer</div>
+          <div style="font-size:12px; color:var(--muted);">Reported at 3:42 PM · 2h 18m until shift starts</div>
+        </div>
+        <div class="card-title" style="margin-bottom:10px;">Agent-Ranked Backup Candidates</div>
+        <div id="backupList"></div>
+        <div class="insight-block" style="margin-top:12px;">
+          <strong>Agent recommendation:</strong> Contact <strong>Sarah K.</strong> first — she can close, has 12 hours remaining this week, and has only covered 1 call-out this month. Alex has covered 3 and is approaching fatigue. Jordan lacks the closer certification.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📨 Auto-Generated Outreach Messages</div>
+        <div style="background:var(--surface2); border-radius:8px; padding:14px; font-size:12px; line-height:1.7; color:var(--label); border:1px solid var(--border);">
+          <strong style="color:var(--text);">To: Sarah K. (+1 555-0192)</strong><br/>
+          Hi Sarah! John has called out for <strong>Saturday 6–10 PM</strong>. You're available and have the closer cert. Interested in picking it up? Reply <strong>YES</strong> to confirm or <strong>NO</strong> to pass. — ShiftIQ 🤖
+        </div>
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button class="btn btn-primary" onclick="confirmBackup()">✓ Sarah Confirmed</button>
+          <button class="btn">Pass to Alex →</button>
+        </div>
+        <div id="backupConfirmMsg" style="display:none; margin-top:10px;"></div>
+      </div>
+    </div>
+
+    <!-- CHAT PAGE -->
+    <div class="page" id="page-chat">
+      <div class="card" style="flex:1; display:flex; flex-direction:column; gap:14px;">
+        <div class="card-title">🤖 Manager Assistant</div>
+        <div class="chat-wrap" id="chatWrap"></div>
+        <div>
+          <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px;" id="chipWrap"></div>
+          <div class="chat-input-row">
+            <input class="chat-input" id="chatInput" placeholder="Ask anything about your schedule, labor costs, or staff..." onkeydown="if(event.key==='Enter') sendChat()"/>
+            <button class="btn btn-primary" onclick="sendChat()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- Callout Modal -->
+<div class="modal-overlay" id="calloutModal">
+  <div class="modal">
+    <div class="modal-title">🚨 Simulate Employee Call-Out</div>
+    <div class="modal-sub">Choose who called out and when</div>
+    <div style="display:grid; gap:10px; margin-bottom:16px;">
+      <select id="coEmployee">
+        <option>John M. — Cashier/Closer</option>
+        <option>Marcus T. — Cake Decorator</option>
+        <option>Priya L. — Ice Cream Maker</option>
+      </select>
+      <select id="coShift">
+        <option>Saturday 6–10 PM</option>
+        <option>Friday 4–8 PM</option>
+        <option>Sunday 10 AM–2 PM</option>
+      </select>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="btn btn-danger" onclick="triggerCallout()">Trigger Call-Out</button>
+      <button class="btn" onclick="document.getElementById('calloutModal').classList.remove('show')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const HOURS = ['8a','9a','10a','11a','12p','1p','2p','3p','4p','5p','6p','7p','8p','9p'];
+
+const salesByDay = [3200, 2800, 2950, 3400, 4900, 5800, 4100];
+const forecastByDay = [3500, 2900, 3100, 3600, 5100, 5900, 4300];
+
+const heatData = [
+  [1,1,2,3,4,5,6,7,7,6,5,4,3,2],
+  [1,1,1,2,3,4,5,5,4,3,2,2,1,1],
+  [1,1,1,2,3,4,5,5,4,3,2,2,1,1],
+  [1,2,2,3,4,5,6,7,7,6,5,4,3,2],
+  [2,2,3,4,5,7,8,9,9,8,7,6,5,3],
+  [2,3,4,5,6,8,9,10,10,9,8,7,6,4],
+  [2,2,3,4,6,7,8,9,8,7,6,5,4,3],
+];
+
+const employees = [
+  {name:'Sarah K.', initials:'SK', color:'#7c6bff', role:'Closer/Cashier', skills:['Closer','Cashier'], maxHrs:40, sched:32, avail:'All week', status:'active', callouts:1},
+  {name:'John M.',  initials:'JM', color:'#ff6b6b', role:'Cashier/Opener', skills:['Cashier','Opener'], maxHrs:35, sched:28, avail:'Mon–Fri',  status:'callout', callouts:0},
+  {name:'Marcus T.',initials:'MT', color:'#4dffd2', role:'Cake Decorator', skills:['Cake','Cashier'],   maxHrs:40, sched:36, avail:'All week', status:'active', callouts:2},
+  {name:'Priya L.', initials:'PL', color:'#ffb347', role:'Ice Cream Maker',skills:['IceCream','Cashier'],maxHrs:30, sched:24, avail:'Tue–Sat',  status:'active', callouts:0},
+  {name:'Alex R.',  initials:'AR', color:'#b8ff6b', role:'Cashier/Closer', skills:['Cashier','Closer'],  maxHrs:25, sched:22, avail:'Weekends', status:'active', callouts:3},
+  {name:'Jordan S.',initials:'JS', color:'#ff9de2', role:'Cashier',         skills:['Cashier'],           maxHrs:20, sched:18, avail:'Thu–Sun',  status:'active', callouts:0},
+];
+
+const schedule = {
+  'Opener/Cashier': ['John M.','John M.','John M.','John M.','Priya L.','Sarah K.','Marcus T.'],
+  'Cake Decorator': ['Marcus T.','—','Marcus T.','Marcus T.','Marcus T.','Marcus T.','Marcus T.'],
+  'Ice Cream Maker':['Priya L.','Priya L.','—','Priya L.','Priya L.','Priya L.','—'],
+  'Cashier PM':     ['Sarah K.','—','—','Alex R.','Jordan S.','Jordan S.','Jordan S.'],
+  'Closer/Manager': ['Sarah K.','Sarah K.','Sarah K.','Sarah K.','Sarah K.','John M.','Sarah K.'],
+};
+
+const backups = [
+  {name:'Sarah K.',score:94,role:'✓ Closer cert',hrs:'12 hrs left',callouts:'1 this month',top:true},
+  {name:'Alex R.', score:71,role:'✓ Closer cert',hrs:'3 hrs left', callouts:'3 this month',top:false},
+  {name:'Jordan S.',score:40,role:'✗ No closer cert',hrs:'2 hrs left','callouts':'0 this month',top:false},
+];
+
+const chatResponses = {
+  'reduce labor': 'Based on this week\'s schedule, you can reduce labor by <strong>$200</strong> by dropping 1 staff on Tuesday morning (8–11 AM) and Wednesday afternoon (2–5 PM). Both periods show <30% of peak foot traffic. This brings labor to <strong>24% of revenue</strong> — under your 30% target.',
+  'busiest': 'Your busiest periods are <strong>Friday and Saturday 6–9 PM</strong>, averaging $820/hr in revenue. These shifts should always have full coverage: 1 manager, 1 cashier, 1 closer, and 1 specialty role.',
+  'overstaffed': 'You\'re currently overstaffed on <strong>Tuesday 8–11 AM</strong> (labor at 38% of revenue) and <strong>Wednesday 2–4 PM</strong> (labor at 34%). Removing 1 worker each period saves ~$168 this week.',
+  'sarah': 'Sarah K. is your most versatile employee. She\'s certified to open, close, and run the register. She has <strong>8 hours remaining</strong> this week and is available all 7 days. She\'s covered 1 call-out this month — well within fairness limits.',
+  'saturday': '<strong>Saturday forecast: $5,900</strong> (87% confidence). You\'ll need all roles covered: Cake Decorator, Ice Cream Maker, Cashier, and a Closer. Marcus, Priya, Sarah, and Jordan are all available. Recommend confirming with Jordan by Thursday.',
+  'default': 'Great question! Based on your POS data, I can see that <strong>labor efficiency</strong> is highest on weekends (26% of revenue) and lowest on Tuesday mornings (38%). Would you like me to draft a schedule adjustment or run a scenario?',
+};
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+window.onload = () => {
+  buildDayChart();
+  buildHeatmap();
+  buildLaborGrid();
+  buildForecastChart();
+  buildStaffingGrid();
+  buildConfGrid();
+  buildTopItems();
+  buildEmployees();
+  buildSchedule();
+  buildBackups();
+  buildChat();
+  buildLaborLive();
+};
+
+// ─── NAVIGATION ──────────────────────────────────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const titles = {insights:'Sales Insights',forecast:'Demand Forecast',employees:'Employee Roster',schedule:'Weekly Schedule',callout:'Call-out Manager',chat:'Manager Chat'};
+  document.getElementById('pageTitle').textContent = titles[id] || '';
+  event && event.currentTarget && event.currentTarget.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => { if(n.getAttribute('onclick')?.includes(id)) n.classList.add('active'); });
+}
+
+// ─── DAY CHART ───────────────────────────────────────────────────────────────
+function buildDayChart() {
+  const el = document.getElementById('dayChart');
+  const max = Math.max(...salesByDay);
+  el.innerHTML = DAYS.map((d,i)=>{
+    const h = Math.round((salesByDay[i]/max)*110);
+    const col = salesByDay[i]>4500?'var(--accent)':salesByDay[i]>3500?'var(--teal)':'var(--border)';
+    return `<div class="bar-wrap">
+      <div class="bar-val">$${(salesByDay[i]/1000).toFixed(1)}k</div>
+      <div class="bar tooltip" style="height:${h}px;background:${col};" title="${d}: $${salesByDay[i]}">
+        <span class="tooltip-text">$${salesByDay[i].toLocaleString()}</span>
+      </div>
+      <div class="bar-label">${d}</div>
+    </div>`;
+  }).join('');
+}
+
+// ─── HEATMAP ─────────────────────────────────────────────────────────────────
+function buildHeatmap() {
+  const el = document.getElementById('heatmap');
+  let html = '<div class="heatmap-cell heat-label"></div>';
+  DAYS.forEach(d => { html += `<div class="heatmap-cell" style="font-size:9px;color:var(--muted);font-family:'DM Mono',monospace;">${d}</div>`; });
+  HOURS.forEach((h,hi) => {
+    html += `<div class="heat-label" style="font-size:9px;">${h}</div>`;
+    DAYS.forEach((_,di) => {
+      const v = heatData[di][hi];
+      const a = (v/10)*0.9+0.1;
+      html += `<div class="heatmap-cell tooltip" style="background:rgba(124,107,255,${a});">
+        <span class="tooltip-text">${DAYS[di]} ${h}: intensity ${v}/10</span>
+      </div>`;
+    });
+  });
+  el.innerHTML = html;
+}
+
+// ─── LABOR GRID ───────────────────────────────────────────────────────────────
+function buildLaborGrid() {
+  const pcts = [29,38,34,28,24,22,27];
+  document.getElementById('laborGrid').innerHTML = DAYS.map((d,i) => {
+    const p = pcts[i]; const col = p>35?'var(--accent3)':p>30?'var(--amber)':'var(--accent2)';
+    return `<div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 8px;text-align:center;">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px;">${d}</div>
+      <div style="font-family:'DM Mono',monospace;font-size:16px;color:${col};font-weight:500;">${p}%</div>
+      <div style="height:3px;background:var(--border);border-radius:2px;margin-top:6px;overflow:hidden;">
+        <div style="height:100%;width:${p}%;background:${col};border-radius:2px;transition:width 0.5s;"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ─── FORECAST CHART ──────────────────────────────────────────────────────────
+function buildForecastChart() {
+  const el = document.getElementById('forecastChart');
+  const max = Math.max(...forecastByDay);
+  el.innerHTML = DAYS.map((d,i) => {
+    const h = Math.round((forecastByDay[i]/max)*140);
+    return `<div class="bar-wrap">
+      <div class="bar-val">$${(forecastByDay[i]/1000).toFixed(1)}k</div>
+      <div class="bar" style="height:${h}px;background:var(--accent);opacity:0.75;border:1px dashed rgba(124,107,255,0.5);" title="${d}"></div>
+      <div class="bar-label">${d}</div>
+    </div>`;
+  }).join('');
+}
+
+// ─── STAFFING GRID ───────────────────────────────────────────────────────────
+function buildStaffingGrid() {
+  const needs = [3,2,2,3,5,6,4];
+  document.getElementById('staffingGrid').innerHTML = DAYS.map((d,i) => {
+    const n = needs[i]; const col = n>=5?'var(--accent3)':n>=4?'var(--amber)':'var(--accent2)';
+    return `<div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 8px;text-align:center;">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px;">${d}</div>
+      <div style="font-family:'DM Mono',monospace;font-size:22px;color:${col};font-weight:500;">${n}</div>
+      <div style="font-size:9px;color:var(--muted);">staff needed</div>
+    </div>`;
+  }).join('');
+}
+
+// ─── CONFIDENCE GRID ─────────────────────────────────────────────────────────
+function buildConfGrid() {
+  const items = [
+    {label:'Friday (high traffic)',val:92,col:'var(--accent2)'},
+    {label:'Saturday (peak)',val:87,col:'var(--accent2)'},
+    {label:'Sunday (moderate)',val:81,col:'var(--accent2)'},
+    {label:'Monday (normal)',val:76,col:'var(--teal)'},
+    {label:'Tuesday (low)',val:71,col:'var(--teal)'},
+    {label:'Wednesday (low)',val:68,col:'var(--amber)'},
+    {label:'Thursday (build)',val:79,col:'var(--teal)'},
+  ];
+  document.getElementById('confGrid').innerHTML = items.map(x =>
+    `<div class="conf-row">
+      <div class="conf-label">${x.label}</div>
+      <div class="conf-bar-wrap"><div class="conf-bar" style="width:${x.val}%;background:${x.col};"></div></div>
+      <div class="conf-pct">${x.val}%</div>
+    </div>`).join('');
+}
+
+// ─── TOP ITEMS ───────────────────────────────────────────────────────────────
+function buildTopItems() {
+  const week = [['Drip Coffee','$1,240'],['Croissant','$890'],['Latte','$760'],['Muffin','$520']];
+  const wknd = [['Specialty Cake','$2,100'],['Sundae','$1,450'],['Cold Brew','$980'],['Brownie','$640']];
+  const row = (items) => items.map(([n,v],i)=>
+    `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(42,42,58,0.5);">
+      <span style="font-size:12px;color:var(--label);">${i+1}. ${n}</span>
+      <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--accent2);">${v}</span>
+    </div>`).join('');
+  document.getElementById('topItemsWeek').innerHTML = row(week);
+  document.getElementById('topItemsWknd').innerHTML = row(wknd);
+}
+
+// ─── EMPLOYEES ───────────────────────────────────────────────────────────────
+function buildEmployees() {
+  document.getElementById('empBody').innerHTML = employees.map(e => {
+    const pct = Math.round((e.sched/e.maxHrs)*100);
+    const statusBadge = e.status==='callout'
+      ? '<span class="badge badge-red">Called Out</span>'
+      : '<span class="badge badge-green">Active</span>';
+    return `<tr>
+      <td><div style="display:flex;align-items:center;gap:10px;">
+        <div class="avatar" style="background:${e.color}22;color:${e.color};">${e.initials}</div>
+        <div>
+          <div style="font-weight:500;">${e.name}</div>
+          <div style="font-size:10px;color:var(--muted);">Call-outs: ${e.callouts}/mo</div>
+        </div>
+      </div></td>
+      <td><span class="tag tag-role">${e.role}</span></td>
+      <td>${e.skills.map(s=>`<span class="tag tag-skill" style="margin-right:3px;">${s}</span>`).join('')}</td>
+      <td style="font-family:'DM Mono',monospace;">${e.maxHrs}h</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <div style="flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden;min-width:60px;">
+            <div style="height:100%;width:${pct}%;background:var(--accent);border-radius:2px;"></div>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);">${e.sched}/${e.maxHrs}h</span>
+        </div>
+      </td>
+      <td style="font-size:12px;color:var(--label);">${e.avail}</td>
+      <td>${statusBadge}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ─── SCHEDULE ────────────────────────────────────────────────────────────────
+function buildSchedule(calloutIdx=-1) {
+  const roles = Object.keys(schedule);
+  let html = `<div class="schedule-grid">
+    <div></div>${DAYS.map(d=>`<div class="sched-header">${d}</div>`).join('')}`;
+  roles.forEach(role => {
+    html += `<div class="sched-role">${role}</div>`;
+    schedule[role].forEach((name,di) => {
+      let cls = 'sched-cell';
+      if(name !== '—') cls += ' filled';
+      if(calloutIdx>=0 && role==='Closer/Manager' && di===calloutIdx) cls = 'sched-cell callout';
+      if(calloutIdx>=0 && role==='Closer/Manager' && di===calloutIdx && name==='COVERED') cls = 'sched-cell covered';
+      html += `<div class="${cls}">
+        ${name!=='—'
+          ? `<div class="sched-name">${name.split(' ')[0]}</div><div class="sched-hours">${name==='COVERED'?'Backup':'6–10p'}</div>`
+          : `<div class="sched-empty">—</div>`}
+      </div>`;
+    });
+  });
+  html += '</div>';
+  document.getElementById('schedGrid').innerHTML = html;
+}
+
+function generateSchedule() {
+  document.getElementById('schedStatus').textContent = '⚡ Optimizing...';
+  setTimeout(() => {
+    document.getElementById('schedStatus').textContent = '✓ Schedule generated';
+    document.getElementById('whyBoxes').style.display = 'block';
+    document.getElementById('whyContent').innerHTML = `
+      <div class="why-box"><strong>Sarah K. → Closer all week:</strong> Only employee with active closer cert + under max hours (32/40). Assigned to highest-revenue nights.</div>
+      <div class="why-box" style="margin-top:6px;"><strong>Marcus T. → Cake Decorator priority:</strong> Sole cake-certified staff. Scheduled Tue/Thu off to avoid exceeding 40h cap.</div>
+      <div class="why-box" style="margin-top:6px;"><strong>Priya L. skipped Wednesday:</strong> Unavailable per submitted availability. Ice cream role left open — low demand day.</div>
+      <div class="why-box" style="margin-top:6px;"><strong>Jordan S. → Weekend PM only:</strong> Limited to Thu–Sun availability. Assigned Fri–Sun PM to cover peak hours with minimal cost.</div>
+    `;
+    updateLaborLive([26,38,32,27,23,22,25]);
+  }, 800);
+}
+
+// ─── LABOR LIVE ──────────────────────────────────────────────────────────────
+function buildLaborLive() { updateLaborLive([27,30,28,26,24,22,25]); }
+function updateLaborLive(pcts) {
+  const target = 30;
+  document.getElementById('laborLive').innerHTML = DAYS.map((d,i) => {
+    const p = pcts[i]; const col = p>35?'var(--accent3)':p>target?'var(--amber)':'var(--accent2)';
+    const flag = p>target ? ' ⚠' : '';
+    return `<div style="background:var(--surface2);border:1px solid ${p>target?'rgba(255,107,107,0.3)':'var(--border)'};border-radius:8px;padding:10px 8px;text-align:center;">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px;">${d}</div>
+      <div style="font-family:'DM Mono',monospace;font-size:16px;color:${col};font-weight:500;">${p}%${flag}</div>
+      <div style="height:3px;background:var(--border);border-radius:2px;margin-top:6px;overflow:hidden;">
+        <div style="height:100%;width:${(p/50)*100}%;background:${col};border-radius:2px;"></div>
+      </div>
+      <div style="font-size:9px;color:var(--muted);margin-top:3px;">target 30%</div>
+    </div>`;
+  }).join('');
+  const avg = Math.round(pcts.reduce((a,b)=>a+b,0)/pcts.length);
+  const el = document.getElementById('laborPct');
+  el.textContent = avg+'%';
+  el.className = 'gauge-val '+(avg>35?'bad':avg>30?'warn':'ok');
+  document.getElementById('laborFill').style.width = avg+'%';
+  document.getElementById('laborFill').style.background = avg>35?'var(--accent3)':avg>30?'var(--amber)':'var(--accent2)';
+}
+
+// ─── BACKUPS ─────────────────────────────────────────────────────────────────
+function buildBackups() {
+  document.getElementById('backupList').innerHTML = backups.map(b => {
+    const col = b.score>=90?'var(--accent2)':b.score>=70?'var(--amber)':'var(--muted)';
+    return `<div class="backup-row ${b.top?'top':''}">
+      <div class="backup-score" style="color:${col};">${b.score}</div>
+      <div class="backup-info">
+        <div class="backup-name">${b.name} ${b.top?'<span class="badge badge-green" style="margin-left:6px;">Recommended</span>':''}</div>
+        <div class="backup-reason">${b.role} · ${b.hrs} · ${b.callouts}</div>
+        <div class="score-bar"><div class="score-fill" style="width:${b.score}%;background:${col};"></div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ─── CHAT ────────────────────────────────────────────────────────────────────
+function buildChat() {
+  addMsg('agent', 'Hi! I\'m your ShiftIQ agent. I can help with scheduling, labor costs, call-outs, and sales trends. What do you need?');
+  const chips = ['What are my busiest hours?','Am I overstaffed anywhere?','Tell me about Sarah','What\'s the Saturday forecast?','How can I reduce labor by $200?'];
+  document.getElementById('chipWrap').innerHTML = chips.map(c =>
+    `<span class="chip" onclick="sendChip('${c}')">${c}</span>`).join('');
+}
+
+function addMsg(role, text) {
+  const wrap = document.getElementById('chatWrap');
+  wrap.innerHTML += `<div class="msg ${role}">
+    <div class="msg-avatar">${role==='agent'?'🤖':'👤'}</div>
+    <div class="msg-bubble">${text}</div>
+  </div>`;
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+function sendChip(text) { document.getElementById('chatInput').value = text; sendChat(); }
+
+function sendChat() {
+  const inp = document.getElementById('chatInput');
+  const val = inp.value.trim();
+  if(!val) return;
+  addMsg('user', val);
+  inp.value = '';
+  setTimeout(() => {
+    const key = Object.keys(chatResponses).find(k => val.toLowerCase().includes(k));
+    addMsg('agent', chatResponses[key||'default']);
+  }, 600);
+}
+
+// ─── CALLOUT MODAL ───────────────────────────────────────────────────────────
+function openCalloutModal() {
+  document.getElementById('calloutModal').classList.add('show');
+}
+function triggerCallout() {
+  document.getElementById('calloutModal').classList.remove('show');
+  showPage('callout');
+  document.querySelectorAll('.nav-item').forEach(n => {if(n.getAttribute('onclick')?.includes('callout')) n.classList.add('active');});
+}
+function confirmBackup() {
+  const msg = document.getElementById('backupConfirmMsg');
+  msg.style.display = 'block';
+  msg.innerHTML = `<div style="background:rgba(184,255,107,0.1);border:1px solid rgba(184,255,107,0.3);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--accent2);">
+    ✓ <strong>Sarah K. confirmed for Saturday 6–10 PM.</strong> Schedule updated. Manager notified. John's hours adjusted.
+  </div>`;
+  buildSchedule(-1);
+}
+
+// ─── TABS ────────────────────────────────────────────────────────────────────
+function switchTab(el, panelId) {
+  el.closest('.card').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.closest('.card').querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+</script>
+</body>
+</html>
