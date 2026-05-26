@@ -25,20 +25,45 @@ export function HeatmapGrid({ data }) {
   const hours = Array.from(new Set(data.map(item => item.hour))).sort((a, b) => a - b);
   const max = Math.max(...data.map(item => Number(item.revenue || 0)), 1);
   const byKey = new Map(data.map(item => [`${item.day}-${item.hour}`, item]));
+  const formatHour = (hour) => {
+    if (hour === 12) return '12p';
+    return hour > 12 ? `${hour - 12}p` : `${hour}a`;
+  };
+
   return (
     <div className="heatmap">
       <div className="heatmap-cell label" />
       {days.map(day => <div className="heatmap-cell day-label" key={day}>{day.slice(0, 3)}</div>)}
       {hours.map(hour => (
         <div className="heatmap-row" key={hour}>
-          <div className="heat-label">{hour > 12 ? `${hour - 12}p` : `${hour}a`}</div>
+          <div className="heat-label">{formatHour(hour)}</div>
           {days.map(day => {
             const item = byKey.get(`${day}-${hour}`);
-            const alpha = 0.12 + ((item?.revenue || 0) / max) * 0.78;
-            return <div className="heatmap-cell" key={`${day}-${hour}`} style={{ background: `rgba(124,107,255,${alpha})` }} title={`${day} ${hour}:00 - ${currency(item?.revenue || 0)}`} />;
+            const revenue = item?.revenue || 0;
+            const intensity = Math.max(1, Math.round((revenue / max) * 10));
+            const alpha = 0.12 + (revenue / max) * 0.78;
+            return (
+              <div
+                className="heatmap-cell heatmap-value"
+                key={`${day}-${hour}`}
+                style={{ background: `rgba(124,107,255,${alpha})` }}
+                aria-label={`${day} ${formatHour(hour)} intensity ${intensity}/10, ${currency(revenue)} revenue`}
+              >
+                <div className="heat-tooltip">
+                  <strong>{day.slice(0, 3)} {formatHour(hour)}: intensity {intensity}/10</strong>
+                  <span>{currency(revenue)} avg revenue</span>
+                  <span>{Math.round(item?.transaction_count || 0)} avg transactions</span>
+                </div>
+              </div>
+            );
           })}
         </div>
       ))}
+      <div className="heat-legend" aria-hidden="true">
+        <span>Low</span>
+        <div className="heat-legend-bar" />
+        <span>High</span>
+      </div>
     </div>
   );
 }

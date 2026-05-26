@@ -70,10 +70,19 @@ button, input, select { font: inherit; }
 .bar.peak { background: linear-gradient(180deg, var(--green), var(--accent)); }
 .bar-val, .bar-label { font-family: "DM Mono", monospace; color: var(--muted); font-size: 10px; margin: 4px 0; }
 .insight-block { margin-top: 14px; background: rgba(124,107,255,.1); border: 1px solid rgba(124,107,255,.2); color: var(--label); border-radius: 8px; padding: 12px; line-height: 1.55; }
-.heatmap { display: grid; grid-template-columns: 38px repeat(7, 1fr); gap: 3px; }
+.heatmap { display: grid; grid-template-columns: 38px repeat(7, 1fr); gap: 3px; overflow: visible; padding-bottom: 4px; }
 .heatmap-row { display: contents; }
 .heatmap-cell { min-height: 18px; border-radius: 4px; background: var(--surface2); }
 .heatmap-cell.day-label, .heat-label { color: var(--muted); font-family: "DM Mono", monospace; font-size: 10px; text-align: center; align-self: center; }
+.heatmap-value { position: relative; min-height: 30px; cursor: crosshair; transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease; border: 1px solid transparent; }
+.heatmap-value:hover { z-index: 5; transform: translateY(-1px); border-color: rgba(184,255,107,.45); box-shadow: 0 0 0 1px rgba(124,107,255,.2); }
+.heat-tooltip { position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%) translateY(4px); min-width: 190px; pointer-events: none; opacity: 0; background: #1c1b29; border: 1px solid rgba(255,255,255,.08); color: var(--label); border-radius: 7px; padding: 9px 12px; box-shadow: 0 14px 34px rgba(0,0,0,.35); font-family: "DM Mono", monospace; font-size: 11px; line-height: 1.45; white-space: nowrap; transition: opacity .12s ease, transform .12s ease; }
+.heat-tooltip::after { content: ""; position: absolute; left: 50%; top: 100%; transform: translateX(-50%); border: 6px solid transparent; border-top-color: #1c1b29; }
+.heat-tooltip strong { display: block; color: var(--text); font-weight: 500; margin-bottom: 4px; }
+.heat-tooltip span { display: block; color: var(--muted); }
+.heatmap-value:hover .heat-tooltip { opacity: 1; transform: translateX(-50%) translateY(0); }
+.heat-legend { grid-column: 1 / -1; display: grid; grid-template-columns: 36px 1fr 38px; gap: 10px; align-items: center; margin-top: 10px; color: var(--muted); font-size: 11px; }
+.heat-legend-bar { height: 4px; border-radius: 999px; background: linear-gradient(90deg, rgba(124,107,255,.16), rgba(124,107,255,.95)); }
 .guardrail-grid, .staff-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
 .guardrail, .staff-need { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 11px 8px; text-align: center; }
 .guardrail.ok .mini-value, .staff-need.ok .mini-value { color: var(--green); }
