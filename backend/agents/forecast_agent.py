@@ -1,3 +1,26 @@
+# =============================================================================
+# Forecast Agent
+#
+# This file predicts next week's demand from historical POS sales. The MVP uses
+# a simple, explainable forecasting method instead of a heavy machine learning
+# model: it aggregates daily revenue by day of week, calculates historical mean
+# and variation, then turns that demand estimate into a recommended staff count
+# and confidence score.
+#
+# Main responsibilities:
+# - Read normalized sales data through the Data Agent.
+# - Aggregate item-level sales rows into daily revenue totals.
+# - Produce a seven-day forecast ordered Monday through Sunday.
+# - Estimate confidence from historical consistency: lower relative variation
+#   means higher confidence.
+# - Estimate staff needed from predicted revenue with a minimum coverage floor.
+#
+# The output feeds the Forecast page, the scheduling engine, labor cost
+# calculations, and Manager Chat responses. The method is intentionally
+# transparent so managers can understand why the app thinks Friday or Saturday
+# needs more coverage.
+# =============================================================================
+
 import pandas as pd
 
 from agents.data_agent import DAY_ORDER, load_sales

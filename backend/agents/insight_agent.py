@@ -1,3 +1,25 @@
+# =============================================================================
+# Insight Agent
+#
+# This file analyzes historical POS sales data and turns it into the operational
+# insights shown on the Sales Insights and Forecast pages. It answers questions
+# such as which days produce the most revenue, which hours are busiest, which
+# products sell best on weekdays versus weekends, and which low-revenue hours
+# are likely overstaffed relative to the labor target.
+#
+# Main responsibilities:
+# - Build average daily revenue by day of week.
+# - Build the hourly heatmap dataset by aggregating item-level rows into true
+#   hourly revenue and transaction totals.
+# - Identify the busiest day/hour periods for staffing recommendations.
+# - Rank top-selling items separately for weekday and weekend behavior.
+# - Flag overstaffing risk using a simple labor-cost guardrail model.
+# - Produce high-level summary metrics for dashboard stat cards.
+#
+# The Insight Agent reads CSV-backed data through the Data Agent and returns
+# JSON-friendly lists/dictionaries for FastAPI routes and React charts.
+# =============================================================================
+
 from agents.data_agent import DAY_ORDER, load_sales
 from agents.forecast_agent import forecast_next_week
 

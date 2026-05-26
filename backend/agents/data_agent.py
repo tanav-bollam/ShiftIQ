@@ -1,3 +1,27 @@
+# =============================================================================
+# Data Agent
+#
+# This file is the data access foundation for the ShiftIQ MVP. Every other agent
+# depends on it to load and normalize the sample CSV files from the top-level
+# data/ directory. It replaces a real POS or workforce database for the
+# hackathon version while keeping the rest of the app written as if data were
+# coming from a structured backend.
+#
+# Main responsibilities:
+# - Locate the project data directory reliably from the backend package.
+# - Load sales, employees, availability, and role requirements from CSV files.
+# - Normalize types used by downstream agents, such as dates, numeric hours,
+#   revenue, transaction counts, and pipe-delimited skill lists.
+# - Provide shared constants such as DAY_ORDER so charts, forecasts, and
+#   schedules always present days consistently.
+# - Convert an employee's weekly availability row into a compact display string
+#   for the Employees page and scheduling explanations.
+#
+# If ShiftIQ later connects to a real POS system or database, this is the module
+# most likely to become the adapter layer while the insight, forecast, and
+# scheduling agents can keep their current interfaces.
+# =============================================================================
+
 from pathlib import Path
 
 import pandas as pd

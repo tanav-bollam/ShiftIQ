@@ -1,3 +1,28 @@
+# =============================================================================
+# ShiftIQ API Entrypoint
+#
+# This file is the public HTTP layer for the ShiftIQ MVP. It creates the FastAPI
+# application, configures local-demo CORS, defines request/response models, and
+# exposes every endpoint consumed by the React dashboard. The business logic is
+# intentionally kept out of this file and delegated to the agent modules in
+# backend/agents so the API remains easy to scan and the product capabilities can
+# evolve independently.
+#
+# Main responsibilities:
+# - Serve health checks and CSV upload endpoints.
+# - Expose POS insight, forecast, schedule, labor, messaging, call-out, and chat
+#   routes to the frontend.
+# - Convert incoming JSON bodies into typed Pydantic models for call-outs and
+#   chat.
+# - Coordinate agent calls and return JSON-safe objects to the React app.
+#
+# Runtime notes:
+# - Generated schedules, call-outs, and messages live in in-memory state for the
+#   hackathon MVP, so they reset when the backend restarts.
+# - CSV files in the top-level data/ directory are the source of truth for
+#   sample sales, employee, availability, and shift-role data.
+# =============================================================================
+
 from pathlib import Path
 import shutil
 from typing import List

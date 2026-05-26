@@ -1,3 +1,26 @@
+# =============================================================================
+# Manager Assistant Agent
+#
+# This file powers the Manager Chat page. It turns the rest of the ShiftIQ data
+# model into concise, manager-friendly answers about sales trends, labor cost,
+# staffing risk, employee details, and schedule recommendations. The agent uses
+# a hybrid strategy: if an OPENAI_API_KEY is configured, it can ask OpenAI to
+# generate a response from live context; otherwise, it falls back to deterministic
+# local responses so the hackathon demo always works without external services.
+#
+# Main responsibilities:
+# - Build answers from live forecast, busiest-period, overstaffing, labor, and
+#   employee data.
+# - Provide reliable canned-but-data-grounded fallback answers for common demo
+#   questions such as labor reduction, busiest hours, Sarah's status, and the
+#   Saturday forecast.
+# - Keep chat responses specific and practical by referencing real values from
+#   the CSV-backed agents and the current in-memory schedule.
+#
+# This agent does not mutate schedules or data. It reads from other agents and
+# explains what it finds in plain English.
+# =============================================================================
+
 import os
 
 from agents.forecast_agent import forecast_next_week

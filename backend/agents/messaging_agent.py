@@ -1,3 +1,26 @@
+# =============================================================================
+# Messaging And Call-Out Agent
+#
+# This file simulates employee communication for the ShiftIQ MVP. In a real
+# product this layer could integrate with SMS, email, push notifications, or a
+# workforce app. For the hackathon build, messages are written to in-memory
+# state and displayed in the dashboard so the manager can see the flow without
+# requiring Twilio or external credentials.
+#
+# Main responsibilities:
+# - Generate weekly availability request messages for all employees.
+# - Store simulated messages in the shared message log.
+# - Evaluate backup candidates when an employee calls out.
+# - Score candidates using availability, skill match, remaining hours, priority,
+#   and recent call-out history.
+# - Confirm a backup and update the current in-memory schedule through the
+#   Scheduler Agent.
+#
+# This agent bridges scheduling decisions and manager-facing operations: it
+# explains who should be contacted, why they are preferred, and records the
+# simulated communication.
+# =============================================================================
+
 from agents import state
 from agents.data_agent import load_availability, load_employees
 from agents.scheduler_agent import get_current_schedule, replace_assignment

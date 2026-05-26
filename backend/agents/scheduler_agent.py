@@ -1,3 +1,27 @@
+# =============================================================================
+# Scheduler Agent
+#
+# This file is the core scheduling engine for ShiftIQ. It converts forecasted
+# demand, employee availability, employee skills, role requirements, wages, max
+# hours, and priority into a weekly schedule. The MVP uses deterministic,
+# explainable rules instead of OR-Tools or opaque optimization so the generated
+# assignments can be shown and defended during a hackathon demo.
+#
+# Main responsibilities:
+# - Generate weekly shift assignments for Opening, Midday, and Closing shifts.
+# - Match required roles to employees who are available, certified, and under
+#   their weekly hour caps.
+# - Prioritize high-demand days first so Friday/Saturday coverage is protected.
+# - Produce plain-English explanations for each assignment or unfilled role.
+# - Track scheduled hours by employee for roster progress bars.
+# - Calculate daily and weekly labor cost as a percentage of forecast revenue.
+# - Replace assignments when the Call-Out Agent confirms a backup.
+#
+# Generated schedules are stored in shared in-memory state for the MVP. This
+# keeps the demo simple while still letting the Schedule, Employees, Call-out,
+# Labor Gauge, and Chat pages all reference the same current schedule.
+# =============================================================================
+
 from agents.data_agent import DAY_ORDER, availability_summary, load_availability, load_employees, load_roles
 from agents.forecast_agent import forecast_next_week
 from agents import state
