@@ -1,5 +1,6 @@
 import { CalendarPlus, Siren } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { Fragment } from 'react';
 import { useState } from 'react';
 import { api, currency } from '../api.js';
 import { Card } from '../components/UI.jsx';
@@ -59,7 +60,7 @@ function ScheduleGrid({ schedule }) {
       <div />
       {days.map(day => <div className="sched-header" key={day}>{day.slice(0, 3)}</div>)}
       {shifts.map(shift => (
-        <>
+        <Fragment key={shift}>
           <div className="sched-role" key={`${shift}-label`}>{shift}</div>
           {days.map(day => {
             const cell = schedule.find(item => item.day === day && item.shift === shift);
@@ -75,7 +76,7 @@ function ScheduleGrid({ schedule }) {
               </div>
             );
           })}
-        </>
+        </Fragment>
       ))}
     </div>
   );
