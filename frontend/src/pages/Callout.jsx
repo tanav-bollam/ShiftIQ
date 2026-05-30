@@ -58,7 +58,7 @@ export default function Callout({ app }) {
                 <div className="backup-score">{candidate.score}</div>
                 <div className="backup-info">
                   <strong>{candidate.name} {index === 0 && <span className="badge green">Recommended</span>}</strong>
-                  <span>{candidate.skill_match ? 'Role match' : 'Partial match'} · {candidate.hours_remaining}h left · {candidate.callouts_this_month} call-outs/mo</span>
+                  <span>{candidate.skill_match ? 'Role match' : 'Partial match'} - {candidate.hours_remaining}h left - {candidate.callouts_this_month} call-outs/mo</span>
                   <Progress value={candidate.score} />
                   <p>{candidate.message}</p>
                 </div>

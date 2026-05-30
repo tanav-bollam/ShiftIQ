@@ -242,6 +242,7 @@ def replace_assignment(day: str, shift_name: str, called_out_id: int, replacemen
                     assignment["hourly_wage"] = float(replacement["hourly_wage"])
                     assignment["score"] = 100
                     assignment["replacement"] = True
+                    current["hours_by_employee"] = _hours_by_employee(current["schedule"])
                     state.current_schedule = current
                     return current
             for assignment in shift["assigned"]:
@@ -252,6 +253,7 @@ def replace_assignment(day: str, shift_name: str, called_out_id: int, replacemen
                     assignment["score"] = 100
                     assignment["replacement"] = True
                     assignment["covered_for_employee_id"] = called_out_id
+                    current["hours_by_employee"] = _hours_by_employee(current["schedule"])
                     state.current_schedule = current
                     return current
             if shift["assigned"]:
@@ -261,6 +263,7 @@ def replace_assignment(day: str, shift_name: str, called_out_id: int, replacemen
                 shift["assigned"][0]["score"] = 100
                 shift["assigned"][0]["replacement"] = True
                 shift["assigned"][0]["covered_for_employee_id"] = called_out_id
+                current["hours_by_employee"] = _hours_by_employee(current["schedule"])
                 state.current_schedule = current
                 return current
     return current
