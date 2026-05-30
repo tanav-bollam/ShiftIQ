@@ -21,9 +21,29 @@ async function request(path, options = {}) {
   throw lastError || new Error('API request failed');
 }
 
+async function upload(path, file) {
+  const form = new FormData();
+  form.append('file', file);
+  let lastError;
+  for (const base of API_BASES) {
+    try {
+      const res = await fetch(`${base}${path}`, {
+        method: 'POST',
+        body: form,
+      });
+      if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+      return res.json();
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError || new Error('Upload failed');
+}
+
 export const api = {
   health: () => request('/health'),
   employees: () => request('/employees'),
+  roles: () => request('/roles'),
   summary: () => request('/insights/summary'),
   dailyRevenue: () => request('/insights/daily-revenue'),
   heatmap: () => request('/insights/heatmap'),
@@ -38,6 +58,7 @@ export const api = {
   findBackups: (body) => request('/callouts/find-backups', { method: 'POST', body: JSON.stringify(body) }),
   confirmBackup: (body) => request('/callouts/confirm-backup', { method: 'POST', body: JSON.stringify(body) }),
   chat: (body) => request('/chat', { method: 'POST', body: JSON.stringify(body) }),
+  uploadFile: (type, file) => upload(`/upload/${type}`, file),
 };
 
 export function currency(value) {

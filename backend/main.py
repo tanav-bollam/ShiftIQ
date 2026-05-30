@@ -33,7 +33,7 @@ from pydantic import BaseModel
 
 from agents import state
 from agents.assistant_agent import chat
-from agents.data_agent import DATA_DIR, availability_summary, load_employees
+from agents.data_agent import DATA_DIR, availability_summary, load_employees, load_roles
 from agents.forecast_agent import forecast_next_week
 from agents.insight_agent import (
     get_busiest_periods,
@@ -97,6 +97,11 @@ def employees():
         emp["scheduled_hours"] = int(hours.get(emp_id, 0))
         records.append(emp)
     return records
+
+
+@app.get("/roles")
+def roles():
+    return load_roles().to_dict(orient="records")
 
 
 @app.post("/upload/{file_type}")
