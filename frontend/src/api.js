@@ -58,8 +58,13 @@ export const api = {
   messages: () => request('/messaging/log'),
   findBackups: (body) => request('/callouts/find-backups', { method: 'POST', body: JSON.stringify(body) }),
   confirmBackup: (body) => request('/callouts/confirm-backup', { method: 'POST', body: JSON.stringify(body) }),
+  shiftRequests: (employeeId) => request(`/employee/shift-requests${employeeId ? `?employee_id=${employeeId}` : ''}`),
+  createShiftRequest: (body) => request('/employee/shift-requests', { method: 'POST', body: JSON.stringify(body) }),
+  claimShiftRequest: (id, body) => request(`/employee/shift-requests/${id}/claim`, { method: 'POST', body: JSON.stringify(body) }),
+  approveShiftRequest: (id) => request(`/employee/shift-requests/${id}/approve`, { method: 'POST' }),
   chat: (body) => request('/chat', { method: 'POST', body: JSON.stringify(body) }),
   uploadFile: (type, file) => upload(`/upload/${type}`, file),
+  previewUpload: (type, file) => upload(`/upload/${type}/preview`, file),
 };
 
 export function currency(value) {

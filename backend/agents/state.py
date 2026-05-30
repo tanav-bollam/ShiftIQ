@@ -22,3 +22,5 @@
 current_schedule = None
 active_callout = None
 message_log = []
+shift_requests = []
+next_shift_request_id = 1

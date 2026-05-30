@@ -14,7 +14,9 @@ export default function EmployeePortal({ app, employeeId = 1 }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [availability, setAvailability] = useState(Object.fromEntries(days.map(day => [day, day !== 'sunday'])));
-  const [requestType, setRequestType] = useState('Shift swap');
+  const [requestType, setRequestType] = useState('Offer shift');
+  const [selectedShiftKey, setSelectedShiftKey] = useState('');
+  const [targetEmployeeId, setTargetEmployeeId] = useState('');
   const [requestNote, setRequestNote] = useState('');
   const [submittedRequest, setSubmittedRequest] = useState(null);
   const [availabilityStatus, setAvailabilityStatus] = useState('Not submitted');
@@ -25,8 +27,8 @@ export default function EmployeePortal({ app, employeeId = 1 }) {
       return schedule.schedule?.length ? schedule : api.generateSchedule();
     };
 
-    Promise.all([api.employees(), currentOrGeneratedSchedule(), api.messages(), api.forecast()])
-      .then(([employees, schedule, messages, forecast]) => setData({ employees, schedule, messages, forecast }))
+    Promise.all([api.employees(), currentOrGeneratedSchedule(), api.messages(), api.forecast(), api.shiftRequests()])
+      .then(([employees, schedule, messages, forecast, requests]) => setData({ employees, schedule, messages, forecast, requests }))
       .catch(setError);
   }, [app.refreshKey]);
 
@@ -47,6 +49,19 @@ export default function EmployeePortal({ app, employeeId = 1 }) {
   const weeklyHours = shifts.reduce((sum, shift) => sum + (shift.time_end - shift.time_start), 0);
   const employeeMessages = data.messages.filter(message => message.to === employee.name || /availability|covering|called out/i.test(message.body || ''));
   const pendingCoverage = employeeMessages.filter(message => /called out|cover/i.test(message.body || '')).length;
+  const employeeRequests = (data.requests || []).filter(request => request.employee_id === employeeId || request.replacement_id === employeeId);
+  const openRequests = (data.requests || []).filter(request => request.status === 'open' && request.employee_id !== employeeId);
+
+  const refreshEmployeeData = async () => {
+    const [employees, schedule, messages, forecast, requests] = await Promise.all([
+      api.employees(),
+      api.currentSchedule(),
+      api.messages(),
+      api.forecast(),
+      api.shiftRequests(),
+    ]);
+    setData({ employees, schedule, messages, forecast, requests });
+  };
 
   const commonProps = {
     employee,
@@ -61,10 +76,19 @@ export default function EmployeePortal({ app, employeeId = 1 }) {
     setAvailabilityStatus,
     requestType,
     setRequestType,
+    selectedShiftKey,
+    setSelectedShiftKey,
+    targetEmployeeId,
+    setTargetEmployeeId,
     requestNote,
     setRequestNote,
     submittedRequest,
     setSubmittedRequest,
+    employeeRequests,
+    openRequests,
+    employees: data.employees,
+    employeeId,
+    refreshEmployeeData,
   };
 
   return (
@@ -78,7 +102,7 @@ export default function EmployeePortal({ app, employeeId = 1 }) {
         <div className="employee-hero-card">
           <span>Next Shift</span>
           <strong>{nextShift ? `${nextShift.day} ${nextShift.shift}` : 'No shift scheduled'}</strong>
-          <small>{nextShift ? `${nextShift.time} · ${nextShift.assignedRole}` : 'Check back after schedule publish'}</small>
+          <small>{nextShift ? `${nextShift.time} - ${nextShift.assignedRole}` : 'Check back after schedule publish'}</small>
         </div>
       </section>
 
@@ -96,7 +120,7 @@ function EmployeeHome({ employee, weeklyHours, nextShift, shifts, pendingCoverag
   return (
     <>
       <div className="employee-stats">
-        <EmployeeStat icon={CalendarDays} label="Next Shift" value={nextShift ? nextShift.day : 'None'} sub={nextShift ? `${nextShift.time} · ${nextShift.assignedRole}` : 'Schedule not published'} />
+        <EmployeeStat icon={CalendarDays} label="Next Shift" value={nextShift ? nextShift.day : 'None'} sub={nextShift ? `${nextShift.time} - ${nextShift.assignedRole}` : 'Schedule not published'} />
         <EmployeeStat icon={Clock} label="This Week" value={`${weeklyHours}/${employee.max_hours}h`} sub="Scheduled hours" />
         <EmployeeStat icon={Bell} label="Action Needed" value={pendingCoverage ? `${pendingCoverage} request` : 'Clear'} sub={availabilityStatus} />
         <EmployeeStat icon={MessageSquare} label="Messages" value={employeeMessages.length} sub="Manager and agent messages" />
@@ -143,7 +167,7 @@ function EmployeeAvailability({ availability, setAvailability, availabilityStatu
             </button>
           ))}
         </div>
-        <button className="btn primary" onClick={() => setAvailabilityStatus(`Submitted · ${selected} days available`)}>
+        <button className="btn primary" onClick={() => setAvailabilityStatus(`Submitted - ${selected} days available`)}>
           <Send size={16} /> Submit Availability
         </button>
       </Card>
@@ -158,41 +182,111 @@ function EmployeeAvailability({ availability, setAvailability, availabilityStatu
   );
 }
 
-function EmployeeRequests({ shifts, requestType, setRequestType, requestNote, setRequestNote, submittedRequest, setSubmittedRequest }) {
-  const firstShift = shifts[0];
+function EmployeeRequests({
+  shifts,
+  requestType,
+  setRequestType,
+  selectedShiftKey,
+  setSelectedShiftKey,
+  targetEmployeeId,
+  setTargetEmployeeId,
+  requestNote,
+  setRequestNote,
+  submittedRequest,
+  setSubmittedRequest,
+  employeeRequests,
+  openRequests,
+  employees,
+  employeeId,
+  refreshEmployeeData,
+}) {
+  const activeShiftKey = selectedShiftKey || (shifts[0] ? shiftKey(shifts[0]) : '');
+  const selectedShift = shifts.find(shift => shiftKey(shift) === activeShiftKey) || shifts[0];
+  const coworkers = employees.filter(employee => Number(employee.id) !== employeeId);
+
+  const submitRequest = async () => {
+    if (!selectedShift) return;
+    const request = await api.createShiftRequest({
+      employee_id: employeeId,
+      request_type: requestType,
+      day: selectedShift.day,
+      shift_name: selectedShift.shift,
+      note: requestNote,
+      replacement_id: requestType === 'Swap with coworker' && targetEmployeeId ? Number(targetEmployeeId) : null,
+    });
+    setSubmittedRequest(request);
+    setRequestNote('');
+    await refreshEmployeeData();
+  };
+
+  const claimOpenShift = async (request) => {
+    const claimed = await api.claimShiftRequest(request.id, { replacement_id: employeeId, note: 'I can cover this shift.' });
+    setSubmittedRequest(claimed);
+    await refreshEmployeeData();
+  };
+
   return (
     <div className="employee-grid">
       <Card title="New Shift Request">
         <div className="employee-form">
           <label>Request type
             <select value={requestType} onChange={event => setRequestType(event.target.value)}>
-              <option>Shift swap</option>
-              <option>Request cover</option>
+              <option>Offer shift</option>
+              <option>Swap with coworker</option>
               <option>Time off</option>
-              <option>Pick up open shift</option>
             </select>
           </label>
           <label>Shift
-            <select>
-              {shifts.length ? shifts.map(shift => <option key={`${shift.day}-${shift.shift}`}>{shift.day} {shift.shift} · {shift.time}</option>) : <option>No shifts available</option>}
+            <select value={activeShiftKey} onChange={event => setSelectedShiftKey(event.target.value)}>
+              {shifts.length ? shifts.map(shift => <option value={shiftKey(shift)} key={shiftKey(shift)}>{shift.day} {shift.shift} - {shift.time}</option>) : <option>No shifts available</option>}
             </select>
           </label>
+          {requestType === 'Swap with coworker' && (
+            <label>Preferred coworker
+              <select value={targetEmployeeId} onChange={event => setTargetEmployeeId(event.target.value)}>
+                <option value="">Manager chooses</option>
+                {coworkers.map(employee => <option value={employee.id} key={employee.id}>{employee.name} - {employee.role}</option>)}
+              </select>
+            </label>
+          )}
           <label>Note
             <textarea value={requestNote} onChange={event => setRequestNote(event.target.value)} placeholder="Add a short note for your manager..." />
           </label>
-          <button className="btn primary" onClick={() => setSubmittedRequest({ type: requestType, shift: firstShift, note: requestNote || 'No note added' })}>Submit Request</button>
+          <button className="btn primary" onClick={submitRequest} disabled={!selectedShift}>Submit Request</button>
         </div>
       </Card>
       <Card title="Request Status">
-        {submittedRequest ? (
-          <div className="request-card pending">
-            <strong>{submittedRequest.type}</strong>
-            <span>{submittedRequest.shift ? `${submittedRequest.shift.day} ${submittedRequest.shift.shift}` : 'General request'}</span>
-            <p>{submittedRequest.note}</p>
-            <em>Pending manager approval</em>
-          </div>
-        ) : <div className="empty-state">No active requests.</div>}
+        <div className="request-list">
+          {submittedRequest && <RequestCard request={submittedRequest} />}
+          {employeeRequests.length ? employeeRequests.map(request => <RequestCard request={request} key={request.id} />) : !submittedRequest && <div className="empty-state">No active requests.</div>}
+        </div>
       </Card>
+      <Card title="Open Shifts">
+        {openRequests.length ? (
+          <div className="request-list">
+            {openRequests.map(request => (
+              <div className="request-card" key={request.id}>
+                <strong>{request.day} {request.shift_name}</strong>
+                <span>{request.time} - {request.role}</span>
+                <p>Opened by {request.employee_name}. {request.note}</p>
+                <button className="btn primary" onClick={() => claimOpenShift(request)}>Claim Shift</button>
+              </div>
+            ))}
+          </div>
+        ) : <div className="empty-state">No open shifts waiting for pickup.</div>}
+      </Card>
+    </div>
+  );
+}
+
+function RequestCard({ request }) {
+  return (
+    <div className={`request-card ${request.status === 'pending' || request.status === 'claimed' ? 'pending' : ''}`}>
+      <strong>{request.request_type}</strong>
+      <span>{request.day} {request.shift_name} - {request.time}</span>
+      <p>{request.note}</p>
+      {request.replacement_name && <p>Coverage: {request.replacement_name}</p>}
+      <em>{request.status}</em>
     </div>
   );
 }
@@ -269,8 +363,8 @@ function ShiftList({ shifts, empty }) {
       {shifts.map(shift => (
         <div className="shift-row" key={`${shift.day}-${shift.shift}-${shift.assignedRole}`}>
           <div>
-            <strong>{shift.day} · {shift.shift}</strong>
-            <span>{shift.time} · {shift.assignedRole}</span>
+            <strong>{shift.day} - {shift.shift}</strong>
+            <span>{shift.time} - {shift.assignedRole}</span>
           </div>
           <em>{shift.replacement ? 'Replacement' : 'Scheduled'}</em>
         </div>
@@ -290,4 +384,8 @@ function ProfileRow({ label, value }) {
 
 function dayIndex(day) {
   return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].indexOf(day);
+}
+
+function shiftKey(shift) {
+  return `${shift.day}|${shift.shift}`;
 }

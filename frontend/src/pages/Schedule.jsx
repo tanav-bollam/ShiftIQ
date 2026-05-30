@@ -14,12 +14,14 @@ export default function Schedule({ app }) {
   const [employees, setEmployees] = useState([]);
   const [editingShift, setEditingShift] = useState(null);
   const [draftAssignments, setDraftAssignments] = useState([]);
+  const [shiftRequests, setShiftRequests] = useState([]);
   const [error, setError] = useState(null);
   const schedule = app.schedule?.schedule || [];
   const explanations = app.schedule?.explanations || [];
 
   useEffect(() => {
     api.employees().then(setEmployees).catch(setError);
+    api.shiftRequests().then(setShiftRequests).catch(setError);
   }, [app.refreshKey]);
 
   const generate = async () => {
@@ -54,6 +56,15 @@ export default function Schedule({ app }) {
     setStatus('Manual edit saved');
   };
 
+  const approveRequest = async (request) => {
+    setStatus('Approving shift request...');
+    await api.approveShiftRequest(request.id);
+    const requests = await api.shiftRequests();
+    setShiftRequests(requests);
+    await app.refresh();
+    setStatus('Shift request updated');
+  };
+
   if (error) return <ErrorState error={error} />;
 
   return (
@@ -83,6 +94,25 @@ export default function Schedule({ app }) {
               <div className="mini-sub">{currency(day.labor_cost)}</div>
             </div>
           ))}
+        </div>
+      </Card>
+
+      <Card title="Employee Shift Requests">
+        <div className="request-list">
+          {shiftRequests.length ? shiftRequests.map(request => (
+            <div className={`request-card ${request.status === 'pending' || request.status === 'claimed' ? 'pending' : ''}`} key={request.id}>
+              <strong>{request.employee_name} - {request.request_type}</strong>
+              <span>{request.day} {request.shift_name} - {request.time} - {request.role}</span>
+              <p>{request.note}</p>
+              {request.replacement_name && <p>Coverage candidate: {request.replacement_name}</p>}
+              <div className="request-actions">
+                <em>{request.status}</em>
+                {(request.status === 'pending' || request.status === 'claimed') && (
+                  <button className="btn primary" onClick={() => approveRequest(request)}>Approve</button>
+                )}
+              </div>
+            </div>
+          )) : <div className="empty-state">No employee shift requests yet.</div>}
         </div>
       </Card>
 

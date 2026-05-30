@@ -229,7 +229,7 @@ select, .chat-input { width: 100%; margin-top: 6px; background: var(--surface2);
 .employee-stat span, .employee-stat small { color: var(--muted); font-size: 11px; }
 .employee-stat strong { font-family: "DM Mono", monospace; font-size: 22px; color: var(--text); }
 .employee-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 16px; }
-.shift-list, .quick-actions, .employee-message-list, .profile-list { display: grid; gap: 10px; }
+.shift-list, .quick-actions, .employee-message-list, .profile-list, .request-list { display: grid; gap: 10px; }
 .shift-row { display: flex; justify-content: space-between; gap: 14px; align-items: center; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
 .shift-row strong { display: block; color: var(--text); margin-bottom: 4px; }
 .shift-row span, .shift-row em { color: var(--muted); font-size: 12px; font-style: normal; }
@@ -253,6 +253,7 @@ select, .chat-input { width: 100%; margin-top: 6px; background: var(--surface2);
 .request-card strong { color: var(--text); }
 .request-card span, .request-card p { color: var(--muted); margin: 0; }
 .request-card em { color: var(--amber); font-style: normal; }
+.request-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .employee-message { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; display: grid; gap: 8px; }
 .employee-message strong { color: var(--green); text-transform: uppercase; font-size: 10px; letter-spacing: .5px; }
 .employee-message span { color: var(--label); line-height: 1.45; }
@@ -275,6 +276,18 @@ select, .chat-input { width: 100%; margin-top: 6px; background: var(--surface2);
 .upload-tile.uploading em { color: var(--amber); }
 .upload-tile.error { border-color: rgba(255,107,107,.45); }
 .upload-tile.error em { color: var(--red); }
+.preview-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.preview-panel { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 14px; display: grid; gap: 12px; min-width: 0; }
+.preview-panel.valid { border-color: rgba(184,255,107,.28); }
+.preview-panel.invalid { border-color: rgba(255,107,107,.35); }
+.preview-head { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+.preview-head strong { display: block; color: var(--text); margin-bottom: 3px; }
+.preview-head span, .preview-columns span { color: var(--muted); font-size: 11px; }
+.preview-columns { display: grid; grid-template-columns: 76px 1fr; gap: 6px 10px; color: var(--label); }
+.preview-columns p { margin: 0; color: var(--label); line-height: 1.4; }
+.preview-table { width: 100%; border-collapse: collapse; min-width: 520px; }
+.preview-table th { color: var(--muted); font-size: 10px; text-align: left; text-transform: uppercase; letter-spacing: .5px; padding: 0 8px 8px; }
+.preview-table td { border-top: 1px solid rgba(42,42,58,.7); color: var(--label); font-size: 11px; padding: 8px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .roles-table { display: grid; }
 .roles-row { display: grid; grid-template-columns: 1.1fr .9fr 1.6fr .4fr; gap: 16px; align-items: center; min-height: 46px; border-top: 1px solid var(--border); color: var(--label); }
 .roles-row:first-child { border-top: 0; }
@@ -290,7 +303,7 @@ select, .chat-input { width: 100%; margin-top: 6px; background: var(--surface2);
   .stats-grid, .grid.two, .guardrail-grid, .staff-grid { grid-template-columns: 1fr; }
   .overview-hero, .today-panel, .health-panel, .employee-hero { grid-template-columns: 1fr; display: grid; }
   .overview-grid, .overview-schedule, .forecast-strip { grid-template-columns: 1fr; }
-  .employee-stats, .employee-grid, .availability-grid, .upload-grid { grid-template-columns: 1fr; }
+  .employee-stats, .employee-grid, .availability-grid, .upload-grid, .preview-grid { grid-template-columns: 1fr; }
   .roles-row { grid-template-columns: 1fr; gap: 6px; padding: 12px 0; }
   .overview-actions { justify-content: flex-start; }
   .employee-picker-list { grid-template-columns: 1fr; }

@@ -33,7 +33,7 @@ from pydantic import BaseModel
 
 from agents import state
 from agents.assistant_agent import chat
-from agents.data_agent import DATA_DIR, availability_summary, load_employees, load_roles
+from agents.data_agent import DATA_DIR, availability_summary, load_employees, load_roles, validate_csv_upload
 from agents.forecast_agent import forecast_next_week
 from agents.insight_agent import (
     get_busiest_periods,
@@ -45,6 +45,7 @@ from agents.insight_agent import (
 )
 from agents.messaging_agent import confirm_backup, find_backups, request_availability
 from agents.scheduler_agent import edit_shift, generate_schedule, get_current_schedule, labor_summary
+from agents.shift_request_agent import approve_shift_request, claim_open_shift, create_shift_request, list_shift_requests
 
 
 app = FastAPI(title="ShiftIQ API")
@@ -92,6 +93,20 @@ class EditShiftRequest(BaseModel):
     assignments: List[ShiftAssignment]
 
 
+class ShiftRequestCreate(BaseModel):
+    employee_id: int
+    request_type: str
+    day: str
+    shift_name: str
+    note: str = ""
+    replacement_id: int | None = None
+
+
+class ShiftClaimRequest(BaseModel):
+    replacement_id: int
+    note: str = ""
+
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
@@ -117,15 +132,22 @@ def roles():
 
 @app.post("/upload/{file_type}")
 async def upload_file(file_type: str, file: UploadFile = File(...)):
-    allowed = {"sales", "employees", "availability", "roles"}
-    if file_type not in allowed:
-        return {"status": "error", "message": f"Unsupported file type: {file_type}"}
+    content = await file.read()
+    validation = validate_csv_upload(file_type, content)
+    if not validation["valid"]:
+        return {"status": "error", "file": file_type, "validation": validation}
     DATA_DIR.mkdir(exist_ok=True)
     path = DATA_DIR / f"{file_type}.csv"
     with path.open("wb") as handle:
-        shutil.copyfileobj(file.file, handle)
+        handle.write(content)
     state.current_schedule = None
-    return {"status": "uploaded", "file": file_type}
+    return {"status": "uploaded", "file": file_type, "validation": validation}
+
+
+@app.post("/upload/{file_type}/preview")
+async def preview_upload(file_type: str, file: UploadFile = File(...)):
+    content = await file.read()
+    return validate_csv_upload(file_type, content)
 
 
 @app.get("/insights/summary")
@@ -182,6 +204,28 @@ def edit_schedule_shift(req: EditShiftRequest):
 @app.get("/labor/summary")
 def labor():
     return labor_summary()
+
+
+@app.get("/employee/shift-requests")
+def shift_requests(employee_id: int | None = None):
+    return list_shift_requests(employee_id)
+
+
+@app.post("/employee/shift-requests")
+def create_employee_shift_request(req: ShiftRequestCreate):
+    if not get_current_schedule()["schedule"]:
+        generate_schedule()
+    return create_shift_request(req.employee_id, req.request_type, req.day, req.shift_name, req.note, req.replacement_id)
+
+
+@app.post("/employee/shift-requests/{request_id}/claim")
+def claim_employee_shift_request(request_id: int, req: ShiftClaimRequest):
+    return claim_open_shift(request_id, req.replacement_id, req.note)
+
+
+@app.post("/employee/shift-requests/{request_id}/approve")
+def approve_employee_shift_request(request_id: int):
+    return approve_shift_request(request_id)
 
 
 @app.post("/messaging/request-availability")
