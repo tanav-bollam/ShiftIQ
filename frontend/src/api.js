@@ -52,6 +52,7 @@ export const api = {
   forecast: () => request('/forecast/next-week'),
   generateSchedule: (week = '2024-03-04') => request(`/schedule/generate?week_start=${week}`, { method: 'POST' }),
   currentSchedule: () => request('/schedule/current'),
+  editShift: (body) => request('/schedule/edit-shift', { method: 'POST', body: JSON.stringify(body) }),
   labor: () => request('/labor/summary'),
   requestAvailability: (week = '2024-03-04') => request(`/messaging/request-availability?week_start=${week}`, { method: 'POST' }),
   messages: () => request('/messaging/log'),

@@ -150,6 +150,52 @@ def get_current_schedule():
     return state.current_schedule or {"week_start": None, "schedule": [], "explanations": [], "hours_by_employee": {}}
 
 
+def edit_shift(day: str, shift_name: str, assignments: list[dict]):
+    current = get_current_schedule()
+    if not current["schedule"]:
+        current = generate_schedule()
+
+    employees = {int(emp["id"]): emp for emp in _employee_records()}
+    target = next((shift for shift in current["schedule"] if shift["day"] == day and shift["shift"] == shift_name), None)
+    if target is None:
+        return current
+
+    edited_assignments = []
+    for assignment in assignments:
+        employee_id = int(assignment["employee_id"])
+        role = assignment["role"]
+        employee = employees.get(employee_id)
+        if employee is None:
+            continue
+        edited_assignments.append(
+            {
+                "employee_id": employee_id,
+                "name": employee["name"],
+                "role": role,
+                "hourly_wage": float(employee["hourly_wage"]),
+                "score": 100,
+                "manual_override": True,
+            }
+        )
+
+    target["assigned"] = edited_assignments
+    target["unfilled_roles"] = []
+    target["manual_override"] = True
+
+    current["hours_by_employee"] = _hours_by_employee(current["schedule"])
+    current.setdefault("explanations", []).append(
+        {
+            "day": day,
+            "shift": shift_name,
+            "employee": None,
+            "role": "Manual edit",
+            "reason": f"Manager manually edited {day} {shift_name}; labor and employee hours were recalculated.",
+        }
+    )
+    state.current_schedule = current
+    return current
+
+
 def labor_summary():
     current = get_current_schedule()
     forecast = {item["day"]: item["predicted_revenue"] for item in forecast_next_week()}

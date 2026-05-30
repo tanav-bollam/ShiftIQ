@@ -44,7 +44,7 @@ from agents.insight_agent import (
     get_top_items,
 )
 from agents.messaging_agent import confirm_backup, find_backups, request_availability
-from agents.scheduler_agent import generate_schedule, get_current_schedule, labor_summary
+from agents.scheduler_agent import edit_shift, generate_schedule, get_current_schedule, labor_summary
 
 
 app = FastAPI(title="ShiftIQ API")
@@ -79,6 +79,17 @@ class ChatMessage(BaseModel):
 class ChatRequest(BaseModel):
     message: str
     history: List[ChatMessage] = []
+
+
+class ShiftAssignment(BaseModel):
+    employee_id: int
+    role: str
+
+
+class EditShiftRequest(BaseModel):
+    day: str
+    shift_name: str
+    assignments: List[ShiftAssignment]
 
 
 @app.get("/health")
@@ -160,6 +171,12 @@ def create_schedule(week_start: str = "2024-03-04"):
 @app.get("/schedule/current")
 def current_schedule():
     return get_current_schedule()
+
+
+@app.post("/schedule/edit-shift")
+def edit_schedule_shift(req: EditShiftRequest):
+    assignments = [{"employee_id": item.employee_id, "role": item.role} for item in req.assignments]
+    return edit_shift(req.day, req.shift_name, assignments)
 
 
 @app.get("/labor/summary")
