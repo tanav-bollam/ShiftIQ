@@ -22,7 +22,7 @@
 # =============================================================================
 
 from agents import state
-from agents.data_agent import DAY_ORDER, load_employees
+from agents.data_agent import DAY_ORDER, load_availability, load_employees
 from agents.scheduler_agent import get_current_schedule, labor_summary
 
 
@@ -42,6 +42,25 @@ def _employee_name(employee_id: int) -> str:
     employees = load_employees()
     row = employees[employees["id"] == employee_id]
     return row.iloc[0]["name"] if not row.empty else f"Employee {employee_id}"
+
+
+def _employee_record(employee_id: int):
+    employees = load_employees()
+    row = employees[employees["id"] == employee_id]
+    return row.iloc[0].to_dict() if not row.empty else None
+
+
+def _employee_can_cover(employee_id: int, request: dict) -> bool:
+    employee = _employee_record(employee_id)
+    if not employee:
+        return False
+    if request.get("role") not in employee.get("skills", []):
+        return False
+    availability = load_availability()
+    row = availability[availability["employee_id"] == employee_id]
+    if row.empty:
+        return False
+    return int(row.iloc[0][request["day"].lower()]) == 1
 
 
 def admin_notifications():
@@ -88,13 +107,19 @@ def admin_notifications():
 
     for request in state.shift_requests:
         if request["status"] in {"pending", "claimed"}:
+            dropped = request["request_type"] == "Offer shift"
             notifications.append(
                 _notification(
                     f"admin-shift-request-{request['id']}",
                     "Shift Requests",
-                    f"{request['employee_name']} needs approval",
-                    f"{request['request_type']} for {request['day']} {request['shift_name']} is {request['status']}.",
-                    "high" if request["status"] == "claimed" else "normal",
+                    f"{request['employee_name']} dropped a shift" if dropped else f"{request['employee_name']} needs approval",
+                    (
+                        f"Priority coverage needed for {request['day']} {request['shift_name']} "
+                        f"({request['role']})."
+                        if dropped
+                        else f"{request['request_type']} for {request['day']} {request['shift_name']} is {request['status']}."
+                    ),
+                    "high" if dropped or request["status"] == "claimed" else "normal",
                     "/schedule",
                 )
             )
@@ -103,9 +128,9 @@ def admin_notifications():
                 _notification(
                     f"admin-open-shift-{request['id']}",
                     "Coverage",
-                    "Open shift waiting for pickup",
+                    "Priority open shift waiting for pickup" if request["request_type"] == "Offer shift" else "Open shift waiting for pickup",
                     f"{request['day']} {request['shift_name']} is open for {request['role']}.",
-                    "normal",
+                    "high" if request["request_type"] == "Offer shift" else "normal",
                     "/schedule",
                 )
             )
@@ -198,14 +223,15 @@ def employee_notifications(employee_id: int):
                     "/employee/requests",
                 )
             )
-        elif request["status"] == "open":
+        elif request["status"] == "open" and _employee_can_cover(employee_id, request):
+            dropped = request["request_type"] == "Offer shift"
             notifications.append(
                 _notification(
                     f"employee-open-shift-{request['id']}",
                     "Coverage",
-                    "Open shift available",
-                    f"{request['day']} {request['shift_name']} is available to claim.",
-                    "normal",
+                    "Priority shift available" if dropped else "Open shift available",
+                    f"{request['day']} {request['shift_name']} needs {request['role']} coverage.",
+                    "high" if dropped else "normal",
                     "/employee/requests",
                 )
             )
