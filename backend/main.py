@@ -44,6 +44,7 @@ from agents.insight_agent import (
     get_top_items,
 )
 from agents.messaging_agent import confirm_backup, find_backups, request_availability
+from agents.notification_agent import get_notifications
 from agents.scheduler_agent import edit_shift, generate_schedule, get_current_schedule, labor_summary
 from agents.shift_request_agent import approve_shift_request, claim_open_shift, create_shift_request, list_shift_requests
 
@@ -236,6 +237,11 @@ def request_avail(week_start: str = "2024-03-04"):
 @app.get("/messaging/log")
 def messaging_log():
     return state.message_log
+
+
+@app.get("/notifications")
+def notifications(mode: str = "admin", employee_id: int | None = None):
+    return get_notifications(mode, employee_id)
 
 
 @app.post("/callouts/find-backups")

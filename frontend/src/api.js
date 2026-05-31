@@ -56,6 +56,7 @@ export const api = {
   labor: () => request('/labor/summary'),
   requestAvailability: (week = '2024-03-04') => request(`/messaging/request-availability?week_start=${week}`, { method: 'POST' }),
   messages: () => request('/messaging/log'),
+  notifications: (mode = 'admin', employeeId) => request(`/notifications?mode=${mode}${employeeId ? `&employee_id=${employeeId}` : ''}`),
   findBackups: (body) => request('/callouts/find-backups', { method: 'POST', body: JSON.stringify(body) }),
   confirmBackup: (body) => request('/callouts/confirm-backup', { method: 'POST', body: JSON.stringify(body) }),
   shiftRequests: (employeeId) => request(`/employee/shift-requests${employeeId ? `?employee_id=${employeeId}` : ''}`),

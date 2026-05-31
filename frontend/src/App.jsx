@@ -141,8 +141,8 @@ function EmployeeLoginModal({ employees, selectedEmployeeId, onSelect, onClose }
               <div className="employee-picker-avatar">{employee.name.split(' ').map(part => part[0]).join('').slice(0, 2)}</div>
               <div>
                 <strong>{employee.name}</strong>
-                <span>{employee.role} · {employee.skills.slice(0, 3).join(', ')}</span>
-                <small>{employee.scheduled_hours}/{employee.max_hours}h scheduled · {employee.availability}</small>
+                <span>{employee.role} - {employee.skills.slice(0, 3).join(', ')}</span>
+                <small>{employee.scheduled_hours}/{employee.max_hours}h scheduled - {employee.availability}</small>
               </div>
             </button>
           ))}
@@ -152,9 +152,11 @@ function EmployeeLoginModal({ employees, selectedEmployeeId, onSelect, onClose }
   );
 }
 
-function Topbar({ mode }) {
+function Topbar({ mode, employeeId, refreshKey }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const [notifications, setNotifications] = useState(null);
+  const [showNotifications, setShowNotifications] = useState(false);
   const adminTitles = {
     '/': 'Overview',
     '/insights': 'Sales Insights',
@@ -174,11 +176,62 @@ function Topbar({ mode }) {
     '/employee/profile': 'Profile',
   };
   const titles = mode === 'admin' ? adminTitles : employeeTitles;
+  useEffect(() => {
+    api.notifications(mode, mode === 'employee' ? employeeId : undefined)
+      .then(setNotifications)
+      .catch(() => setNotifications({ counts: { all: 0 }, notifications: [] }));
+  }, [mode, employeeId, refreshKey, location.pathname]);
+
+  const notificationItems = notifications?.notifications || [];
+  const notificationCount = notifications?.counts?.all || 0;
+
+  const openNotification = (item) => {
+    setShowNotifications(false);
+    if (item.action_url) navigate(item.action_url);
+  };
+
   return (
     <header className="topbar">
       <div className="topbar-title">{titles[location.pathname] || 'ShiftIQ'}</div>
       <div className="topbar-actions">
         <span className="badge green">{mode === 'admin' ? 'Admin View' : 'Employee View'}</span>
+        <button
+          className={`notification-button ${showNotifications ? 'active' : ''}`}
+          type="button"
+          aria-label="Notifications"
+          onClick={() => setShowNotifications(open => !open)}
+        >
+          <Bell size={16} />
+          {notificationCount > 0 && <span>{notificationCount}</span>}
+        </button>
+        {showNotifications && (
+          <div className="notification-panel">
+            <div className="notification-head">
+              <strong>Notifications</strong>
+              <span>{notificationCount} active</span>
+            </div>
+            <div className="notification-summary">
+              {['Schedule', 'Shift Requests', 'Coverage', 'Messages'].map(category => (
+                <div key={category}>
+                  <strong>{notifications?.counts?.[category] || 0}</strong>
+                  <span>{category}</span>
+                </div>
+              ))}
+            </div>
+            <div className="notification-list">
+              {notificationItems.map(item => (
+                <button className={`notification-item ${item.priority}`} type="button" key={item.id} onClick={() => openNotification(item)}>
+                  <div>
+                    <strong>{item.title}</strong>
+                    <p>{item.body}</p>
+                  </div>
+                  <span>{item.category}</span>
+                </button>
+              ))}
+              {!notificationItems.length && <div className="empty-state">No notifications right now.</div>}
+            </div>
+          </div>
+        )}
         {mode === 'admin' ? (
           <>
             <button className="btn" onClick={() => navigate('/chat')}><Bot size={15} /> Ask Agent</button>
@@ -252,7 +305,7 @@ export default function App() {
         employee={selectedEmployee}
       />
       <main className="main">
-        <Topbar mode={mode} />
+        <Topbar mode={mode} employeeId={selectedEmployeeId} refreshKey={refreshKey} />
         <section className="content">
           <Routes>
             <Route path="/" element={<Overview app={context} />} />
