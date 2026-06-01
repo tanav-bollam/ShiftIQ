@@ -236,19 +236,19 @@ def employee_notifications(employee_id: int):
                 )
             )
 
-    for index, message in enumerate(reversed(state.message_log[-8:])):
+    direct_messages = [message for message in state.message_log if message.get("to") == employee_name]
+    for index, message in enumerate(reversed(direct_messages[-8:])):
         body = message.get("body", "")
-        if message.get("to") == employee_name or "availability" in body.lower() or "cover" in body.lower():
-            notifications.append(
-                _notification(
-                    f"employee-message-{index}",
-                    "Messages",
-                    message.get("status", "Message").title(),
-                    body,
-                    "high" if "cover" in body.lower() else "normal",
-                    "/employee/messages",
-                )
+        notifications.append(
+            _notification(
+                f"employee-message-{index}",
+                "Messages",
+                message.get("status", "Message").title(),
+                body,
+                "high" if "cover" in body.lower() else "normal",
+                "/employee/messages",
             )
+        )
 
     notifications.append(
         _notification(

@@ -47,7 +47,7 @@ export default function EmployeePortal({ app, employeeId = 1 }) {
 
   const nextShift = shifts[0];
   const weeklyHours = shifts.reduce((sum, shift) => sum + (shift.time_end - shift.time_start), 0);
-  const employeeMessages = data.messages.filter(message => message.to === employee.name || /availability|covering|called out/i.test(message.body || ''));
+  const employeeMessages = data.messages.filter(message => message.to === employee.name);
   const pendingCoverage = employeeMessages.filter(message => /called out|cover/i.test(message.body || '')).length;
   const employeeRequests = (data.requests || []).filter(request => request.employee_id === employeeId || request.replacement_id === employeeId);
   const openRequests = (data.requests || []).filter(request => request.status === 'open' && request.employee_id !== employeeId);
