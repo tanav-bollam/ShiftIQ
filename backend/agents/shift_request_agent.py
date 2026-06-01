@@ -22,9 +22,15 @@
 # approval permissions/audit logs.
 # =============================================================================
 
+from datetime import datetime, timedelta
+
 from agents import state
 from agents.data_agent import load_employees
 from agents.scheduler_agent import generate_schedule, get_current_schedule, replace_assignment
+
+
+AUTO_OPEN_NOTICE_HOURS = 48
+DAY_ORDER = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 
 def _employees_by_id():
@@ -42,6 +48,44 @@ def _employee_assignment(shift, employee_id: int):
     if not shift:
         return None
     return next((assignment for assignment in shift["assigned"] if int(assignment["employee_id"]) == employee_id), None)
+
+
+def _shift_start_datetime(day: str, shift) -> datetime:
+    now = datetime.now()
+    target_day_index = DAY_ORDER.index(day)
+    week_start = get_current_schedule().get("week_start")
+
+    try:
+        base = datetime.strptime(week_start, "%Y-%m-%d")
+        candidate = base + timedelta(days=target_day_index)
+        candidate = candidate.replace(hour=int(shift["time_start"]), minute=0, second=0, microsecond=0)
+    except (TypeError, ValueError):
+        days_ahead = (target_day_index - now.weekday()) % 7
+        candidate = (now + timedelta(days=days_ahead)).replace(
+            hour=int(shift["time_start"]),
+            minute=0,
+            second=0,
+            microsecond=0,
+        )
+
+    if candidate <= now:
+        days_ahead = (target_day_index - now.weekday()) % 7
+        if days_ahead == 0:
+            days_ahead = 7
+        candidate = (now + timedelta(days=days_ahead)).replace(
+            hour=int(shift["time_start"]),
+            minute=0,
+            second=0,
+            microsecond=0,
+        )
+    return candidate
+
+
+def _can_auto_open(request_type: str, day: str, shift) -> tuple[bool, float]:
+    if request_type != "Offer shift" or not shift:
+        return False, 0
+    hours_until_shift = (_shift_start_datetime(day, shift) - datetime.now()).total_seconds() / 3600
+    return hours_until_shift >= AUTO_OPEN_NOTICE_HOURS, round(hours_until_shift, 1)
 
 
 def list_shift_requests(employee_id: int | None = None):
@@ -69,6 +113,7 @@ def create_shift_request(
     shift = _find_shift(day, shift_name)
     assignment = _employee_assignment(shift, employee_id)
     role = assignment["role"] if assignment else (shift["required_roles"][0] if shift else "Cashier")
+    auto_open, hours_until_shift = _can_auto_open(request_type, day, shift)
 
     request_id = state.next_shift_request_id
     state.next_shift_request_id += 1
@@ -84,8 +129,14 @@ def create_shift_request(
         "replacement_id": replacement_id,
         "replacement_name": replacement["name"] if replacement else None,
         "note": note or "No note added",
-        "status": "pending",
-        "manager_note": "",
+        "status": "open" if auto_open else "pending",
+        "manager_note": (
+            f"Auto-opened because the shift is {hours_until_shift} hours away."
+            if auto_open
+            else "Manager approval required because this request is within 48 hours or is not a dropped shift."
+        ),
+        "auto_opened": auto_open,
+        "hours_until_shift": hours_until_shift,
     }
     state.shift_requests.append(request)
     return request
