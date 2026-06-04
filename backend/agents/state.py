@@ -24,3 +24,9 @@ active_callout = None
 message_log = []
 shift_requests = []
 next_shift_request_id = 1
+staffing_thresholds = [
+    {"min_revenue": 0, "max_revenue": 300, "employees_needed": 2, "label": "Slow"},
+    {"min_revenue": 301, "max_revenue": 600, "employees_needed": 3, "label": "Steady"},
+    {"min_revenue": 601, "max_revenue": 900, "employees_needed": 4, "label": "Busy"},
+    {"min_revenue": 901, "max_revenue": None, "employees_needed": 5, "label": "Peak"},
+]

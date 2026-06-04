@@ -24,6 +24,7 @@
 
 from agents.data_agent import DAY_ORDER, availability_summary, load_availability, load_employees, load_roles
 from agents.forecast_agent import forecast_next_week
+from agents.staffing_agent import staffing_recommendation
 from agents import state
 
 
@@ -59,15 +60,35 @@ def generate_schedule(week_start: str = "2024-03-04"):
     for day in scheduling_days:
         day_col = day.lower()
         available_ids = availability[availability[day_col] == 1]["employee_id"].astype(int).tolist()
-        demand = forecast.get(day, {}).get("staff_needed", 2)
+        daily_demand = forecast.get(day, {}).get("staff_needed", 2)
 
         for shift in roles.to_dict(orient="records"):
             duration = int(shift["time_end"] - shift["time_start"])
             assigned = []
             assigned_ids = set()
             unfilled = []
+            staffing = staffing_recommendation(day, shift)
+            base_roles = list(shift["required_roles"])
+            threshold_staff = int(staffing["employees_needed"])
+            target_staff = max(len(base_roles), threshold_staff)
+            extra_slots = max(0, target_staff - len(base_roles))
+            dynamic_roles = base_roles + ["Cashier"] * extra_slots
 
-            for required_role in shift["required_roles"]:
+            explanations.append(
+                {
+                    "day": day,
+                    "shift": shift["shift_name"],
+                    "employee": None,
+                    "role": "Staffing threshold",
+                    "reason": (
+                        f"{day} {shift['shift_name']} averages ${staffing['expected_hourly_revenue']:.0f}/hour, "
+                        f"which falls in the {staffing['threshold']['label']} threshold. "
+                        f"ShiftIQ targeted {target_staff} employees for this shift."
+                    ),
+                }
+            )
+
+            for required_role in dynamic_roles:
                 candidates = []
                 for emp in employees:
                     emp_id = int(emp["id"])
@@ -82,7 +103,8 @@ def generate_schedule(week_start: str = "2024-03-04"):
                     score = 50
                     score += (4 - int(emp["priority"])) * 12
                     score += min(remaining, 20)
-                    score += min(demand, 6) * 2
+                    score += min(daily_demand, 6) * 2
+                    score += min(threshold_staff, 6) * 2
                     score -= int(emp.get("callouts_this_month", 0)) * 3
                     candidates.append((score, remaining, emp))
 
@@ -133,7 +155,12 @@ def generate_schedule(week_start: str = "2024-03-04"):
                     "time_start": int(shift["time_start"]),
                     "time_end": int(shift["time_end"]),
                     "time": f"{int(shift['time_start'])}:00-{int(shift['time_end'])}:00",
-                    "required_roles": shift["required_roles"],
+                    "required_roles": dynamic_roles,
+                    "base_required_roles": base_roles,
+                    "target_staff": target_staff,
+                    "staffing_threshold": staffing["threshold"],
+                    "expected_hourly_revenue": staffing["expected_hourly_revenue"],
+                    "extra_dynamic_slots": extra_slots,
                     "assigned": assigned,
                     "unfilled_roles": unfilled,
                 }

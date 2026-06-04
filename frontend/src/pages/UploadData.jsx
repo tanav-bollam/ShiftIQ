@@ -1,4 +1,4 @@
-import { ClipboardList, FileBarChart, FileSpreadsheet, ShieldCheck, UsersRound } from 'lucide-react';
+import { ClipboardList, FileBarChart, Plus, Save, ShieldCheck, Trash2, UsersRound } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { api } from '../api.js';
 import { Card, ErrorState, Loading } from '../components/UI.jsx';
@@ -36,16 +36,19 @@ const uploadCards = [
 
 export default function UploadData({ app }) {
   const [roles, setRoles] = useState(null);
+  const [thresholds, setThresholds] = useState(null);
   const [status, setStatus] = useState({});
   const [pendingFiles, setPendingFiles] = useState({});
   const [previews, setPreviews] = useState({});
+  const [thresholdStatus, setThresholdStatus] = useState('');
   const [error, setError] = useState(null);
   const inputs = useRef({});
 
   const loadRoles = () => api.roles().then(setRoles).catch(setError);
+  const loadThresholds = () => api.staffingThresholds().then(setThresholds).catch(setError);
 
   useEffect(() => {
-    loadRoles();
+    Promise.all([loadRoles(), loadThresholds()]);
   }, [app.refreshKey]);
 
   const handleFile = async (type, file) => {
@@ -80,14 +83,41 @@ export default function UploadData({ app }) {
       }
       setStatus(prev => ({ ...prev, [type]: { state: 'ok', label: `${result.file}.csv uploaded` } }));
       setPendingFiles(prev => ({ ...prev, [type]: null }));
-      await Promise.all([loadRoles(), app.refresh()]);
+      await Promise.all([loadRoles(), loadThresholds(), app.refresh()]);
     } catch (uploadError) {
       setStatus(prev => ({ ...prev, [type]: { state: 'error', label: uploadError.message } }));
     }
   };
 
+  const updateThreshold = (index, patch) => {
+    setThresholds(current => current.map((item, itemIndex) => itemIndex === index ? { ...item, ...patch } : item));
+  };
+
+  const addThreshold = () => {
+    setThresholds(current => [
+      ...current,
+      { min_revenue: 0, max_revenue: null, employees_needed: 2, label: 'New Band' },
+    ]);
+  };
+
+  const removeThreshold = (index) => {
+    setThresholds(current => current.filter((_, itemIndex) => itemIndex !== index));
+  };
+
+  const saveThresholds = async () => {
+    setThresholdStatus('Saving staffing rules...');
+    const result = await api.updateStaffingThresholds(thresholds);
+    if (result.status === 'error') {
+      setThresholdStatus(result.errors.join(' '));
+      return;
+    }
+    setThresholds(result.thresholds);
+    await app.refresh();
+    setThresholdStatus('Staffing thresholds saved. Regenerate the schedule to apply them.');
+  };
+
   if (error) return <ErrorState error={error} />;
-  if (!roles) return <Loading label="Loading upload tools..." />;
+  if (!roles || !thresholds) return <Loading label="Loading upload tools..." />;
 
   return (
     <div className="page-stack upload-page">
@@ -158,6 +188,36 @@ export default function UploadData({ app }) {
         <div className="insight-block">
           <strong>Upload note:</strong> Uploading any CSV replaces the matching file in the backend data folder and clears the generated schedule so the next schedule reflects the new data.
         </div>
+      </Card>
+
+      <Card title="Dynamic Staffing Thresholds">
+        <div className="threshold-copy">
+          <strong>Sales volume controls staffing slots.</strong>
+          <span>ShiftIQ compares each shift’s average hourly revenue to these rules. Required roles stay protected, and busy shifts receive extra flexible cashier coverage when the threshold requires more people.</span>
+        </div>
+        <div className="threshold-table">
+          <div className="threshold-row threshold-head">
+            <span>Label</span>
+            <span>Min $/hour</span>
+            <span>Max $/hour</span>
+            <span>Employees</span>
+            <span />
+          </div>
+          {thresholds.map((rule, index) => (
+            <div className="threshold-row" key={`${rule.label}-${index}`}>
+              <input value={rule.label} onChange={event => updateThreshold(index, { label: event.target.value })} aria-label={`Threshold ${index + 1} label`} />
+              <input type="number" min="0" value={rule.min_revenue} onChange={event => updateThreshold(index, { min_revenue: Number(event.target.value) })} aria-label={`Threshold ${index + 1} minimum revenue`} />
+              <input value={rule.max_revenue ?? ''} placeholder="No cap" type="number" min="0" onChange={event => updateThreshold(index, { max_revenue: event.target.value === '' ? null : Number(event.target.value) })} aria-label={`Threshold ${index + 1} maximum revenue`} />
+              <input type="number" min="1" value={rule.employees_needed} onChange={event => updateThreshold(index, { employees_needed: Number(event.target.value) })} aria-label={`Threshold ${index + 1} employees needed`} />
+              <button className="icon-button danger-icon" type="button" onClick={() => removeThreshold(index)} aria-label={`Remove threshold ${index + 1}`}><Trash2 size={17} /></button>
+            </div>
+          ))}
+        </div>
+        <div className="editor-actions">
+          <button className="btn" type="button" onClick={addThreshold}><Plus size={16} /> Add Rule</button>
+          <button className="btn primary" type="button" onClick={saveThresholds}><Save size={16} /> Save Staffing Rules</button>
+        </div>
+        {thresholdStatus && <div className={thresholdStatus.includes('saved') ? 'success-box' : 'insight-block'}>{thresholdStatus}</div>}
       </Card>
     </div>
   );

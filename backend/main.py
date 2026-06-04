@@ -46,6 +46,7 @@ from agents.insight_agent import (
 from agents.messaging_agent import confirm_backup, find_backups, request_availability
 from agents.notification_agent import get_notifications
 from agents.scheduler_agent import edit_shift, generate_schedule, get_current_schedule, labor_summary
+from agents.staffing_agent import get_staffing_thresholds, update_staffing_thresholds
 from agents.shift_request_agent import approve_shift_request, claim_open_shift, create_shift_request, list_shift_requests
 
 
@@ -94,6 +95,17 @@ class EditShiftRequest(BaseModel):
     assignments: List[ShiftAssignment]
 
 
+class StaffingThreshold(BaseModel):
+    min_revenue: float
+    max_revenue: float | None = None
+    employees_needed: int
+    label: str = ""
+
+
+class StaffingThresholdUpdate(BaseModel):
+    thresholds: List[StaffingThreshold]
+
+
 class ShiftRequestCreate(BaseModel):
     employee_id: int
     request_type: str
@@ -129,6 +141,17 @@ def employees():
 @app.get("/roles")
 def roles():
     return load_roles().to_dict(orient="records")
+
+
+@app.get("/staffing-thresholds")
+def staffing_thresholds():
+    return get_staffing_thresholds()
+
+
+@app.put("/staffing-thresholds")
+def save_staffing_thresholds(req: StaffingThresholdUpdate):
+    thresholds = [item.model_dump() for item in req.thresholds]
+    return update_staffing_thresholds(thresholds)
 
 
 @app.post("/upload/{file_type}")

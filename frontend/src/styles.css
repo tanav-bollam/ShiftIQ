@@ -156,6 +156,7 @@ button, input, select { font: inherit; }
 .sched-cell.filled { border-color: rgba(124,107,255,.32); }
 .sched-cell.manual { border-color: rgba(255,179,71,.48); background: rgba(255,179,71,.06); }
 .manual-badge { align-self: flex-start; border-radius: 999px; padding: 2px 7px; background: rgba(255,179,71,.14); color: var(--amber); font-size: 9px; text-transform: uppercase; letter-spacing: .45px; }
+.staffing-badge { border-radius: 6px; padding: 5px 6px; background: rgba(77,255,210,.08); border: 1px solid rgba(77,255,210,.16); color: var(--teal); font-size: 10px; font-family: "DM Mono", monospace; line-height: 1.25; }
 .sched-person { background: rgba(124,107,255,.12); border: 1px solid rgba(124,107,255,.2); border-radius: 6px; padding: 6px; }
 .sched-person strong { display: block; font-size: 12px; }
 .sched-person span, .sched-empty { color: var(--muted); font-size: 10px; }
@@ -172,7 +173,7 @@ button, input, select { font: inherit; }
 .danger-icon:hover { color: var(--red); border-color: rgba(255,107,107,.45); }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr auto; align-items: end; gap: 12px; }
 label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
-select, .chat-input { width: 100%; margin-top: 6px; background: var(--surface2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 10px; outline: none; }
+select, input, .chat-input { width: 100%; margin-top: 6px; background: var(--surface2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 10px; outline: none; }
 .backup-list { display: grid; gap: 10px; margin-top: 12px; }
 .backup-row { display: grid; grid-template-columns: 58px 1fr auto; gap: 12px; align-items: center; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
 .backup-row.top { border-color: rgba(184,255,107,.32); }
@@ -313,6 +314,13 @@ select, .chat-input { width: 100%; margin-top: 6px; background: var(--surface2);
 .roles-head { min-height: 36px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .7px; }
 .roles-row strong { color: var(--text); }
 .role-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.threshold-copy { display: grid; gap: 5px; color: var(--label); line-height: 1.45; margin-bottom: 14px; }
+.threshold-copy strong { color: var(--text); }
+.threshold-copy span { color: var(--muted); }
+.threshold-table { display: grid; gap: 8px; }
+.threshold-row { display: grid; grid-template-columns: 1fr .75fr .75fr .62fr auto; gap: 10px; align-items: center; }
+.threshold-head { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .65px; padding: 0 10px 2px; }
+.threshold-row input { margin-top: 0; }
 
 @media (max-width: 980px) {
   .shell { flex-direction: column; }
@@ -323,7 +331,8 @@ select, .chat-input { width: 100%; margin-top: 6px; background: var(--surface2);
   .overview-hero, .today-panel, .health-panel, .employee-hero { grid-template-columns: 1fr; display: grid; }
   .overview-grid, .overview-schedule, .forecast-strip { grid-template-columns: 1fr; }
   .employee-stats, .employee-grid, .availability-grid, .upload-grid, .preview-grid { grid-template-columns: 1fr; }
-  .roles-row { grid-template-columns: 1fr; gap: 6px; padding: 12px 0; }
+  .roles-row, .threshold-row { grid-template-columns: 1fr; gap: 6px; padding: 12px 0; }
+  .threshold-head { display: none; }
   .overview-actions { justify-content: flex-start; }
   .employee-picker-list { grid-template-columns: 1fr; }
   .schedule-grid { grid-template-columns: 90px repeat(7, 120px); overflow-x: auto; }

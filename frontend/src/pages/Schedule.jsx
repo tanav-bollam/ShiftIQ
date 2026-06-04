@@ -144,6 +144,11 @@ function ScheduleGrid({ schedule, onEdit }) {
             return (
               <button className={`sched-cell ${cell?.assigned?.length ? 'filled' : ''} ${cell?.manual_override ? 'manual' : ''}`} key={`${day}-${shift}`} onClick={() => onEdit(cell)} type="button">
                 {cell?.manual_override && <div className="manual-badge">Manual</div>}
+                {cell && (
+                  <div className="staffing-badge">
+                    {cell.assigned.length}/{cell.target_staff || cell.required_roles.length} staff · {currency(cell.expected_hourly_revenue)}/hr
+                  </div>
+                )}
                 {(cell?.assigned || []).map(person => (
                   <div className="sched-person" key={`${person.employee_id}-${person.role}`}>
                     <strong>{person.name.split(' ')[0]}</strong>
@@ -176,7 +181,14 @@ function ShiftEditor({ shift, employees, assignments, setAssignments, onAdd, onS
           <div>
             <div className="section-kicker">Manual Schedule Edit</div>
             <h2 id="shift-editor-title">{shift.day} {shift.shift}</h2>
-            <p>{shift.time} - Required roles: {shift.required_roles.join(', ')}</p>
+            <p>{shift.time} - Required roles: {(shift.base_required_roles || shift.required_roles).join(', ')}</p>
+            {shift.staffing_threshold && (
+              <p>
+                Demand rule: {shift.staffing_threshold.label} at {currency(shift.expected_hourly_revenue)}/hour,
+                target {shift.target_staff} employees
+                {shift.extra_dynamic_slots ? ` with ${shift.extra_dynamic_slots} dynamic slot${shift.extra_dynamic_slots === 1 ? '' : 's'}` : ''}.
+              </p>
+            )}
           </div>
           <button className="icon-button" type="button" onClick={onClose} aria-label="Close schedule editor"><X size={18} /></button>
         </div>
