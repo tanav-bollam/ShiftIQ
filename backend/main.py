@@ -33,7 +33,7 @@ from pydantic import BaseModel
 
 from agents import state
 from agents.assistant_agent import chat
-from agents.data_agent import DATA_DIR, availability_summary, load_employees, load_roles, validate_csv_upload
+from agents.data_agent import DATA_DIR, availability_summary, load_editable_table, load_employees, load_roles, save_editable_table, validate_csv_upload
 from agents.forecast_agent import forecast_next_week
 from agents.insight_agent import (
     get_busiest_periods,
@@ -106,6 +106,10 @@ class StaffingThresholdUpdate(BaseModel):
     thresholds: List[StaffingThreshold]
 
 
+class DataTableUpdate(BaseModel):
+    rows: List[dict]
+
+
 class ShiftRequestCreate(BaseModel):
     employee_id: int
     request_type: str
@@ -152,6 +156,19 @@ def staffing_thresholds():
 def save_staffing_thresholds(req: StaffingThresholdUpdate):
     thresholds = [item.model_dump() for item in req.thresholds]
     return update_staffing_thresholds(thresholds)
+
+
+@app.get("/data-tables/{file_type}")
+def data_table(file_type: str):
+    return load_editable_table(file_type)
+
+
+@app.put("/data-tables/{file_type}")
+def save_data_table(file_type: str, req: DataTableUpdate):
+    result = save_editable_table(file_type, req.rows)
+    if result["status"] == "saved":
+        state.current_schedule = None
+    return result
 
 
 @app.post("/upload/{file_type}")

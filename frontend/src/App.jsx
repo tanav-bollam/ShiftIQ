@@ -1,5 +1,5 @@
 import { Link, NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { BarChart3, Bell, Bot, CalendarDays, Database, Gauge, LayoutDashboard, LineChart, LogIn, MessageSquare, Repeat2, Siren, UserRound, UsersRound, X } from 'lucide-react';
+import { BarChart3, Bell, Bot, CalendarDays, Database, Gauge, LayoutDashboard, LineChart, LogIn, MessageSquare, Repeat2, Siren, TableProperties, UserRound, UsersRound, X } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { api } from './api.js';
 import Overview from './pages/Overview.jsx';
@@ -11,6 +11,7 @@ import Callout from './pages/Callout.jsx';
 import Chat from './pages/Chat.jsx';
 import EmployeePortal from './pages/EmployeePortal.jsx';
 import UploadData from './pages/UploadData.jsx';
+import DataManager from './pages/DataManager.jsx';
 
 const adminNav = [
   { section: 'Command', items: [
@@ -28,6 +29,7 @@ const adminNav = [
   { section: 'AI Tools', items: [
     { to: '/chat', label: 'Manager Chat', icon: Bot },
     { to: '/upload', label: 'Upload Data', icon: Database },
+    { to: '/data', label: 'Data Manager', icon: TableProperties },
   ] },
 ];
 
@@ -166,6 +168,7 @@ function Topbar({ mode, employeeId, refreshKey }) {
     '/callout': 'Call-out Manager',
     '/chat': 'Manager Chat',
     '/upload': 'Upload Data',
+    '/data': 'Data Manager',
   };
   const employeeTitles = {
     '/employee': 'Employee Home',
@@ -317,6 +320,7 @@ export default function App() {
             <Route path="/callout" element={<Callout app={context} />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/upload" element={<UploadData app={context} />} />
+            <Route path="/data" element={<DataManager app={context} />} />
             <Route path="/employee" element={<EmployeePortal app={context} employeeId={selectedEmployeeId} />} />
             <Route path="/employee/schedule" element={<EmployeePortal app={context} employeeId={selectedEmployeeId} />} />
             <Route path="/employee/availability" element={<EmployeePortal app={context} employeeId={selectedEmployeeId} />} />

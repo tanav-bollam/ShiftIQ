@@ -139,3 +139,51 @@ def validate_csv_upload(file_type: str, content: bytes) -> dict:
         "warnings": warnings,
         "preview": preview,
     }
+
+
+def load_editable_table(file_type: str) -> dict:
+    required = REQUIRED_COLUMNS.get(file_type)
+    if not required:
+        return {"status": "error", "errors": [f"Unsupported file type: {file_type}"]}
+
+    df = pd.read_csv(data_path(f"{file_type}.csv"), dtype=str, keep_default_na=False).fillna("")
+    return {
+        "status": "ok",
+        "file_type": file_type,
+        "columns": list(df.columns),
+        "required_columns": required,
+        "row_count": int(len(df)),
+        "rows": df.to_dict(orient="records"),
+    }
+
+
+def save_editable_table(file_type: str, rows: list[dict]) -> dict:
+    required = REQUIRED_COLUMNS.get(file_type)
+    if not required:
+        return {"status": "error", "errors": [f"Unsupported file type: {file_type}"]}
+    if not rows:
+        return {"status": "error", "errors": ["At least one row is required."]}
+
+    df = pd.DataFrame(rows).fillna("")
+    for column in required:
+        if column not in df.columns:
+            df[column] = ""
+    df = df[required]
+
+    if file_type == "sales":
+        parsed_dates = pd.to_datetime(df["date"], errors="coerce")
+        valid_dates = ~parsed_dates.isna()
+        df.loc[valid_dates, "date"] = parsed_dates[valid_dates].dt.strftime("%Y-%m-%d")
+        df.loc[valid_dates, "day_of_week"] = parsed_dates[valid_dates].dt.day_name()
+
+    path = data_path(f"{file_type}.csv")
+    had_bom = path.exists() and path.read_bytes().startswith(b"\xef\xbb\xbf")
+    content = df.to_csv(index=False).encode("utf-8-sig" if had_bom else "utf-8")
+    validation = validate_csv_upload(file_type, content)
+    if not validation["valid"]:
+        return {"status": "error", "validation": validation, "errors": validation["errors"]}
+
+    DATA_DIR.mkdir(exist_ok=True)
+    with path.open("wb") as handle:
+        handle.write(content)
+    return {"status": "saved", "file_type": file_type, "validation": validation}
