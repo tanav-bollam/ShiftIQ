@@ -269,7 +269,8 @@ export default function App() {
 
   useEffect(() => { refresh().catch(() => {}); }, [refresh]);
   useEffect(() => {
-    if (location.pathname.startsWith('/employee')) setMode('employee');
+    const isEmployeePortalRoute = location.pathname === '/employee' || location.pathname.startsWith('/employee/');
+    if (isEmployeePortalRoute) setMode('employee');
   }, [location.pathname]);
 
   const context = useMemo(() => ({ labor, schedule, refresh, refreshKey }), [labor, schedule, refresh, refreshKey]);
