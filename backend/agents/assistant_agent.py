@@ -60,6 +60,10 @@ def _model_name():
     return os.getenv("GOOGLE_ADK_MODEL", DEFAULT_MODEL_NAME)
 
 
+def _uses_vertex_ai():
+    return os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "").strip().lower() == "true"
+
+
 def _json_safe(value):
     return json.loads(json.dumps(value, default=str))
 
@@ -237,7 +241,7 @@ def _fallback(message: str):
 
 def chat(message: str, history: list | None = None):
     _load_local_env()
-    if not os.getenv("GOOGLE_API_KEY"):
+    if not _uses_vertex_ai() and not os.getenv("GOOGLE_API_KEY"):
         return _fallback(message)
 
     try:
