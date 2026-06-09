@@ -17,11 +17,13 @@
 # - Provide reliable canned-but-data-grounded fallback answers for common demo
 #   questions such as labor reduction, busiest hours, Sarah's status, and the
 #   Saturday forecast.
+# - Execute explicit manager commands for supported operations, such as switching
+#   the current schedule between shift-block and flexible-demand modes.
 # - Keep chat responses specific and practical by referencing real values from
 #   the CSV-backed agents and the current in-memory schedule.
 #
-# This agent does not mutate schedules or data. It reads from other agents and
-# explains what it finds in plain English.
+# Most questions are read-only. Explicit action requests mutate only the same
+# in-memory demo state that the Schedule page already uses.
 # =============================================================================
 
 import asyncio
@@ -148,6 +150,36 @@ def generate_shift_schedule(mode: str = "block") -> dict:
     }
 
 
+def _requested_schedule_mode(message: str) -> str | None:
+    text = message.lower()
+    schedule_terms = ("schedule", "shift", "shifts", "staffing")
+    action_terms = ("switch", "change", "convert", "make", "set", "use", "generate", "optimize", "turn")
+    has_schedule_context = any(term in text for term in schedule_terms)
+    has_action = any(term in text for term in action_terms)
+    if not has_schedule_context or not has_action:
+        return None
+    if "flexible" in text or "demand" in text or "non-block" in text or "not blocked" in text:
+        return "flexible"
+    if "block" in text or "shift block" in text or "fixed" in text:
+        return "block"
+    return None
+
+
+def _execute_schedule_mode_change(mode: str) -> str:
+    result = generate_schedule(mode=mode)
+    labor = labor_summary()
+    schedule_count = len(result.get("schedule", []))
+    assigned_count = sum(len(shift.get("assigned", [])) for shift in result.get("schedule", []))
+    unfilled_count = sum(len(shift.get("unfilled_roles", [])) for shift in result.get("schedule", []))
+    label = "flexible demand" if mode == "flexible" else "shift block"
+    return (
+        f"Done. I switched the schedule to {label} mode and regenerated the week. "
+        f"It now has {schedule_count} coverage windows, {assigned_count} assignments, "
+        f"and {unfilled_count} unfilled role slots. Weekly labor is "
+        f"{labor['weekly']['labor_pct']}% against the {labor['weekly']['target_pct']}% target."
+    )
+
+
 def _context_prompt() -> str:
     overview = get_shiftiq_overview()
     employees = load_employees().head(18).to_dict(orient="records")
@@ -155,6 +187,7 @@ def _context_prompt() -> str:
         "You are ShiftIQ, an AI operations manager for a small food/retail business. "
         "Answer manager questions using live ShiftIQ tool data. Be concise, specific, and practical. "
         "Use exact numbers when available. If a user asks about a schedule action, explain the tradeoff before recommending it. "
+        "If the user explicitly asks you to switch, generate, optimize, set, or change the schedule mode, call generate_shift_schedule. "
         "Do not invent employees, sales numbers, or schedule facts.\n\n"
         f"Current live snapshot: {json.dumps(_json_safe(overview), ensure_ascii=False)}\n"
         f"Employee roster snapshot: {json.dumps(_json_safe(employees), ensure_ascii=False)}"
@@ -201,6 +234,10 @@ async def _run_adk_chat(message: str, history: list | None = None) -> str:
 
 def _fallback(message: str):
     text = message.lower()
+    requested_mode = _requested_schedule_mode(message)
+    if requested_mode:
+        return _execute_schedule_mode_change(requested_mode)
+
     forecast = forecast_next_week()
     busiest = get_busiest_periods(3)
     alerts = get_overstaffing_alerts()
@@ -241,6 +278,10 @@ def _fallback(message: str):
 
 def chat(message: str, history: list | None = None):
     _load_local_env()
+    requested_mode = _requested_schedule_mode(message)
+    if requested_mode:
+        return _execute_schedule_mode_change(requested_mode)
+
     if not _uses_vertex_ai() and not os.getenv("GOOGLE_API_KEY"):
         return _fallback(message)
 

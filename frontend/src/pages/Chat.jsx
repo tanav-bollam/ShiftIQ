@@ -11,7 +11,7 @@ const chips = [
   'How can I reduce labor by $200?',
 ];
 
-export default function Chat() {
+export default function Chat({ app }) {
   const [messages, setMessages] = useState([{ role: 'assistant', content: "Hi, I'm your ShiftIQ agent. Ask about scheduling, labor costs, call-outs, or sales trends." }]);
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
@@ -26,6 +26,7 @@ export default function Chat() {
     try {
       const res = await api.chat({ message: value, history: next.filter(m => m.role !== 'assistant' || m.content !== messages[0].content) });
       setMessages([...next, { role: 'assistant', content: res.reply }]);
+      app?.refresh?.();
     } finally {
       setSending(false);
     }

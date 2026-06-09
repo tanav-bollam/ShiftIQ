@@ -318,7 +318,7 @@ export default function App() {
             <Route path="/employees" element={<Employees app={context} />} />
             <Route path="/schedule" element={<Schedule app={context} />} />
             <Route path="/callout" element={<Callout app={context} />} />
-            <Route path="/chat" element={<Chat />} />
+            <Route path="/chat" element={<Chat app={context} />} />
             <Route path="/upload" element={<UploadData app={context} />} />
             <Route path="/data" element={<DataManager app={context} />} />
             <Route path="/employee" element={<EmployeePortal app={context} employeeId={selectedEmployeeId} />} />
