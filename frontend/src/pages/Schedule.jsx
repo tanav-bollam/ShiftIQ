@@ -1,4 +1,4 @@
-import { CalendarPlus, Plus, Save, Siren, Trash2, X } from 'lucide-react';
+import { CalendarPlus, Grid3X3, ListTree, Plus, Save, Siren, Trash2, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Fragment } from 'react';
 import { useEffect, useState } from 'react';
@@ -15,6 +15,7 @@ export default function Schedule({ app }) {
   const [editingShift, setEditingShift] = useState(null);
   const [draftAssignments, setDraftAssignments] = useState([]);
   const [shiftRequests, setShiftRequests] = useState([]);
+  const [scheduleMode, setScheduleMode] = useState(app.schedule?.mode || 'block');
   const [error, setError] = useState(null);
   const schedule = app.schedule?.schedule || [];
   const explanations = app.schedule?.explanations || [];
@@ -24,11 +25,15 @@ export default function Schedule({ app }) {
     api.shiftRequests().then(setShiftRequests).catch(setError);
   }, [app.refreshKey]);
 
+  useEffect(() => {
+    if (app.schedule?.mode) setScheduleMode(app.schedule.mode);
+  }, [app.schedule?.mode]);
+
   const generate = async () => {
-    setStatus('Optimizing...');
-    await api.generateSchedule();
+    setStatus(scheduleMode === 'flexible' ? 'Optimizing flexible demand windows...' : 'Optimizing shift blocks...');
+    await api.generateSchedule('2024-03-04', scheduleMode);
     await app.refresh();
-    setStatus('Schedule generated');
+    setStatus(scheduleMode === 'flexible' ? 'Flexible schedule generated' : 'Block schedule generated');
   };
 
   const openEditor = (shift) => {
@@ -70,13 +75,27 @@ export default function Schedule({ app }) {
   return (
     <div className="page-stack">
       <div className="action-row">
+        <div className="mode-switch" role="group" aria-label="Schedule optimization mode">
+          <button className={scheduleMode === 'block' ? 'active' : ''} type="button" onClick={() => setScheduleMode('block')}>
+            <Grid3X3 size={15} /> Shift Blocks
+          </button>
+          <button className={scheduleMode === 'flexible' ? 'active' : ''} type="button" onClick={() => setScheduleMode('flexible')}>
+            <ListTree size={15} /> Flexible Demand
+          </button>
+        </div>
         <button className="btn primary" onClick={generate}><CalendarPlus size={16} /> Generate Optimized Schedule</button>
         <button className="btn danger" onClick={() => navigate('/callout')}><Siren size={16} /> Simulate Call-Out</button>
         <span className="muted">{status}</span>
       </div>
 
-      <Card title="Week of March 4-10">
-        {schedule.length === 0 ? <div className="empty-state">Generate a schedule to fill the weekly grid.</div> : <ScheduleGrid schedule={schedule} onEdit={openEditor} />}
+      <Card title={app.schedule?.mode === 'flexible' ? 'Flexible Demand Schedule - March 4-10' : 'Week of March 4-10'}>
+        {schedule.length === 0 ? (
+          <div className="empty-state">Generate a schedule to fill the weekly grid.</div>
+        ) : app.schedule?.mode === 'flexible' ? (
+          <FlexibleSchedule schedule={schedule} onEdit={openEditor} />
+        ) : (
+          <ScheduleGrid schedule={schedule} onEdit={openEditor} />
+        )}
         {explanations.length > 0 && (
           <div className="why-panel">
             <div className="card-title">Why These Assignments?</div>
@@ -146,7 +165,7 @@ function ScheduleGrid({ schedule, onEdit }) {
                 {cell?.manual_override && <div className="manual-badge">Manual</div>}
                 {cell && (
                   <div className="staffing-badge">
-                    {cell.assigned.length}/{cell.target_staff || cell.required_roles.length} staff · {currency(cell.expected_hourly_revenue)}/hr
+                    {cell.assigned.length}/{cell.target_staff || cell.required_roles.length} staff - {currency(cell.expected_hourly_revenue)}/hr
                   </div>
                 )}
                 {(cell?.assigned || []).map(person => (
@@ -161,6 +180,43 @@ function ScheduleGrid({ schedule, onEdit }) {
           })}
         </Fragment>
       ))}
+    </div>
+  );
+}
+
+function FlexibleSchedule({ schedule, onEdit }) {
+  return (
+    <div className="flex-schedule">
+      {days.map(day => {
+        const dayWindows = schedule.filter(item => item.day === day);
+        return (
+          <div className="flex-day" key={day}>
+            <div className="flex-day-head">
+              <strong>{day.slice(0, 3)}</strong>
+              <span>{dayWindows.length} demand windows</span>
+            </div>
+            <div className="flex-window-list">
+              {dayWindows.map(window => (
+                <button className="flex-window" type="button" key={`${window.day}-${window.shift}`} onClick={() => onEdit(window)}>
+                  <div className="flex-time">
+                    <strong>{window.time}</strong>
+                    <span>{currency(window.expected_hourly_revenue)}/hr</span>
+                  </div>
+                  <div className="flex-bar" style={{ '--staff': window.target_staff || 2 }}>
+                    <span>{window.assigned.length}/{window.target_staff} staff</span>
+                  </div>
+                  <div className="flex-people">
+                    {window.assigned.map(person => (
+                      <span key={`${person.employee_id}-${person.role}`}>{person.name.split(' ')[0]} - {person.role}</span>
+                    ))}
+                    {window.unfilled_roles.map(role => <em key={role}>Open: {role}</em>)}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -222,3 +278,4 @@ function ShiftEditor({ shift, employees, assignments, setAssignments, onAdd, onS
     </div>
   );
 }
+

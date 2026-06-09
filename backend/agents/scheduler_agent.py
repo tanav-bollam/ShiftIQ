@@ -22,9 +22,9 @@
 # Labor Gauge, and Chat pages all reference the same current schedule.
 # =============================================================================
 
-from agents.data_agent import DAY_ORDER, availability_summary, load_availability, load_employees, load_roles
+from agents.data_agent import DAY_ORDER, availability_summary, load_availability, load_employees, load_roles, load_sales
 from agents.forecast_agent import forecast_next_week
-from agents.staffing_agent import staffing_recommendation
+from agents.staffing_agent import match_staffing_threshold, staffing_recommendation
 from agents import state
 
 
@@ -42,7 +42,92 @@ def _hours_by_employee(schedule):
     return hours
 
 
-def generate_schedule(week_start: str = "2024-03-04"):
+def _score_candidates(employees, available_ids, assigned_ids, hours_assigned, required_role, duration, demand_score, target_staff):
+    candidates = []
+    for emp in employees:
+        emp_id = int(emp["id"])
+        if emp_id not in available_ids or emp_id in assigned_ids:
+            continue
+        if required_role not in emp["skills"]:
+            continue
+        if hours_assigned[emp_id] + duration > int(emp["max_hours"]):
+            continue
+
+        remaining = int(emp["max_hours"]) - hours_assigned[emp_id]
+        score = 50
+        score += (4 - int(emp["priority"])) * 12
+        score += min(remaining, 20)
+        score += min(demand_score, 6) * 2
+        score += min(target_staff, 6) * 2
+        score -= int(emp.get("callouts_this_month", 0)) * 3
+        candidates.append((score, remaining, emp))
+    return candidates
+
+
+def _assign_roles(employees, available_ids, hours_assigned, day, shift_name, duration, roles, demand_score, target_staff, explanations):
+    assigned = []
+    assigned_ids = set()
+    unfilled = []
+
+    for required_role in roles:
+        candidates = _score_candidates(
+            employees,
+            available_ids,
+            assigned_ids,
+            hours_assigned,
+            required_role,
+            duration,
+            demand_score,
+            target_staff,
+        )
+
+        if not candidates:
+            unfilled.append(required_role)
+            explanations.append(
+                {
+                    "day": day,
+                    "shift": shift_name,
+                    "employee": None,
+                    "role": required_role,
+                    "reason": f"No available certified employee could cover {required_role} for {day} {shift_name}.",
+                }
+            )
+            continue
+
+        score, remaining, best = sorted(candidates, key=lambda item: item[0], reverse=True)[0]
+        emp_id = int(best["id"])
+        hours_assigned[emp_id] += duration
+        assigned_ids.add(emp_id)
+        assigned.append(
+            {
+                "employee_id": emp_id,
+                "name": best["name"],
+                "role": required_role,
+                "hourly_wage": float(best["hourly_wage"]),
+                "score": round(score, 1),
+            }
+        )
+        explanations.append(
+            {
+                "day": day,
+                "shift": shift_name,
+                "employee": best["name"],
+                "role": required_role,
+                "reason": (
+                    f"Assigned {best['name']} to {required_role} on {day} {shift_name}: "
+                    f"available {availability_summary(emp_id)}, certified, priority {best['priority']}, "
+                    f"and {int(best['max_hours']) - hours_assigned[emp_id]}h remaining after assignment."
+                ),
+            }
+        )
+
+    return assigned, unfilled
+
+
+def generate_schedule(week_start: str = "2024-03-04", mode: str = "block"):
+    if mode == "flexible":
+        return generate_flexible_schedule(week_start)
+
     employees = _employee_records()
     availability = load_availability()
     roles = load_roles()
@@ -64,9 +149,6 @@ def generate_schedule(week_start: str = "2024-03-04"):
 
         for shift in roles.to_dict(orient="records"):
             duration = int(shift["time_end"] - shift["time_start"])
-            assigned = []
-            assigned_ids = set()
-            unfilled = []
             staffing = staffing_recommendation(day, shift)
             base_roles = list(shift["required_roles"])
             threshold_staff = int(staffing["employees_needed"])
@@ -88,65 +170,18 @@ def generate_schedule(week_start: str = "2024-03-04"):
                 }
             )
 
-            for required_role in dynamic_roles:
-                candidates = []
-                for emp in employees:
-                    emp_id = int(emp["id"])
-                    if emp_id not in available_ids or emp_id in assigned_ids:
-                        continue
-                    if required_role not in emp["skills"]:
-                        continue
-                    if hours_assigned[emp_id] + duration > int(emp["max_hours"]):
-                        continue
-
-                    remaining = int(emp["max_hours"]) - hours_assigned[emp_id]
-                    score = 50
-                    score += (4 - int(emp["priority"])) * 12
-                    score += min(remaining, 20)
-                    score += min(daily_demand, 6) * 2
-                    score += min(threshold_staff, 6) * 2
-                    score -= int(emp.get("callouts_this_month", 0)) * 3
-                    candidates.append((score, remaining, emp))
-
-                if not candidates:
-                    unfilled.append(required_role)
-                    explanations.append(
-                        {
-                            "day": day,
-                            "shift": shift["shift_name"],
-                            "employee": None,
-                            "role": required_role,
-                            "reason": f"No available certified employee could cover {required_role} for {day} {shift['shift_name']}.",
-                        }
-                    )
-                    continue
-
-                score, remaining, best = sorted(candidates, key=lambda item: item[0], reverse=True)[0]
-                emp_id = int(best["id"])
-                hours_assigned[emp_id] += duration
-                assigned_ids.add(emp_id)
-                assigned.append(
-                    {
-                        "employee_id": emp_id,
-                        "name": best["name"],
-                        "role": required_role,
-                        "hourly_wage": float(best["hourly_wage"]),
-                        "score": round(score, 1),
-                    }
-                )
-                explanations.append(
-                    {
-                        "day": day,
-                        "shift": shift["shift_name"],
-                        "employee": best["name"],
-                        "role": required_role,
-                        "reason": (
-                            f"Assigned {best['name']} to {required_role} on {day} {shift['shift_name']}: "
-                            f"available {availability_summary(emp_id)}, certified, priority {best['priority']}, "
-                            f"and {int(best['max_hours']) - hours_assigned[emp_id]}h remaining after assignment."
-                        ),
-                    }
-                )
+            assigned, unfilled = _assign_roles(
+                employees,
+                available_ids,
+                hours_assigned,
+                day,
+                shift["shift_name"],
+                duration,
+                dynamic_roles,
+                daily_demand,
+                threshold_staff,
+                explanations,
+            )
 
             schedule.append(
                 {
@@ -168,13 +203,145 @@ def generate_schedule(week_start: str = "2024-03-04"):
 
     shift_order = {row["shift_name"]: index for index, row in enumerate(roles.to_dict(orient="records"))}
     schedule.sort(key=lambda item: (DAY_ORDER.index(item["day"]), shift_order.get(item["shift"], 99)))
-    result = {"week_start": week_start, "schedule": schedule, "explanations": explanations, "hours_by_employee": hours_assigned}
+    result = {"week_start": week_start, "mode": "block", "schedule": schedule, "explanations": explanations, "hours_by_employee": hours_assigned}
+    state.current_schedule = result
+    return result
+
+
+def _average_hourly_revenue():
+    sales = load_sales()
+    hourly_totals = sales.groupby(["date", "day_of_week", "hour"], as_index=False)["revenue"].sum()
+    return hourly_totals.groupby(["day_of_week", "hour"], as_index=False)["revenue"].mean()
+
+
+def _flexible_roles(time_start: int, time_end: int, target_staff: int):
+    roles = []
+    if time_start < 11:
+        roles.append("Opener")
+    if time_end > 16:
+        roles.append("Closer")
+    if target_staff >= 3:
+        roles.append("IceCream")
+    if target_staff >= 4:
+        roles.append("Cake")
+    while len(roles) < target_staff:
+        roles.append("Cashier")
+    return roles[:target_staff]
+
+
+def _merge_hourly_windows(day_rows):
+    windows = []
+    current = None
+
+    for row in day_rows:
+        hourly_revenue = round(float(row["revenue"]), 2)
+        threshold = match_staffing_threshold(hourly_revenue)
+        target_staff = int(threshold["employees_needed"])
+        hour = int(row["hour"])
+        signature = (target_staff, threshold["label"])
+
+        if current and current["time_end"] == hour and current["signature"] == signature:
+            current["time_end"] = hour + 1
+            current["revenues"].append(hourly_revenue)
+            continue
+
+        if current:
+            windows.append(current)
+        current = {
+            "time_start": hour,
+            "time_end": hour + 1,
+            "target_staff": target_staff,
+            "threshold": threshold,
+            "signature": signature,
+            "revenues": [hourly_revenue],
+        }
+
+    if current:
+        windows.append(current)
+    return windows
+
+
+def generate_flexible_schedule(week_start: str = "2024-03-04"):
+    employees = _employee_records()
+    availability = load_availability()
+    forecast = {item["day"]: item for item in forecast_next_week()}
+    hourly = _average_hourly_revenue()
+    hours_assigned = {int(emp["id"]): 0 for emp in employees}
+    schedule = []
+    explanations = []
+
+    scheduling_days = sorted(
+        DAY_ORDER,
+        key=lambda day: forecast.get(day, {}).get("predicted_revenue", 0),
+        reverse=True,
+    )
+
+    for day in scheduling_days:
+        day_col = day.lower()
+        available_ids = availability[availability[day_col] == 1]["employee_id"].astype(int).tolist()
+        day_rows = hourly[(hourly["day_of_week"] == day) & (hourly["hour"] >= 8) & (hourly["hour"] < 22)]
+        day_rows = day_rows.sort_values("hour").to_dict(orient="records")
+        daily_demand = forecast.get(day, {}).get("staff_needed", 2)
+
+        for window in _merge_hourly_windows(day_rows):
+            duration = int(window["time_end"] - window["time_start"])
+            target_staff = int(window["target_staff"])
+            avg_revenue = round(sum(window["revenues"]) / max(len(window["revenues"]), 1), 2)
+            shift_name = f"{window['time_start']}:00-{window['time_end']}:00 Demand"
+            roles = _flexible_roles(window["time_start"], window["time_end"], target_staff)
+
+            explanations.append(
+                {
+                    "day": day,
+                    "shift": shift_name,
+                    "employee": None,
+                    "role": "Flexible demand window",
+                    "reason": (
+                        f"{day} {window['time_start']}:00-{window['time_end']}:00 averages ${avg_revenue:.0f}/hour, "
+                        f"so flexible mode created a {target_staff}-person {window['threshold']['label']} coverage window."
+                    ),
+                }
+            )
+
+            assigned, unfilled = _assign_roles(
+                employees,
+                available_ids,
+                hours_assigned,
+                day,
+                shift_name,
+                duration,
+                roles,
+                daily_demand,
+                target_staff,
+                explanations,
+            )
+            schedule.append(
+                {
+                    "day": day,
+                    "shift": shift_name,
+                    "time_start": int(window["time_start"]),
+                    "time_end": int(window["time_end"]),
+                    "time": f"{int(window['time_start'])}:00-{int(window['time_end'])}:00",
+                    "required_roles": roles,
+                    "base_required_roles": roles,
+                    "target_staff": target_staff,
+                    "staffing_threshold": window["threshold"],
+                    "expected_hourly_revenue": avg_revenue,
+                    "extra_dynamic_slots": 0,
+                    "schedule_mode": "flexible",
+                    "assigned": assigned,
+                    "unfilled_roles": unfilled,
+                }
+            )
+
+    schedule.sort(key=lambda item: (DAY_ORDER.index(item["day"]), item["time_start"]))
+    result = {"week_start": week_start, "mode": "flexible", "schedule": schedule, "explanations": explanations, "hours_by_employee": hours_assigned}
     state.current_schedule = result
     return result
 
 
 def get_current_schedule():
-    return state.current_schedule or {"week_start": None, "schedule": [], "explanations": [], "hours_by_employee": {}}
+    return state.current_schedule or {"week_start": None, "mode": "block", "schedule": [], "explanations": [], "hours_by_employee": {}}
 
 
 def edit_shift(day: str, shift_name: str, assignments: list[dict]):

@@ -227,8 +227,8 @@ def next_week_forecast():
 
 
 @app.post("/schedule/generate")
-def create_schedule(week_start: str = "2024-03-04"):
-    return generate_schedule(week_start)
+def create_schedule(week_start: str = "2024-03-04", mode: str = "block"):
+    return generate_schedule(week_start, mode)
 
 
 @app.get("/schedule/current")
