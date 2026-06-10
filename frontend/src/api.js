@@ -60,6 +60,7 @@ export const api = {
   editShift: (body) => request('/schedule/edit-shift', { method: 'POST', body: JSON.stringify(body) }),
   labor: () => request('/labor/summary'),
   requestAvailability: (week = '2024-03-04') => request(`/messaging/request-availability?week_start=${week}`, { method: 'POST' }),
+  submitAvailability: (body) => request('/employee/availability', { method: 'POST', body: JSON.stringify(body) }),
   messages: () => request('/messaging/log'),
   notifications: (mode = 'admin', employeeId) => request(`/notifications?mode=${mode}${employeeId ? `&employee_id=${employeeId}` : ''}`),
   findBackups: (body) => request('/callouts/find-backups', { method: 'POST', body: JSON.stringify(body) }),

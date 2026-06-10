@@ -22,7 +22,7 @@
 # =============================================================================
 
 from agents import state
-from agents.data_agent import load_availability, load_employees
+from agents.data_agent import is_available_for_window, load_availability, load_employees
 from agents.persistence_agent import log_audit, save_runtime_state
 from agents.scheduler_agent import get_current_schedule, replace_assignment
 
@@ -68,7 +68,11 @@ def find_backups(called_out_id: int, shift_name: str, day: str):
         if emp_id == called_out_id:
             continue
         row = availability[availability["employee_id"] == emp_id]
-        if row.empty or int(row.iloc[0][day.lower()]) != 1:
+        if row.empty:
+            continue
+        shift_start = target_shift["time_start"] if target_shift else 8
+        shift_end = target_shift["time_end"] if target_shift else 22
+        if not is_available_for_window(emp_id, day, shift_start, shift_end):
             continue
         role_match = any(role in emp["skills"] for role in needed_roles)
         hours_remaining = int(emp["max_hours"]) - int(hours_used.get(emp_id, 0))

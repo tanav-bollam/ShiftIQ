@@ -22,7 +22,7 @@
 # Labor Gauge, and Chat pages all reference the same current schedule.
 # =============================================================================
 
-from agents.data_agent import DAY_ORDER, availability_summary, load_availability, load_employees, load_roles, load_sales
+from agents.data_agent import DAY_ORDER, availability_summary, available_employee_ids_for_window, load_availability, load_employees, load_roles, load_sales
 from agents.forecast_agent import forecast_next_week
 from agents.persistence_agent import load_runtime_state, log_audit, save_runtime_state
 from agents.staffing_agent import match_staffing_threshold, staffing_recommendation
@@ -144,12 +144,11 @@ def generate_schedule(week_start: str = "2024-03-04", mode: str = "block"):
     )
 
     for day in scheduling_days:
-        day_col = day.lower()
-        available_ids = availability[availability[day_col] == 1]["employee_id"].astype(int).tolist()
         daily_demand = forecast.get(day, {}).get("staff_needed", 2)
 
         for shift in roles.to_dict(orient="records"):
             duration = int(shift["time_end"] - shift["time_start"])
+            available_ids = available_employee_ids_for_window(availability, day, shift["time_start"], shift["time_end"])
             staffing = staffing_recommendation(day, shift)
             base_roles = list(shift["required_roles"])
             threshold_staff = int(staffing["employees_needed"])
@@ -280,8 +279,6 @@ def generate_flexible_schedule(week_start: str = "2024-03-04"):
     )
 
     for day in scheduling_days:
-        day_col = day.lower()
-        available_ids = availability[availability[day_col] == 1]["employee_id"].astype(int).tolist()
         day_rows = hourly[(hourly["day_of_week"] == day) & (hourly["hour"] >= 8) & (hourly["hour"] < 22)]
         day_rows = day_rows.sort_values("hour").to_dict(orient="records")
         daily_demand = forecast.get(day, {}).get("staff_needed", 2)
@@ -289,6 +286,7 @@ def generate_flexible_schedule(week_start: str = "2024-03-04"):
         for window in _merge_hourly_windows(day_rows):
             duration = int(window["time_end"] - window["time_start"])
             target_staff = int(window["target_staff"])
+            available_ids = available_employee_ids_for_window(availability, day, window["time_start"], window["time_end"])
             avg_revenue = round(sum(window["revenues"]) / max(len(window["revenues"]), 1), 2)
             shift_name = f"{window['time_start']}:00-{window['time_end']}:00 Demand"
             roles = _flexible_roles(window["time_start"], window["time_end"], target_staff)

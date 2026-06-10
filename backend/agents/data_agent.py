@@ -37,6 +37,11 @@ REQUIRED_COLUMNS = {
     "availability": ["employee_id", "week_start", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
     "roles": ["shift_name", "time_start", "time_end", "required_roles"],
 }
+AVAILABILITY_TIME_COLUMNS = [
+    f"{day}_{suffix}"
+    for day in ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+    for suffix in ["start", "end"]
+]
 
 
 def data_path(filename: str) -> Path:
@@ -59,7 +64,64 @@ def load_employees(path: str | Path | None = None) -> pd.DataFrame:
 
 
 def load_availability(path: str | Path | None = None) -> pd.DataFrame:
-    return pd.read_csv(path or data_path("availability.csv"))
+    df = pd.read_csv(path or data_path("availability.csv"))
+    for column in AVAILABILITY_TIME_COLUMNS:
+        if column not in df.columns:
+            df[column] = ""
+    return df
+
+
+def _format_time(value) -> str:
+    if value is None or pd.isna(value) or str(value).strip() == "":
+        return ""
+    text = str(value).strip()
+    if ":" in text:
+        hour, minute = text.split(":", 1)
+        return f"{int(float(hour)):02d}:{int(float(minute[:2] or 0)):02d}"
+    return f"{int(float(text)):02d}:00"
+
+
+def _time_to_hour(value, fallback: int) -> float:
+    formatted = _format_time(value)
+    if not formatted:
+        return float(fallback)
+    hour, minute = formatted.split(":", 1)
+    return int(hour) + int(minute) / 60
+
+
+def availability_windows(employee_id: int) -> dict:
+    availability = load_availability()
+    row = availability[availability["employee_id"] == employee_id]
+    if row.empty:
+        return {}
+    item = row.iloc[0]
+    windows = {}
+    for day in [name.lower() for name in DAY_ORDER]:
+        is_available = int(item.get(day, 0) or 0) == 1
+        start = _format_time(item.get(f"{day}_start", "")) or "08:00"
+        end = _format_time(item.get(f"{day}_end", "")) or "22:00"
+        windows[day] = {"available": is_available, "start": start, "end": end}
+    return windows
+
+
+def is_available_for_window(employee_id: int, day: str, time_start: int | float, time_end: int | float) -> bool:
+    windows = availability_windows(employee_id)
+    window = windows.get(day.lower())
+    if not window or not window["available"]:
+        return False
+    available_start = _time_to_hour(window["start"], 8)
+    available_end = _time_to_hour(window["end"], 22)
+    return available_start <= float(time_start) and available_end >= float(time_end)
+
+
+def available_employee_ids_for_window(availability: pd.DataFrame, day: str, time_start: int | float, time_end: int | float) -> list[int]:
+    day_col = day.lower()
+    available_rows = availability[availability[day_col] == 1]
+    return [
+        int(row["employee_id"])
+        for row in available_rows.to_dict(orient="records")
+        if is_available_for_window(int(row["employee_id"]), day, time_start, time_end)
+    ]
 
 
 def load_roles(path: str | Path | None = None) -> pd.DataFrame:
@@ -71,12 +133,52 @@ def load_roles(path: str | Path | None = None) -> pd.DataFrame:
 
 
 def availability_summary(employee_id: int) -> str:
-    availability = load_availability()
-    row = availability[availability["employee_id"] == employee_id]
-    if row.empty:
+    windows = availability_windows(employee_id)
+    if not windows:
         return "Not submitted"
-    days = [day[:3] for day in DAY_ORDER if int(row.iloc[0][day.lower()]) == 1]
+    days = []
+    for day in DAY_ORDER:
+        window = windows.get(day.lower())
+        if not window or not window["available"]:
+            continue
+        if window["start"] == "08:00" and window["end"] == "22:00":
+            days.append(day[:3])
+        else:
+            days.append(f"{day[:3]} {window['start']}-{window['end']}")
     return ", ".join(days) if days else "Unavailable"
+
+
+def update_employee_availability(employee_id: int, week_start: str, windows: dict) -> dict:
+    path = data_path("availability.csv")
+    df = load_availability(path)
+    employee_id = int(employee_id)
+    mask = df["employee_id"].astype(int) == employee_id
+    if not mask.any():
+        row = {"employee_id": employee_id, "week_start": week_start}
+        for day in [name.lower() for name in DAY_ORDER]:
+            row[day] = 0
+            row[f"{day}_start"] = ""
+            row[f"{day}_end"] = ""
+        df = pd.concat([df, pd.DataFrame([row])], ignore_index=True)
+        mask = df["employee_id"].astype(int) == employee_id
+
+    df.loc[mask, "week_start"] = week_start
+    for day in [name.lower() for name in DAY_ORDER]:
+        window = windows.get(day, {})
+        available = 1 if window.get("available") else 0
+        start = _format_time(window.get("start", "")) if available else ""
+        end = _format_time(window.get("end", "")) if available else ""
+        if available and (not start or not end):
+            start, end = "08:00", "22:00"
+        df.loc[mask, day] = available
+        df.loc[mask, f"{day}_start"] = start
+        df.loc[mask, f"{day}_end"] = end
+
+    base_columns = REQUIRED_COLUMNS["availability"]
+    extra_columns = [column for column in AVAILABILITY_TIME_COLUMNS if column in df.columns]
+    df = df[base_columns + extra_columns]
+    df.to_csv(path, index=False)
+    return {"status": "saved", "employee_id": employee_id, "week_start": week_start, "availability": availability_windows(employee_id)}
 
 
 def validate_csv_upload(file_type: str, content: bytes) -> dict:
@@ -115,6 +217,20 @@ def validate_csv_upload(file_type: str, content: bytes) -> dict:
             if invalid.any():
                 errors.append(f"{day} availability values must be 0 or 1.")
                 break
+        for day in [item.lower() for item in DAY_ORDER]:
+            start_col = f"{day}_start"
+            end_col = f"{day}_end"
+            if start_col in df.columns and end_col in df.columns:
+                starts = df[start_col].fillna("").apply(lambda value: _time_to_hour(value, 8) if str(value).strip() else None)
+                ends = df[end_col].fillna("").apply(lambda value: _time_to_hour(value, 22) if str(value).strip() else None)
+                invalid_windows = [
+                    index
+                    for index, start in starts.items()
+                    if start is not None and ends[index] is not None and ends[index] <= start
+                ]
+                if invalid_windows:
+                    errors.append(f"{day} availability end times must be after start times.")
+                    break
     if file_type == "roles" and not errors:
         starts = pd.to_numeric(df["time_start"], errors="coerce")
         ends = pd.to_numeric(df["time_end"], errors="coerce")
@@ -168,7 +284,9 @@ def save_editable_table(file_type: str, rows: list[dict]) -> dict:
     for column in required:
         if column not in df.columns:
             df[column] = ""
-    df = df[required]
+    columns = list(df.columns)
+    ordered = required + [column for column in columns if column not in required]
+    df = df[ordered]
 
     if file_type == "sales":
         parsed_dates = pd.to_datetime(df["date"], errors="coerce")

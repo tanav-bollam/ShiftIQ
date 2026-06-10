@@ -33,7 +33,7 @@ from pydantic import BaseModel
 
 from agents import state
 from agents.assistant_agent import available_chat_agents, chat, list_report_artifacts, load_report_artifact
-from agents.data_agent import DATA_DIR, availability_summary, load_editable_table, load_employees, load_roles, save_editable_table, validate_csv_upload
+from agents.data_agent import DATA_DIR, availability_summary, availability_windows, load_editable_table, load_employees, load_roles, save_editable_table, update_employee_availability, validate_csv_upload
 from agents.forecast_agent import forecast_next_week
 from agents.insight_agent import (
     get_busiest_periods,
@@ -136,6 +136,18 @@ class ShiftClaimRequest(BaseModel):
     note: str = ""
 
 
+class DayAvailability(BaseModel):
+    available: bool = False
+    start: str = "08:00"
+    end: str = "22:00"
+
+
+class AvailabilitySubmission(BaseModel):
+    employee_id: int
+    week_start: str = "2024-03-04"
+    availability: dict[str, DayAvailability]
+
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
@@ -149,6 +161,7 @@ def employees():
     for emp in load_employees().to_dict(orient="records"):
         emp_id = int(emp["id"])
         emp["availability"] = availability_summary(emp_id)
+        emp["availability_windows"] = availability_windows(emp_id)
         emp["scheduled_hours"] = int(hours.get(emp_id, 0))
         records.append(emp)
     return records
@@ -295,6 +308,15 @@ def approve_employee_shift_request(request_id: int):
 @app.post("/messaging/request-availability")
 def request_avail(week_start: str = "2024-03-04"):
     return request_availability(week_start)
+
+
+@app.post("/employee/availability")
+def submit_employee_availability(req: AvailabilitySubmission):
+    windows = {day: item.model_dump() for day, item in req.availability.items()}
+    result = update_employee_availability(req.employee_id, req.week_start, windows)
+    state.current_schedule = None
+    save_runtime_state("current_schedule", {"week_start": None, "mode": "block", "schedule": [], "explanations": [], "hours_by_employee": {}})
+    return result
 
 
 @app.get("/messaging/log")

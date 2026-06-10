@@ -322,11 +322,15 @@ select, input, .chat-input { width: 100%; margin-top: 6px; background: var(--sur
 .quick-action:hover { border-color: rgba(124,107,255,.5); background: rgba(124,107,255,.12); }
 .quick-action svg { color: var(--teal); }
 .availability-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; margin-bottom: 14px; }
-.availability-day { background: var(--surface2); border: 1px solid var(--border); color: var(--label); border-radius: 8px; padding: 12px 8px; cursor: pointer; display: grid; gap: 4px; text-align: center; }
+.availability-day { background: var(--surface2); border: 1px solid var(--border); color: var(--label); border-radius: 8px; padding: 9px 8px; display: grid; gap: 8px; text-align: center; min-width: 0; }
+.availability-day button { background: transparent; border: 0; color: inherit; padding: 0; display: grid; gap: 4px; cursor: pointer; }
 .availability-day strong { color: var(--text); }
 .availability-day span { color: var(--muted); font-size: 10px; }
 .availability-day.active { border-color: rgba(184,255,107,.42); background: rgba(184,255,107,.08); }
 .availability-day.active span { color: var(--green); }
+.availability-times { display: grid; gap: 5px; }
+.availability-times input { width: 100%; min-width: 0; background: rgba(4,7,16,.62); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 5px 4px; font-size: 11px; color-scheme: dark; }
+.form-error { color: var(--red); font-size: 12px; margin-bottom: 10px; }
 .employee-status-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; display: grid; gap: 11px; color: var(--label); line-height: 1.45; }
 .employee-status-card svg { color: var(--green); }
 .employee-status-card strong { color: var(--text); font-size: 17px; }

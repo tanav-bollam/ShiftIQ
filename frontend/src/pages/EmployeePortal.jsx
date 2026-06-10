@@ -8,12 +8,16 @@ import { Card, ErrorState, Loading, Progress } from '../components/UI.jsx';
 const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
+function defaultAvailability() {
+  return Object.fromEntries(days.map(day => [day, { available: day !== 'sunday', start: '08:00', end: '22:00' }]));
+}
+
 export default function EmployeePortal({ app, employeeId = 1 }) {
   const location = useLocation();
   const section = location.pathname.split('/')[2] || 'home';
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [availability, setAvailability] = useState(Object.fromEntries(days.map(day => [day, day !== 'sunday'])));
+  const [availability, setAvailability] = useState(defaultAvailability());
   const [requestType, setRequestType] = useState('Offer shift');
   const [selectedShiftKey, setSelectedShiftKey] = useState('');
   const [targetEmployeeId, setTargetEmployeeId] = useState('');
@@ -33,6 +37,18 @@ export default function EmployeePortal({ app, employeeId = 1 }) {
   }, [app.refreshKey]);
 
   const employee = data?.employees.find(item => Number(item.id) === employeeId);
+
+  useEffect(() => {
+    if (!employee?.availability_windows) return;
+    setAvailability(prev => ({
+      ...prev,
+      ...Object.fromEntries(days.map(day => [day, {
+        available: Boolean(employee.availability_windows[day]?.available),
+        start: employee.availability_windows[day]?.start || '08:00',
+        end: employee.availability_windows[day]?.end || '22:00',
+      }])),
+    }));
+  }, [employee?.id]);
   const shifts = useMemo(() => {
     if (!data?.schedule?.schedule) return [];
     return data.schedule.schedule
@@ -150,32 +166,56 @@ function EmployeeSchedule({ shifts }) {
   );
 }
 
-function EmployeeAvailability({ availability, setAvailability, availabilityStatus, setAvailabilityStatus }) {
-  const selected = Object.values(availability).filter(Boolean).length;
+function EmployeeAvailability({ employeeId, availability, setAvailability, availabilityStatus, setAvailabilityStatus, refreshEmployeeData }) {
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+  const selected = Object.values(availability).filter(day => day.available).length;
+  const updateDay = (day, patch) => setAvailability(prev => ({ ...prev, [day]: { ...prev[day], ...patch } }));
+  const submit = async () => {
+    setSaving(true);
+    setError('');
+    try {
+      await api.submitAvailability({ employee_id: employeeId, week_start: '2024-03-04', availability });
+      setAvailabilityStatus(`Submitted - ${selected} days with specific hours`);
+      await refreshEmployeeData();
+    } catch (err) {
+      setError(err.message || 'Could not submit availability');
+    } finally {
+      setSaving(false);
+    }
+  };
   return (
     <div className="employee-grid">
       <Card title="Submit Weekly Availability">
         <div className="availability-grid">
           {days.map((day, index) => (
-            <button
-              className={`availability-day ${availability[day] ? 'active' : ''}`}
+            <div
+              className={`availability-day ${availability[day].available ? 'active' : ''}`}
               key={day}
-              onClick={() => setAvailability(prev => ({ ...prev, [day]: !prev[day] }))}
             >
-              <strong>{labels[index]}</strong>
-              <span>{availability[day] ? 'Available' : 'Unavailable'}</span>
-            </button>
+              <button type="button" onClick={() => updateDay(day, { available: !availability[day].available })}>
+                <strong>{labels[index]}</strong>
+                <span>{availability[day].available ? 'Available' : 'Unavailable'}</span>
+              </button>
+              {availability[day].available && (
+                <div className="availability-times">
+                  <input type="time" value={availability[day].start} onChange={event => updateDay(day, { start: event.target.value })} aria-label={`${labels[index]} start time`} />
+                  <input type="time" value={availability[day].end} onChange={event => updateDay(day, { end: event.target.value })} aria-label={`${labels[index]} end time`} />
+                </div>
+              )}
+            </div>
           ))}
         </div>
-        <button className="btn primary" onClick={() => setAvailabilityStatus(`Submitted - ${selected} days available`)}>
-          <Send size={16} /> Submit Availability
+        {error && <div className="form-error">{error}</div>}
+        <button className="btn primary" onClick={submit} disabled={saving}>
+          <Send size={16} /> {saving ? 'Submitting...' : 'Submit Availability'}
         </button>
       </Card>
       <Card title="Submission Status">
         <div className="employee-status-card">
           <CheckCircle2 size={28} />
           <strong>{availabilityStatus}</strong>
-          <span>For this MVP, the submission is simulated in the employee portal. The admin availability workflow still uses the backend message log.</span>
+          <span>Your availability is saved to the backend and used the next time ShiftIQ generates a block or flexible schedule.</span>
         </div>
       </Card>
     </div>
