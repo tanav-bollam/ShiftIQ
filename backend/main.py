@@ -46,6 +46,7 @@ from agents.insight_agent import (
 from agents.messaging_agent import confirm_backup, find_backups, request_availability
 from agents.notification_agent import get_notifications
 from agents.persistence_agent import approve_request, list_approvals, list_audit, load_runtime_state, reject_request, save_runtime_state
+from agents.policy_agent import policy_knowledge_overview, search_policy_knowledge
 from agents.scheduler_agent import edit_shift, generate_schedule, get_current_schedule, labor_summary
 from agents.staffing_agent import get_staffing_thresholds, update_staffing_thresholds
 from agents.shift_request_agent import approve_shift_request, claim_open_shift, create_shift_request, list_shift_requests
@@ -309,6 +310,16 @@ def notifications(mode: str = "admin", employee_id: int | None = None):
 @app.get("/audit-log")
 def audit_log(limit: int = 120):
     return list_audit(limit)
+
+
+@app.get("/knowledge/overview")
+def knowledge_overview():
+    return policy_knowledge_overview()
+
+
+@app.get("/knowledge/search")
+def knowledge_search(q: str, limit: int = 4):
+    return search_policy_knowledge(q, limit)
 
 
 @app.get("/agent-approvals")

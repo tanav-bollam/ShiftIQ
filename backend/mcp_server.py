@@ -40,6 +40,7 @@ from agents.assistant_agent import (
     optimize_labor_savings,
 )
 from agents.messaging_agent import find_backups
+from agents.policy_agent import policy_knowledge_overview, search_policy_knowledge
 from agents.scheduler_agent import generate_schedule, get_current_schedule
 from agents.weather_agent import weather_adjusted_forecast, weather_staffing_recommendations
 
@@ -124,6 +125,18 @@ def get_weather_aware_staffing_tool() -> dict:
             "recommendations": weather_staffing_recommendations(),
         }
     )
+
+
+@mcp.tool()
+def search_policy_knowledge_tool(query: str) -> dict:
+    """Search ShiftIQ policy/RAG knowledge with citations."""
+    return _json_safe(search_policy_knowledge(query))
+
+
+@mcp.tool()
+def get_policy_knowledge_overview_tool() -> dict:
+    """Return policy knowledge base metadata."""
+    return _json_safe(policy_knowledge_overview())
 
 
 @mcp.tool()

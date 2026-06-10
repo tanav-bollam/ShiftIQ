@@ -7,3 +7,5 @@ openai==1.58.1
 google-adk
 mcp
 httpx
+google-cloud-aiplatform[agent_engines]
+cloudpickle

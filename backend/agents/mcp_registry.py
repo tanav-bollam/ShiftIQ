@@ -20,7 +20,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from google.adk.tools.mcp_tool import McpToolset
+from google.adk.tools.mcp_tool import McpToolset, StdioConnectionParams
 from mcp import StdioServerParameters
 
 
@@ -38,6 +38,8 @@ SHIFTIQ_MCP_TOOLS = [
     "find_backup_candidates_tool",
     "optimize_labor_savings_tool",
     "get_weather_aware_staffing_tool",
+    "search_policy_knowledge_tool",
+    "get_policy_knowledge_overview_tool",
     "create_report_artifact_tool",
 ]
 
@@ -45,9 +47,12 @@ SHIFTIQ_MCP_TOOLS = [
 def build_shiftiq_mcp_toolset(tool_filter: list[str] | None = None) -> McpToolset:
     """Create an ADK MCP toolset for the local ShiftIQ MCP server."""
     return McpToolset(
-        connection_params=StdioServerParameters(
-            command=sys.executable,
-            args=[str(MCP_SERVER_PATH)],
+        connection_params=StdioConnectionParams(
+            server_params=StdioServerParameters(
+                command=sys.executable,
+                args=[str(MCP_SERVER_PATH)],
+            ),
+            timeout=8.0,
         ),
         tool_filter=tool_filter or SHIFTIQ_MCP_TOOLS,
         tool_name_prefix="shiftiq_",

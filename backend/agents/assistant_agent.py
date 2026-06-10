@@ -38,6 +38,7 @@ from agents.forecast_agent import forecast_next_week
 from agents.insight_agent import get_busiest_periods, get_daily_revenue, get_hourly_heatmap, get_overstaffing_alerts, get_top_items
 from agents.messaging_agent import find_backups
 from agents.persistence_agent import create_approval, log_audit
+from agents.policy_agent import policy_knowledge_overview, search_policy_knowledge
 from agents.scheduler_agent import generate_schedule, get_current_schedule as scheduler_current_schedule, labor_summary
 from agents.data_agent import load_employees
 from agents.staffing_agent import get_staffing_thresholds
@@ -228,6 +229,11 @@ def get_weather_aware_staffing() -> dict:
         "forecast": weather_adjusted_forecast(),
         "recommendations": weather_staffing_recommendations(),
     }
+
+
+def search_shift_policy(query: str) -> dict:
+    """Search ShiftIQ scheduling and labor policy knowledge with citations."""
+    return search_policy_knowledge(query)
 
 
 def get_employee_profile(name_or_id: str) -> dict:
@@ -547,6 +553,27 @@ def _execute_artifact_request(kind: str) -> str:
     )
 
 
+def _policy_answer(message: str) -> str | None:
+    text = message.lower()
+    if not any(term in text for term in ("policy", "approval", "approve", "48", "drop", "swap", "fairness", "weather rule", "staffing rule")):
+        return None
+    result = search_policy_knowledge(message, 3)
+    if not result["results"]:
+        return None
+    top = result["results"][0]
+    supporting = result["results"][1:3]
+    lines = [
+        f"Policy match from {top['source']} - {top['heading']}: {top['excerpt']}",
+    ]
+    if supporting:
+        lines.append(
+            "Also checked: "
+            + "; ".join(f"{item['source']} - {item['heading']}" for item in supporting)
+            + "."
+        )
+    return " ".join(lines)
+
+
 def _agent_tools(agent_id: str):
     data_tools = [
         get_shiftiq_overview,
@@ -554,6 +581,7 @@ def _agent_tools(agent_id: str):
         get_current_schedule,
         get_sales_insights,
         get_weather_aware_staffing,
+        search_shift_policy,
         get_employee_profile,
         get_schedule_summary,
         generate_shift_schedule,
@@ -562,6 +590,7 @@ def _agent_tools(agent_id: str):
         get_current_schedule,
         get_employee_profile,
         get_schedule_summary,
+        search_shift_policy,
         explain_schedule_assignment,
         generate_shift_schedule,
     ]
@@ -570,11 +599,13 @@ def _agent_tools(agent_id: str):
         get_employee_profile,
         find_backup_candidates,
         get_schedule_summary,
+        search_shift_policy,
     ]
     labor_tools = [
         get_labor_summary,
         get_sales_insights,
         get_weather_aware_staffing,
+        search_shift_policy,
         get_current_schedule,
         optimize_labor_savings,
         generate_shift_schedule,
@@ -585,6 +616,7 @@ def _agent_tools(agent_id: str):
         optimize_labor_savings,
         create_report_artifact,
         list_report_artifacts,
+        search_shift_policy,
     ]
     if agent_id == "tool_calling":
         return data_tools
@@ -620,14 +652,17 @@ def _after_agent_callback(callback_context):
 def _context_prompt() -> str:
     overview = get_shiftiq_overview()
     employees = load_employees().head(18).to_dict(orient="records")
+    policy = policy_knowledge_overview()
     return (
         "You are ShiftIQ, an AI operations manager for a small food/retail business. "
         "Answer manager questions using live ShiftIQ tool data. Be concise, specific, and practical. "
         "Use exact numbers when available. If a user asks about a schedule action, explain the tradeoff before recommending it. "
-        "If the user explicitly asks you to switch, generate, optimize, set, or change the schedule mode, call generate_shift_schedule. "
-        "Do not invent employees, sales numbers, or schedule facts.\n\n"
+        "If a question involves rules, approval, labor policy, weather policy, shift drops, or fairness, search policy knowledge and cite the source. "
+        "If the user explicitly asks you to switch, generate, optimize, set, or change the schedule mode, create an approval rather than silently mutating state. "
+        "Do not invent employees, sales numbers, policy rules, or schedule facts.\n\n"
         f"Current live snapshot: {json.dumps(_json_safe(overview), ensure_ascii=False)}\n"
-        f"Employee roster snapshot: {json.dumps(_json_safe(employees), ensure_ascii=False)}"
+        f"Employee roster snapshot: {json.dumps(_json_safe(employees), ensure_ascii=False)}\n"
+        f"Policy knowledge base: {json.dumps(_json_safe(policy), ensure_ascii=False)}"
     )
 
 
@@ -651,12 +686,28 @@ def build_adk_agent(agent: str | None = None):
 
     agent_id = _agent_id(agent)
     profile = AGENT_PROFILES[agent_id]
+    tools = _agent_tools(agent_id)
+    tool_mode = "direct_function_tools"
+    if os.getenv("SHIFTIQ_USE_MCP_TOOLS", "true").strip().lower() not in {"0", "false", "no"}:
+        try:
+            from agents.mcp_registry import build_shiftiq_mcp_toolset
+
+            tools = [build_shiftiq_mcp_toolset()]
+            tool_mode = "mcp_toolset"
+        except Exception as exc:
+            log_audit(
+                "adk_tool",
+                "mcp_toolset_fallback",
+                "warn",
+                {"error": str(exc)[:400]},
+                actor=AGENT_PROFILES.get(agent_id, AGENT_PROFILES[DEFAULT_AGENT_ID])["label"],
+            )
     return LlmAgent(
         model=_model_name(),
         name=f"shiftiq_{agent_id}_agent",
         description=profile["description"],
-        instruction=_agent_instruction(agent_id),
-        tools=_agent_tools(agent_id),
+        instruction=f"{_agent_instruction(agent_id)}\n\nActive tool transport: {tool_mode}.",
+        tools=tools,
         before_tool_callback=_before_tool_callback,
         after_tool_callback=_after_tool_callback,
         after_agent_callback=_after_agent_callback,
@@ -728,6 +779,9 @@ def _fallback(message: str):
     if "saturday" in text:
         sat = next(item for item in forecast if item["day"] == "Saturday")
         return f"Saturday forecast is ${sat['predicted_revenue']:.0f} with {sat['confidence_pct']}% confidence. Plan for about {sat['staff_needed']} staff across peak coverage."
+    policy_answer = _policy_answer(message)
+    if policy_answer:
+        return policy_answer
     return (
         f"Weekly labor is currently {labor['weekly']['labor_pct']}% against a 30% target. "
         "Ask about busiest hours, overstaffing, Saturday forecast, Sarah, or labor reduction for a specific recommendation."
@@ -749,12 +803,16 @@ def chat(message: str, history: list | None = None, agent: str | None = None):
     requested_artifact = _requested_artifact_kind(message)
     if requested_artifact:
         return _execute_artifact_request(requested_artifact)
+    policy_answer = _policy_answer(message)
+    if policy_answer:
+        return policy_answer
 
     if not _uses_vertex_ai() and not os.getenv("GOOGLE_API_KEY"):
         return _fallback(message)
 
     try:
         with contextlib.redirect_stderr(io.StringIO()), contextlib.redirect_stdout(io.StringIO()):
-            return asyncio.run(_run_adk_chat(message, history, agent))
+            timeout_seconds = float(os.getenv("SHIFTIQ_ADK_TIMEOUT_SECONDS", "25"))
+            return asyncio.run(asyncio.wait_for(_run_adk_chat(message, history, agent), timeout=timeout_seconds))
     except Exception:
         return _fallback(message)

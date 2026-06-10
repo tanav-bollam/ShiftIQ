@@ -75,6 +75,8 @@ export const api = {
   approveAction: (id) => request(`/agent-approvals/${id}/approve`, { method: 'POST' }),
   rejectAction: (id) => request(`/agent-approvals/${id}/reject`, { method: 'POST' }),
   auditLog: () => request('/audit-log'),
+  knowledgeOverview: () => request('/knowledge/overview'),
+  searchKnowledge: (query) => request(`/knowledge/search?q=${encodeURIComponent(query)}`),
   uploadFile: (type, file) => upload(`/upload/${type}`, file),
   previewUpload: (type, file) => upload(`/upload/${type}/preview`, file),
 };

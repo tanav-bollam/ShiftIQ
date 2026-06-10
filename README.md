@@ -58,6 +58,7 @@ The chat page includes a selectable ADK agent team:
 - Call-Out & Coverage Agent
 - Labor Optimization Agent
 - Report & Export Agent
+- Policy Knowledge Agent
 
 ## MCP Server
 
@@ -76,6 +77,46 @@ python mcp_server.py --transport http --host 0.0.0.0 --port 8010
 ```
 
 The ADK MCP toolset configuration is in `backend/agents/mcp_registry.py`.
+
+Manager Chat prefers the MCP toolset when ADK is enabled. To force direct local function tools for debugging:
+
+```env
+SHIFTIQ_USE_MCP_TOOLS=FALSE
+```
+
+## Grounding And RAG
+
+ShiftIQ includes a lightweight policy RAG layer in `data/knowledge`. The Policy Knowledge Agent retrieves cited policy excerpts for approval, fairness, dropped-shift, and weather-staffing questions.
+
+Useful endpoints:
+
+- `GET /knowledge/overview`
+- `GET /knowledge/search?q=manager approval`
+
+This local RAG tool can later be swapped for Vertex AI Search, Agent Platform Search, or RAG Engine.
+
+## Agent Engine / Agent Runtime
+
+The ADK root agent is exported from `backend/agent_engine_app.py` as `root_agent`.
+
+Deployment helper:
+
+```bash
+cd backend
+python deploy_agent_engine.py
+```
+
+Required environment:
+
+```env
+GOOGLE_CLOUD_PROJECT=your-project-id
+GOOGLE_CLOUD_LOCATION=us-central1
+GOOGLE_GENAI_USE_VERTEXAI=TRUE
+GOOGLE_ADK_MODEL=gemini-2.5-flash-lite
+AGENT_ENGINE_STAGING_BUCKET=gs://optional-staging-bucket
+```
+
+Architecture details: `docs/track-1-architecture.md`.
 
 ## Google Cloud Deployment
 
