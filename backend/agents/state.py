@@ -24,6 +24,9 @@ active_callout = None
 message_log = []
 shift_requests = []
 next_shift_request_id = 1
+adk_session_service = None
+adk_artifact_service = None
+adk_agent_events = []
 staffing_thresholds = [
     {"min_revenue": 0, "max_revenue": 300, "employees_needed": 2, "label": "Slow"},
     {"min_revenue": 301, "max_revenue": 600, "employees_needed": 3, "label": "Steady"},

@@ -27,12 +27,12 @@ from pathlib import Path
 import shutil
 from typing import List
 
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, Response, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from agents import state
-from agents.assistant_agent import chat
+from agents.assistant_agent import available_chat_agents, chat, list_report_artifacts, load_report_artifact
 from agents.data_agent import DATA_DIR, availability_summary, load_editable_table, load_employees, load_roles, save_editable_table, validate_csv_upload
 from agents.forecast_agent import forecast_next_week
 from agents.insight_agent import (
@@ -82,6 +82,7 @@ class ChatMessage(BaseModel):
 class ChatRequest(BaseModel):
     message: str
     history: List[ChatMessage] = []
+    agent: str = "orchestrator"
 
 
 class ShiftAssignment(BaseModel):
@@ -299,4 +300,27 @@ def callout_confirm(req: ConfirmBackupRequest):
 @app.post("/chat")
 def manager_chat(req: ChatRequest):
     history = [{"role": item.role, "content": item.content} for item in req.history]
-    return {"reply": chat(req.message, history)}
+    return {"reply": chat(req.message, history, req.agent), "agent": req.agent}
+
+
+@app.get("/chat/agents")
+def chat_agents():
+    return available_chat_agents()
+
+
+@app.get("/chat/artifacts")
+async def chat_artifacts():
+    return await list_report_artifacts()
+
+
+@app.get("/chat/artifacts/{filename}")
+async def chat_artifact(filename: str):
+    artifact = await load_report_artifact(filename)
+    if artifact is None or artifact.inline_data is None:
+        return Response(status_code=404)
+    display_name = filename.replace("user:", "", 1)
+    return Response(
+        content=artifact.inline_data.data,
+        media_type=artifact.inline_data.mime_type or "application/octet-stream",
+        headers={"Content-Disposition": f'attachment; filename="{display_name}"'},
+    )
