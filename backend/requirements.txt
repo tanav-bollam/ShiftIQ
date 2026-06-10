@@ -6,3 +6,4 @@ python-multipart==0.0.20
 openai==1.58.1
 google-adk
 mcp
+httpx

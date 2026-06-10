@@ -1,5 +1,5 @@
 import { Link, NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { BarChart3, Bell, Bot, CalendarDays, Database, Gauge, LayoutDashboard, LineChart, LogIn, MessageSquare, Repeat2, Siren, TableProperties, UserRound, UsersRound, X } from 'lucide-react';
+import { BarChart3, Bell, Bot, CalendarDays, Database, Gauge, LayoutDashboard, LineChart, LogIn, MessageSquare, Repeat2, ShieldCheck, Siren, TableProperties, UserRound, UsersRound, X } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { api } from './api.js';
 import Overview from './pages/Overview.jsx';
@@ -12,6 +12,7 @@ import Chat from './pages/Chat.jsx';
 import EmployeePortal from './pages/EmployeePortal.jsx';
 import UploadData from './pages/UploadData.jsx';
 import DataManager from './pages/DataManager.jsx';
+import AgentActions from './pages/AgentActions.jsx';
 
 const adminNav = [
   { section: 'Command', items: [
@@ -28,6 +29,7 @@ const adminNav = [
   ] },
   { section: 'AI Tools', items: [
     { to: '/chat', label: 'Manager Chat', icon: Bot },
+    { to: '/agent-actions', label: 'Agent Actions', icon: ShieldCheck },
     { to: '/upload', label: 'Upload Data', icon: Database },
     { to: '/data', label: 'Data Manager', icon: TableProperties },
   ] },
@@ -167,6 +169,7 @@ function Topbar({ mode, employeeId, refreshKey }) {
     '/schedule': 'Weekly Schedule',
     '/callout': 'Call-out Manager',
     '/chat': 'Manager Chat',
+    '/agent-actions': 'Agent Actions',
     '/upload': 'Upload Data',
     '/data': 'Data Manager',
   };
@@ -319,6 +322,7 @@ export default function App() {
             <Route path="/schedule" element={<Schedule app={context} />} />
             <Route path="/callout" element={<Callout app={context} />} />
             <Route path="/chat" element={<Chat app={context} />} />
+            <Route path="/agent-actions" element={<AgentActions app={context} />} />
             <Route path="/upload" element={<UploadData app={context} />} />
             <Route path="/data" element={<DataManager app={context} />} />
             <Route path="/employee" element={<EmployeePortal app={context} employeeId={selectedEmployeeId} />} />

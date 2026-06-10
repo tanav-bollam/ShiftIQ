@@ -41,6 +41,7 @@ from agents.assistant_agent import (
 )
 from agents.messaging_agent import find_backups
 from agents.scheduler_agent import generate_schedule, get_current_schedule
+from agents.weather_agent import weather_adjusted_forecast, weather_staffing_recommendations
 
 
 def _json_safe(value):
@@ -115,6 +116,17 @@ def optimize_labor_savings_tool(target_savings: float = 200.0) -> dict:
 
 
 @mcp.tool()
+def get_weather_aware_staffing_tool() -> dict:
+    """Return weather-adjusted forecast and staffing recommendations."""
+    return _json_safe(
+        {
+            "forecast": weather_adjusted_forecast(),
+            "recommendations": weather_staffing_recommendations(),
+        }
+    )
+
+
+@mcp.tool()
 async def create_report_artifact_tool(kind: str = "weekly_schedule_csv") -> dict:
     """Create a schedule CSV, labor report, or staffing recommendations artifact."""
     return _json_safe(await create_report_artifact(kind))
@@ -137,4 +149,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

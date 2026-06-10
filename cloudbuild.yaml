@@ -12,27 +12,13 @@ steps:
       - -f
       - backend/Dockerfile
       - -t
-      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-backend:$COMMIT_SHA
-      - .
-
-  - name: gcr.io/cloud-builders/docker
-    args:
-      - build
-      - -f
-      - frontend/Dockerfile
-      - -t
-      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-frontend:$COMMIT_SHA
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-backend:$BUILD_ID
       - .
 
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-backend:$COMMIT_SHA
-
-  - name: gcr.io/cloud-builders/docker
-    args:
-      - push
-      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-frontend:$COMMIT_SHA
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-backend:$BUILD_ID
 
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
     entrypoint: gcloud
@@ -40,11 +26,34 @@ steps:
       - run
       - deploy
       - ${_BACKEND_SERVICE}
-      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-backend:$COMMIT_SHA
+      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-backend:$BUILD_ID
       - --region=${_REGION}
       - --platform=managed
       - --allow-unauthenticated
       - --set-env-vars=GOOGLE_GENAI_USE_VERTEXAI=TRUE,GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_LOCATION=${_GOOGLE_CLOUD_LOCATION},GOOGLE_ADK_MODEL=${_GOOGLE_ADK_MODEL}
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        BACKEND_URL=$$(gcloud run services describe ${_BACKEND_SERVICE} --region=${_REGION} --format='value(status.url)')
+        printf "VITE_API_BASE=$${BACKEND_URL}\n" > frontend/.env.production
+        cat frontend/.env.production
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -f
+      - frontend/Dockerfile
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-frontend:$BUILD_ID
+      - .
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-frontend:$BUILD_ID
 
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
     entrypoint: gcloud
@@ -52,12 +61,12 @@ steps:
       - run
       - deploy
       - ${_FRONTEND_SERVICE}
-      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-frontend:$COMMIT_SHA
+      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-frontend:$BUILD_ID
       - --region=${_REGION}
       - --platform=managed
       - --allow-unauthenticated
 
 images:
-  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-backend:$COMMIT_SHA
-  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-frontend:$COMMIT_SHA
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-backend:$BUILD_ID
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/shiftiq/shiftiq-frontend:$BUILD_ID
 

@@ -37,6 +37,7 @@ SHIFTIQ_MCP_TOOLS = [
     "generate_schedule_tool",
     "find_backup_candidates_tool",
     "optimize_labor_savings_tool",
+    "get_weather_aware_staffing_tool",
     "create_report_artifact_tool",
 ]
 
@@ -51,4 +52,3 @@ def build_shiftiq_mcp_toolset(tool_filter: list[str] | None = None) -> McpToolse
         tool_filter=tool_filter or SHIFTIQ_MCP_TOOLS,
         tool_name_prefix="shiftiq_",
     )
-

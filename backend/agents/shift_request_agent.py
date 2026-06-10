@@ -26,6 +26,7 @@ from datetime import datetime, timedelta
 
 from agents import state
 from agents.data_agent import load_employees
+from agents.persistence_agent import log_audit, save_runtime_state
 from agents.scheduler_agent import generate_schedule, get_current_schedule, replace_assignment
 
 
@@ -139,6 +140,9 @@ def create_shift_request(
         "hours_until_shift": hours_until_shift,
     }
     state.shift_requests.append(request)
+    save_runtime_state("shift_requests", state.shift_requests)
+    save_runtime_state("next_shift_request_id", state.next_shift_request_id)
+    log_audit("shift_request", "create", request["status"], {"request": request}, actor=request["employee_name"])
     return request
 
 
@@ -152,6 +156,8 @@ def claim_open_shift(request_id: int, replacement_id: int, note: str = ""):
     request["replacement_name"] = replacement["name"] if replacement else f"Employee {replacement_id}"
     request["status"] = "claimed"
     request["claim_note"] = note or "Available to cover this shift."
+    save_runtime_state("shift_requests", state.shift_requests)
+    log_audit("shift_request", "claim", "claimed", {"request_id": request_id, "replacement_id": replacement_id}, actor=request["replacement_name"])
     return request
 
 
@@ -164,6 +170,8 @@ def approve_shift_request(request_id: int):
     if not replacement_id:
         request["status"] = "open"
         request["manager_note"] = "Approved for coverage; waiting for another employee to claim it."
+        save_runtime_state("shift_requests", state.shift_requests)
+        log_audit("shift_request", "approve_open", "open", {"request_id": request_id}, actor="manager")
         return {"status": "open", "request": request, "schedule": get_current_schedule()}
 
     updated = replace_assignment(request["day"], request["shift_name"], int(request["employee_id"]), int(replacement_id))
@@ -185,4 +193,7 @@ def approve_shift_request(request_id: int):
             "status": "approved",
         }
     )
+    save_runtime_state("shift_requests", state.shift_requests)
+    save_runtime_state("message_log", state.message_log)
+    log_audit("shift_request", "approve", "approved", {"request_id": request_id, "replacement_id": replacement_id}, actor="manager")
     return {"status": "approved", "request": request, "schedule": updated}

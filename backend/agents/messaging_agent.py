@@ -23,6 +23,7 @@
 
 from agents import state
 from agents.data_agent import load_availability, load_employees
+from agents.persistence_agent import log_audit, save_runtime_state
 from agents.scheduler_agent import get_current_schedule, replace_assignment
 
 
@@ -39,6 +40,8 @@ def request_availability(week_start: str):
         }
         messages.append(msg)
         state.message_log.append(msg)
+    save_runtime_state("message_log", state.message_log)
+    log_audit("message", "request_availability", "ok", {"week_start": week_start, "messages": len(messages)}, actor="manager")
     return messages
 
 
@@ -101,6 +104,7 @@ def find_backups(called_out_id: int, shift_name: str, day: str):
         "day": day,
         "candidates": candidates,
     }
+    log_audit("coverage", "find_backups", "ok", {"called_out_id": called_out_id, "day": day, "shift_name": shift_name, "candidate_count": len(candidates)}, actor="manager")
     return state.active_callout
 
 
@@ -116,5 +120,7 @@ def confirm_backup(called_out_id: int, replacement_id: int, shift_name: str, day
         "status": "confirmed",
     }
     state.message_log.append(msg)
+    save_runtime_state("message_log", state.message_log)
     state.active_callout = {**(state.active_callout or {}), "confirmed_backup": replacement_name}
+    log_audit("coverage", "confirm_backup", "ok", {"called_out_id": called_out_id, "replacement_id": replacement_id, "day": day, "shift_name": shift_name}, actor="manager")
     return {"status": "confirmed", "schedule": updated, "message": msg}

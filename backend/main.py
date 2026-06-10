@@ -45,9 +45,11 @@ from agents.insight_agent import (
 )
 from agents.messaging_agent import confirm_backup, find_backups, request_availability
 from agents.notification_agent import get_notifications
+from agents.persistence_agent import approve_request, list_approvals, list_audit, load_runtime_state, reject_request, save_runtime_state
 from agents.scheduler_agent import edit_shift, generate_schedule, get_current_schedule, labor_summary
 from agents.staffing_agent import get_staffing_thresholds, update_staffing_thresholds
 from agents.shift_request_agent import approve_shift_request, claim_open_shift, create_shift_request, list_shift_requests
+from agents.weather_agent import get_weather_forecast, weather_adjusted_forecast, weather_staffing_recommendations
 
 
 app = FastAPI(title="ShiftIQ API")
@@ -59,6 +61,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.on_event("startup")
+def restore_persisted_state():
+    state.current_schedule = load_runtime_state("current_schedule")
+    state.message_log = load_runtime_state("message_log", [])
+    state.shift_requests = load_runtime_state("shift_requests", [])
+    state.next_shift_request_id = load_runtime_state("next_shift_request_id", 1)
 
 
 class CalloutRequest(BaseModel):
@@ -169,6 +179,7 @@ def save_data_table(file_type: str, req: DataTableUpdate):
     result = save_editable_table(file_type, req.rows)
     if result["status"] == "saved":
         state.current_schedule = None
+        save_runtime_state("current_schedule", {"week_start": None, "mode": "block", "schedule": [], "explanations": [], "hours_by_employee": {}})
     return result
 
 
@@ -183,6 +194,7 @@ async def upload_file(file_type: str, file: UploadFile = File(...)):
     with path.open("wb") as handle:
         handle.write(content)
     state.current_schedule = None
+    save_runtime_state("current_schedule", {"week_start": None, "mode": "block", "schedule": [], "explanations": [], "hours_by_employee": {}})
     return {"status": "uploaded", "file": file_type, "validation": validation}
 
 
@@ -225,6 +237,15 @@ def overstaffing():
 @app.get("/forecast/next-week")
 def next_week_forecast():
     return forecast_next_week()
+
+
+@app.get("/forecast/weather-aware")
+def weather_forecast():
+    return {
+        "weather": get_weather_forecast(),
+        "forecast": weather_adjusted_forecast(),
+        "recommendations": weather_staffing_recommendations(),
+    }
 
 
 @app.post("/schedule/generate")
@@ -283,6 +304,26 @@ def messaging_log():
 @app.get("/notifications")
 def notifications(mode: str = "admin", employee_id: int | None = None):
     return get_notifications(mode, employee_id)
+
+
+@app.get("/audit-log")
+def audit_log(limit: int = 120):
+    return list_audit(limit)
+
+
+@app.get("/agent-approvals")
+def agent_approvals(status: str | None = None):
+    return list_approvals(status)
+
+
+@app.post("/agent-approvals/{approval_id}/approve")
+def approve_agent_action(approval_id: int):
+    return approve_request(approval_id)
+
+
+@app.post("/agent-approvals/{approval_id}/reject")
+def reject_agent_action(approval_id: int):
+    return reject_request(approval_id)
 
 
 @app.post("/callouts/find-backups")

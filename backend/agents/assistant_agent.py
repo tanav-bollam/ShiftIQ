@@ -37,10 +37,12 @@ from pathlib import Path
 from agents.forecast_agent import forecast_next_week
 from agents.insight_agent import get_busiest_periods, get_daily_revenue, get_hourly_heatmap, get_overstaffing_alerts, get_top_items
 from agents.messaging_agent import find_backups
+from agents.persistence_agent import create_approval, log_audit
 from agents.scheduler_agent import generate_schedule, get_current_schedule as scheduler_current_schedule, labor_summary
 from agents.data_agent import load_employees
 from agents.staffing_agent import get_staffing_thresholds
 from agents.shift_request_agent import list_shift_requests
+from agents.weather_agent import weather_adjusted_forecast, weather_staffing_recommendations
 from agents import state
 
 
@@ -178,6 +180,7 @@ def _record_agent_event(agent_id: str, event_type: str, detail: dict):
         }
     )
     state.adk_agent_events = state.adk_agent_events[-80:]
+    log_audit("adk_tool", event_type, "ok", {"agent": agent_id, **_json_safe(detail)}, actor=AGENT_PROFILES.get(agent_id, AGENT_PROFILES[DEFAULT_AGENT_ID])["label"])
 
 
 def get_shiftiq_overview() -> dict:
@@ -194,6 +197,7 @@ def get_shiftiq_overview() -> dict:
         "busiest_periods": get_busiest_periods(5),
         "overstaffing_alerts": get_overstaffing_alerts(),
         "staffing_thresholds": get_staffing_thresholds(),
+        "weather_recommendations": weather_staffing_recommendations()[:3],
     }
 
 
@@ -215,6 +219,14 @@ def get_sales_insights() -> dict:
         "top_items": get_top_items(),
         "hourly_heatmap_sample": get_hourly_heatmap()[:40],
         "overstaffing_alerts": get_overstaffing_alerts(),
+    }
+
+
+def get_weather_aware_staffing() -> dict:
+    """Return weather-adjusted demand and staffing recommendations."""
+    return {
+        "forecast": weather_adjusted_forecast(),
+        "recommendations": weather_staffing_recommendations(),
     }
 
 
@@ -510,18 +522,20 @@ def _requested_artifact_kind(message: str) -> str | None:
     return "weekly_schedule_csv"
 
 
-def _execute_schedule_mode_change(mode: str) -> str:
-    result = generate_schedule(mode=mode)
-    labor = labor_summary()
-    schedule_count = len(result.get("schedule", []))
-    assigned_count = sum(len(shift.get("assigned", [])) for shift in result.get("schedule", []))
-    unfilled_count = sum(len(shift.get("unfilled_roles", [])) for shift in result.get("schedule", []))
+def _create_schedule_mode_approval(mode: str) -> str:
     label = "flexible demand" if mode == "flexible" else "shift block"
+    current = scheduler_current_schedule()
+    current_mode = current.get("mode", "block")
+    approval = create_approval(
+        "schedule_mode",
+        f"Switch schedule from {current_mode} to {label} mode",
+        "Regenerates the current week, recalculates labor, and updates the schedule shown across the app.",
+        {"mode": mode, "previous_mode": current_mode},
+        created_by="Manager Chat",
+    )
     return (
-        f"Done. I switched the schedule to {label} mode and regenerated the week. "
-        f"It now has {schedule_count} coverage windows, {assigned_count} assignments, "
-        f"and {unfilled_count} unfilled role slots. Weekly labor is "
-        f"{labor['weekly']['labor_pct']}% against the {labor['weekly']['target_pct']}% target."
+        f"I prepared approval #{approval['id']} to switch the schedule to {label} mode. "
+        "Review it on the Agent Actions page, then approve it to regenerate the schedule and update labor."
     )
 
 
@@ -539,6 +553,7 @@ def _agent_tools(agent_id: str):
         get_labor_summary,
         get_current_schedule,
         get_sales_insights,
+        get_weather_aware_staffing,
         get_employee_profile,
         get_schedule_summary,
         generate_shift_schedule,
@@ -559,6 +574,7 @@ def _agent_tools(agent_id: str):
     labor_tools = [
         get_labor_summary,
         get_sales_insights,
+        get_weather_aware_staffing,
         get_current_schedule,
         optimize_labor_savings,
         generate_shift_schedule,
@@ -675,7 +691,7 @@ def _fallback(message: str):
     text = message.lower()
     requested_mode = _requested_schedule_mode(message)
     if requested_mode:
-        return _execute_schedule_mode_change(requested_mode)
+        return _create_schedule_mode_approval(requested_mode)
     requested_artifact = _requested_artifact_kind(message)
     if requested_artifact:
         return _execute_artifact_request(requested_artifact)
@@ -729,7 +745,7 @@ def chat(message: str, history: list | None = None, agent: str | None = None):
     _load_local_env()
     requested_mode = _requested_schedule_mode(message)
     if requested_mode:
-        return _execute_schedule_mode_change(requested_mode)
+        return _create_schedule_mode_approval(requested_mode)
     requested_artifact = _requested_artifact_kind(message)
     if requested_artifact:
         return _execute_artifact_request(requested_artifact)

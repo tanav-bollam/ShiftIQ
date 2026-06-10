@@ -24,6 +24,7 @@
 
 from agents.data_agent import DAY_ORDER, availability_summary, load_availability, load_employees, load_roles, load_sales
 from agents.forecast_agent import forecast_next_week
+from agents.persistence_agent import load_runtime_state, log_audit, save_runtime_state
 from agents.staffing_agent import match_staffing_threshold, staffing_recommendation
 from agents import state
 
@@ -205,6 +206,8 @@ def generate_schedule(week_start: str = "2024-03-04", mode: str = "block"):
     schedule.sort(key=lambda item: (DAY_ORDER.index(item["day"]), shift_order.get(item["shift"], 99)))
     result = {"week_start": week_start, "mode": "block", "schedule": schedule, "explanations": explanations, "hours_by_employee": hours_assigned}
     state.current_schedule = result
+    save_runtime_state("current_schedule", result)
+    log_audit("schedule", "generate_block", "ok", {"week_start": week_start, "shifts": len(schedule), "assignments": sum(len(item["assigned"]) for item in schedule)}, actor="scheduler")
     return result
 
 
@@ -337,11 +340,19 @@ def generate_flexible_schedule(week_start: str = "2024-03-04"):
     schedule.sort(key=lambda item: (DAY_ORDER.index(item["day"]), item["time_start"]))
     result = {"week_start": week_start, "mode": "flexible", "schedule": schedule, "explanations": explanations, "hours_by_employee": hours_assigned}
     state.current_schedule = result
+    save_runtime_state("current_schedule", result)
+    log_audit("schedule", "generate_flexible", "ok", {"week_start": week_start, "windows": len(schedule), "assignments": sum(len(item["assigned"]) for item in schedule)}, actor="scheduler")
     return result
 
 
 def get_current_schedule():
-    return state.current_schedule or {"week_start": None, "mode": "block", "schedule": [], "explanations": [], "hours_by_employee": {}}
+    if state.current_schedule:
+        return state.current_schedule
+    persisted = load_runtime_state("current_schedule")
+    if persisted:
+        state.current_schedule = persisted
+        return persisted
+    return {"week_start": None, "mode": "block", "schedule": [], "explanations": [], "hours_by_employee": {}}
 
 
 def edit_shift(day: str, shift_name: str, assignments: list[dict]):
@@ -387,6 +398,8 @@ def edit_shift(day: str, shift_name: str, assignments: list[dict]):
         }
     )
     state.current_schedule = current
+    save_runtime_state("current_schedule", current)
+    log_audit("schedule", "manual_edit_shift", "ok", {"day": day, "shift": shift_name, "assignments": assignments}, actor="manager")
     return current
 
 
@@ -438,6 +451,8 @@ def replace_assignment(day: str, shift_name: str, called_out_id: int, replacemen
                     assignment["replacement"] = True
                     current["hours_by_employee"] = _hours_by_employee(current["schedule"])
                     state.current_schedule = current
+                    save_runtime_state("current_schedule", current)
+                    log_audit("schedule", "replace_assignment", "ok", {"day": day, "shift": shift_name, "called_out_id": called_out_id, "replacement_id": replacement_id}, actor="manager")
                     return current
             for assignment in shift["assigned"]:
                 if assignment["role"] in replacement["skills"]:
@@ -449,6 +464,8 @@ def replace_assignment(day: str, shift_name: str, called_out_id: int, replacemen
                     assignment["covered_for_employee_id"] = called_out_id
                     current["hours_by_employee"] = _hours_by_employee(current["schedule"])
                     state.current_schedule = current
+                    save_runtime_state("current_schedule", current)
+                    log_audit("schedule", "replace_assignment", "ok", {"day": day, "shift": shift_name, "called_out_id": called_out_id, "replacement_id": replacement_id}, actor="manager")
                     return current
             if shift["assigned"]:
                 shift["assigned"][0]["employee_id"] = replacement_id
@@ -459,5 +476,7 @@ def replace_assignment(day: str, shift_name: str, called_out_id: int, replacemen
                 shift["assigned"][0]["covered_for_employee_id"] = called_out_id
                 current["hours_by_employee"] = _hours_by_employee(current["schedule"])
                 state.current_schedule = current
+                save_runtime_state("current_schedule", current)
+                log_audit("schedule", "replace_assignment", "ok", {"day": day, "shift": shift_name, "called_out_id": called_out_id, "replacement_id": replacement_id}, actor="manager")
                 return current
     return current

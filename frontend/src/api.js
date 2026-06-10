@@ -54,6 +54,7 @@ export const api = {
   overstaffing: () => request('/insights/overstaffing'),
   topItems: () => request('/insights/top-items'),
   forecast: () => request('/forecast/next-week'),
+  weatherForecast: () => request('/forecast/weather-aware'),
   generateSchedule: (week = '2024-03-04', mode = 'block') => request(`/schedule/generate?week_start=${week}&mode=${mode}`, { method: 'POST' }),
   currentSchedule: () => request('/schedule/current'),
   editShift: (body) => request('/schedule/edit-shift', { method: 'POST', body: JSON.stringify(body) }),
@@ -70,6 +71,10 @@ export const api = {
   chatAgents: () => request('/chat/agents'),
   chatArtifacts: () => request('/chat/artifacts'),
   chat: (body) => request('/chat', { method: 'POST', body: JSON.stringify(body) }),
+  approvals: (status) => request(`/agent-approvals${status ? `?status=${status}` : ''}`),
+  approveAction: (id) => request(`/agent-approvals/${id}/approve`, { method: 'POST' }),
+  rejectAction: (id) => request(`/agent-approvals/${id}/reject`, { method: 'POST' }),
+  auditLog: () => request('/audit-log'),
   uploadFile: (type, file) => upload(`/upload/${type}`, file),
   previewUpload: (type, file) => upload(`/upload/${type}/preview`, file),
 };

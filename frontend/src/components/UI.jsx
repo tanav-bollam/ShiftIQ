@@ -29,3 +29,7 @@ export function Progress({ value, max = 100, status = 'ok' }) {
   const pct = max ? Math.min(100, Math.round((value / max) * 100)) : 0;
   return <div className="progress"><div className={`progress-fill ${status}`} style={{ width: `${pct}%` }} /></div>;
 }
+
+export function StatusBadge({ status = 'ok', children }) {
+  return <span className={`status-badge ${status}`}>{children || status}</span>;
+}
