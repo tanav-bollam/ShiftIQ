@@ -253,6 +253,31 @@ select, input, .chat-input { width: 100%; margin-top: 6px; background: var(--sur
 .architecture-row { display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: start; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 11px; }
 .architecture-row svg { color: var(--green); margin-top: 2px; }
 .architecture-row span { display: block; color: var(--muted); font-size: 12px; line-height: 1.45; margin-top: 3px; }
+.architecture-section { display: grid; gap: 14px; }
+.architecture-section .section-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; }
+.architecture-section .section-head h2 { margin: 5px 0 0; }
+.architecture-section .section-head p { margin: 0; max-width: 580px; color: var(--muted); line-height: 1.5; }
+.architecture-system-grid { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+.architecture-lane { display: grid; align-content: start; gap: 10px; }
+.architecture-lane > span, .app-flow-title { color: var(--teal); text-transform: uppercase; letter-spacing: .16em; font-size: 10px; font-weight: 800; }
+.architecture-node { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; min-height: 88px; padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; }
+.architecture-node svg { color: var(--accent); margin-top: 2px; }
+.architecture-node.accent { border-color: rgba(77,255,210,.32); background: rgba(77,255,210,.07); }
+.architecture-node.agent { border-color: rgba(184,255,107,.26); background: rgba(184,255,107,.06); }
+.architecture-node.warn { border-color: rgba(255,179,71,.28); background: rgba(255,179,71,.06); }
+.architecture-node strong { display: block; color: var(--text); }
+.architecture-node span { display: block; color: var(--muted); font-size: 12px; line-height: 1.45; margin-top: 4px; }
+.app-flowchart { display: grid; grid-template-columns: 1.05fr 1.15fr 1.15fr 1.05fr; gap: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; overflow-x: auto; }
+.app-flow-col { min-width: 210px; display: grid; align-content: start; gap: 10px; position: relative; }
+.app-flow-col:not(:last-child)::after { content: ""; position: absolute; top: 83px; right: -18px; width: 18px; height: 1px; background: rgba(77,255,210,.55); }
+.app-flow-col:not(:last-child)::before { content: ""; position: absolute; top: 78px; right: -20px; border-left: 7px solid rgba(77,255,210,.7); border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+.app-flow-box { min-height: 82px; display: grid; gap: 5px; padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; }
+.app-flow-box.primary { border-color: rgba(77,255,210,.32); background: rgba(77,255,210,.07); }
+.app-flow-box.agent { border-color: rgba(184,255,107,.26); background: rgba(184,255,107,.06); }
+.app-flow-box.govern { border-color: rgba(255,179,71,.28); background: rgba(255,179,71,.06); }
+.app-flow-box strong { color: var(--text); }
+.app-flow-box span { color: var(--muted); font-size: 12px; line-height: 1.42; }
+.app-flow-split { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .metric-list { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
 .metric-list span { border: 1px solid rgba(124,107,255,.25); background: rgba(124,107,255,.1); color: var(--label); border-radius: 999px; padding: 5px 8px; font-size: 11px; }
 .big-number { margin-top: 12px; font-family: "DM Mono", monospace; color: var(--text); font-size: 26px; }
@@ -437,4 +462,9 @@ select, input, .chat-input { width: 100%; margin-top: 6px; background: var(--sur
   .form-grid { grid-template-columns: 1fr; }
   .architecture-flow { grid-template-columns: 1fr; }
   .architecture-flow div::after { display: none; }
+  .architecture-section .section-head { display: grid; }
+  .architecture-system-grid { grid-template-columns: 1fr; }
+  .app-flowchart { grid-template-columns: 1fr; }
+  .app-flow-col::before, .app-flow-col::after { display: none; }
+  .app-flow-split { grid-template-columns: 1fr; }
 }
