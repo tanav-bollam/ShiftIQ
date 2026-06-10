@@ -2,6 +2,8 @@
 
 ShiftIQ is a full-stack hackathon MVP that turns sample POS data into sales insights, demand forecasts, optimized employee schedules, call-out backup recommendations, and data-grounded manager chat.
 
+For the Google for Startups AI Agents Challenge, ShiftIQ is structured as a Track 1 multi-agent system using Google ADK, Vertex AI Gemini, MCP tool access, and Cloud Run deployment scaffolding.
+
 The original static prototype is preserved at `docs/reference-demo.html`.
 
 ## Project Structure
@@ -35,15 +37,63 @@ npm run dev
 
 Open `http://localhost:5173`. The `dev` command builds the React app and serves the production bundle with a small Node server to avoid Vite's Windows child-process issue in restricted environments.
 
-## Optional AI Chat
+## Google ADK Manager Chat
 
-Manager Chat works without an API key using deterministic data-grounded fallback responses.
+Manager Chat works without an API key using deterministic data-grounded fallback responses, but the primary path uses Google ADK with Vertex AI Gemini.
 
-To enable OpenAI-backed answers:
+Local Vertex AI configuration lives in `backend/.env`:
+
+```env
+GOOGLE_GENAI_USE_VERTEXAI=TRUE
+GOOGLE_CLOUD_PROJECT=your-project-id
+GOOGLE_CLOUD_LOCATION=us-central1
+GOOGLE_ADK_MODEL=gemini-2.5-flash-lite
+```
+
+The chat page includes a selectable ADK agent team:
+
+- Core Orchestrator
+- Tool Calling Agent
+- Schedule Explanation Agent
+- Call-Out & Coverage Agent
+- Labor Optimization Agent
+- Report & Export Agent
+
+## MCP Server
+
+ShiftIQ exposes its business tools through a local MCP server:
 
 ```bash
-set OPENAI_API_KEY=your_key_here
+cd backend
+python mcp_server.py
 ```
+
+HTTP MCP mode:
+
+```bash
+cd backend
+python mcp_server.py --transport http --host 0.0.0.0 --port 8010
+```
+
+The ADK MCP toolset configuration is in `backend/agents/mcp_registry.py`.
+
+## Google Cloud Deployment
+
+Cloud Run deployment scaffolding is included:
+
+- `backend/Dockerfile`
+- `frontend/Dockerfile`
+- `frontend/nginx.conf`
+- `cloudbuild.yaml`
+
+Deploy:
+
+```bash
+gcloud artifacts repositories create shiftiq --repository-format=docker --location=us-central1
+gcloud builds submit --config cloudbuild.yaml
+```
+
+More detail: `docs/track-1-production-readiness.md`.
 
 ## Demo Flow
 

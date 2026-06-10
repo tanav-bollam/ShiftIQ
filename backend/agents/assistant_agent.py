@@ -630,14 +630,12 @@ def _agent_instruction(agent_id: str) -> str:
     )
 
 
-async def _run_adk_chat(message: str, history: list | None = None, agent: str | None = None) -> str:
+def build_adk_agent(agent: str | None = None):
     from google.adk.agents import LlmAgent
-    from google.adk.runners import Runner
-    from google.genai import types
 
     agent_id = _agent_id(agent)
     profile = AGENT_PROFILES[agent_id]
-    agent = LlmAgent(
+    return LlmAgent(
         model=_model_name(),
         name=f"shiftiq_{agent_id}_agent",
         description=profile["description"],
@@ -647,6 +645,14 @@ async def _run_adk_chat(message: str, history: list | None = None, agent: str | 
         after_tool_callback=_after_tool_callback,
         after_agent_callback=_after_agent_callback,
     )
+
+
+async def _run_adk_chat(message: str, history: list | None = None, agent: str | None = None) -> str:
+    from google.adk.runners import Runner
+    from google.genai import types
+
+    agent_id = _agent_id(agent)
+    agent = build_adk_agent(agent_id)
     session = await _ensure_session(agent_id)
     session_service = _session_service()
     runner = Runner(agent=agent, app_name=APP_NAME, session_service=session_service)
