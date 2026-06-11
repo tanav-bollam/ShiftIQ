@@ -1,18 +1,51 @@
-# ShiftIQ - POS Scheduling Agent
+# ShiftIQ - AI Workforce Scheduling Agent
 
-ShiftIQ is a full-stack hackathon MVP that turns sample POS data into sales insights, demand forecasts, optimized employee schedules, call-out backup recommendations, and data-grounded manager chat.
+ShiftIQ is a full-stack hackathon MVP for small food and retail businesses. It connects POS-style sales data, employee availability, labor targets, weather context, and real-time staffing events so managers can build better schedules, reduce labor waste, and handle call-outs faster.
 
-For the Google for Startups AI Agents Challenge, ShiftIQ is structured as a Track 1 multi-agent system using Google ADK, Vertex AI Gemini, MCP tool access, and Cloud Run deployment scaffolding.
+For the Google for Startups AI Agents Challenge, ShiftIQ is structured as a Track 1 net-new multi-agent system using Google ADK concepts, Vertex AI Gemini, MCP tool access, grounding/RAG, and Cloud Run deployment.
+
+## Live Demo
+
+- Frontend: https://shiftiq-frontend-y5d7huc3pq-uc.a.run.app
+- Backend health: https://shiftiq-backend-y5d7huc3pq-uc.a.run.app/health
+- Architecture page: https://shiftiq-frontend-y5d7huc3pq-uc.a.run.app/architecture
+- Standalone architecture HTML: https://shiftiq-frontend-y5d7huc3pq-uc.a.run.app/architecture.html
 
 The original static prototype is preserved at `docs/reference-demo.html`.
+
+## Current Features
+
+- Sales insights from CSV-backed POS data
+- Daily revenue cards, busiest periods, top items, and hourly heatmap
+- Demand forecast by day
+- Weather-aware forecast and staffing recommendations
+- Labor cost summary with green/amber/red guardrails
+- Staffing threshold controls for demand-based employee counts
+- Traditional shift-block schedule generation
+- Flexible demand-based schedule generation
+- Manual schedule editing
+- Employee roster with skills, wages, max hours, status, and call-out history
+- Employee portal with selected employee identity
+- Employee-specific messages and notifications
+- Weekly availability with specific start/end hours
+- Shift drop, open shift, claim, approval, and auto-approval workflows
+- Call-out backup ranking and confirmation
+- Data upload, validation preview, and editable CSV-backed data tables
+- Agent approval workflow for high-impact actions
+- Audit log for manager and agent actions
+- Manager Chat with selectable agent modes
+- Local deterministic chat fallback when external AI credentials are unavailable
+- Lightweight policy RAG over `data/knowledge`
+- Local MCP server exposing ShiftIQ tools
+- Cloud Run deployment scaffolding
 
 ## Project Structure
 
 ```text
-backend/   FastAPI API and agent modules
-frontend/  React/Vite dashboard
-data/      CSV sample data
-docs/      Reference static demo
+backend/   FastAPI API, agent modules, MCP server, ADK/Agent Engine helpers
+frontend/  React/Vite dashboard and employee portal
+data/      CSV sample data and local knowledge documents
+docs/      Reference demo, architecture docs, and standalone architecture site
 ```
 
 ## Start The Backend
@@ -35,13 +68,15 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173`. The `dev` command builds the React app and serves the production bundle with a small Node server to avoid Vite's Windows child-process issue in restricted environments.
+Open `http://localhost:5173`.
 
-## Google ADK Manager Chat
+The `dev` command builds the React app and serves the production bundle with `server.mjs`. This avoids Vite's Windows child-process issue in restricted environments.
 
-Manager Chat works without an API key using deterministic data-grounded fallback responses, but the primary path uses Google ADK with Vertex AI Gemini.
+## Local Environment
 
-Local Vertex AI configuration lives in `backend/.env`:
+Secrets stay local in `backend/.env`, which is ignored by Git.
+
+Vertex AI configuration:
 
 ```env
 GOOGLE_GENAI_USE_VERTEXAI=TRUE
@@ -50,7 +85,13 @@ GOOGLE_CLOUD_LOCATION=us-central1
 GOOGLE_ADK_MODEL=gemini-2.5-flash-lite
 ```
 
-The chat page includes a selectable ADK agent team:
+Google AI Studio key mode is documented at `docs/google-ai-studio-gemini-api-key.md`.
+
+Manager Chat still works without external credentials by using deterministic, data-grounded fallback responses.
+
+## Manager Chat And Agent Team
+
+The chat page includes a selectable agent team:
 
 - Core Orchestrator
 - Tool Calling Agent
@@ -60,9 +101,11 @@ The chat page includes a selectable ADK agent team:
 - Report & Export Agent
 - Policy Knowledge Agent
 
+The Core Orchestrator routes manager intent to specialized tools and agents. The assistant can answer questions, explain schedules, find backup candidates, recommend labor savings, create approval requests, and consult policy knowledge.
+
 ## MCP Server
 
-ShiftIQ exposes its business tools through a local MCP server:
+ShiftIQ exposes business tools through a local MCP server:
 
 ```bash
 cd backend
@@ -93,7 +136,7 @@ Useful endpoints:
 - `GET /knowledge/overview`
 - `GET /knowledge/search?q=manager approval`
 
-This local RAG tool can later be swapped for Vertex AI Search, Agent Platform Search, or RAG Engine.
+This local RAG layer can later be swapped for Vertex AI Search, Agent Platform Search, or RAG Engine.
 
 ## Agent Engine / Agent Runtime
 
@@ -116,7 +159,11 @@ GOOGLE_ADK_MODEL=gemini-2.5-flash-lite
 AGENT_ENGINE_STAGING_BUCKET=gs://optional-staging-bucket
 ```
 
-Architecture details: `docs/track-1-architecture.md`.
+Architecture details:
+
+- `docs/track-1-architecture.md`
+- `docs/architecture.html`
+- frontend route `/architecture`
 
 ## Google Cloud Deployment
 
@@ -138,28 +185,80 @@ More detail: `docs/track-1-production-readiness.md`.
 
 ## Demo Flow
 
-1. Open Sales Insights and point out Friday/Saturday peaks.
-2. Open Forecast and show next-week demand.
-3. Open Employees and send availability requests.
-4. Open Schedule and generate an optimized schedule.
-5. Show the assignment explanations and labor monitor.
-6. Open Call-out Manager, find backups, and confirm the top candidate.
-7. Return to Schedule and verify the replacement assignment.
-8. Ask Manager Chat: `How can I reduce labor by $200 this week?`
+1. Open the dashboard and show the live labor gauge.
+2. Open Sales Insights and point out Friday/Saturday peaks.
+3. Hover the hourly heatmap to show revenue/intensity details.
+4. Open Forecast and show next-week demand.
+5. Open the weather-aware forecast recommendation.
+6. Open Employees and show skills, max hours, scheduled hours, and exact availability windows.
+7. Open Data Manager to show editable CSV-backed business data.
+8. Open Schedule and generate an optimized block schedule.
+9. Switch to flexible demand scheduling and regenerate.
+10. Show assignment explanations and daily labor monitor.
+11. Manually edit a shift assignment.
+12. Open the employee portal, select an employee, and submit hourly availability.
+13. Drop or request a shift swap.
+14. Show employee-specific messages and notifications.
+15. Open Call-out Manager, find backups, and confirm the top candidate.
+16. Open Agent Actions and show approvals/auditability.
+17. Ask Manager Chat: `How can I reduce labor by $200 this week?`
+18. Open Architecture to explain ADK, MCP, RAG, approvals, and Cloud Run.
 
 ## Key API Endpoints
 
 - `GET /health`
 - `GET /employees`
+- `GET /roles`
+- `GET /staffing-thresholds`
+- `PUT /staffing-thresholds`
+- `GET /data-tables/{file_type}`
+- `PUT /data-tables/{file_type}`
+- `POST /upload/{file_type}`
+- `POST /upload/{file_type}/preview`
 - `GET /insights/summary`
 - `GET /insights/daily-revenue`
 - `GET /insights/heatmap`
+- `GET /insights/busiest`
 - `GET /insights/top-items`
+- `GET /insights/overstaffing`
 - `GET /forecast/next-week`
+- `GET /forecast/weather-aware`
 - `POST /schedule/generate`
 - `GET /schedule/current`
+- `POST /schedule/edit-shift`
 - `GET /labor/summary`
+- `GET /employee/shift-requests`
+- `POST /employee/shift-requests`
+- `POST /employee/shift-requests/{request_id}/claim`
+- `POST /employee/shift-requests/{request_id}/approve`
 - `POST /messaging/request-availability`
+- `POST /employee/availability`
+- `GET /messaging/log`
+- `GET /notifications`
+- `GET /audit-log`
+- `GET /knowledge/overview`
+- `GET /knowledge/search`
+- `GET /agent-approvals`
+- `POST /agent-approvals/{approval_id}/approve`
+- `POST /agent-approvals/{approval_id}/reject`
 - `POST /callouts/find-backups`
 - `POST /callouts/confirm-backup`
 - `POST /chat`
+- `GET /chat/agents`
+- `GET /chat/artifacts`
+- `GET /chat/artifacts/{filename}`
+
+## Verification
+
+Common local checks:
+
+```bash
+cd frontend
+npm run build
+```
+
+```bash
+python -m compileall backend
+```
+
+The app has been audited against the live Cloud Run deployment for route rendering, frontend console errors, backend API responses, schedule generation, chat fallback, employee-specific messages, and architecture pages.
