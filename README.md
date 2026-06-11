@@ -9,6 +9,8 @@ For the Google for Startups AI Agents Challenge, ShiftIQ is structured as a Trac
 - Frontend: https://shiftiq-frontend-y5d7huc3pq-uc.a.run.app
 - Backend health: https://shiftiq-backend-y5d7huc3pq-uc.a.run.app/health
 - Architecture page: https://shiftiq-frontend-y5d7huc3pq-uc.a.run.app/architecture.html
+- Presentation: https://docs.google.com/presentation/d/1wg7Xshr33yIe9LxRHwDhoamGmP9YGxqf5lVcdaDVC3Q/edit?slide=id.p1#slide=id.p1
+- Video Presentation: https://www.youtube.com/watch?v=an9kXEFnLY8&feature=youtu.be
 
 ## Current Features
 
